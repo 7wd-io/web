@@ -1,0 +1,83 @@
+<template>
+  <q-page class="full-height">
+    <q-card class="q-pa-lg absolute-center" style="width: 300px">
+      <h3 class="text-weight-bold text-center">Log in</h3>
+      <q-form :autofocus="true" novalidate @submit.stop="onSubmit">
+        <q-input
+          v-model="login"
+          type="text"
+          label="Nickname or Email *"
+          color="welcome"
+          lazy-rules="ondemand"
+          :rules="rules.login"
+          :clearable="true"
+        />
+        <q-input
+          v-model="password"
+          label="Password *"
+          color="welcome"
+          :type="showPassword ? 'text' : 'password'"
+          :rules="rules.password"
+          lazy-rules="ondemand"
+          :clearable="true"
+        >
+          <template #append>
+            <q-icon
+              class="cursor-pointer"
+              :name="showPassword ? 'visibility_off' : 'visibility'"
+              @click="showPassword = !showPassword"
+            />
+          </template>
+        </q-input>
+        <div class="text-center q-pt-lg">
+          <q-btn
+            type="submit"
+            label="Login"
+            color="welcome"
+            :loading="inProgress"
+          />
+        </div>
+      </q-form>
+    </q-card>
+  </q-page>
+</template>
+
+<script setup lang="ts">
+import { useAccountStore } from 'src/stores/account';
+import { useQuasar } from 'quasar';
+import { ref } from 'vue';
+import { ApiError } from 'boot/axios';
+
+const $q = useQuasar();
+const $account = useAccountStore();
+
+const inProgress = ref(false);
+const login = ref('');
+const password = ref('');
+const showPassword = ref(false);
+const rules = {
+  login: [
+    (val: string) => (val && val.length > 0) || 'Nickname or Email is required',
+  ],
+  password: [
+    (val: string) => (val && val.length > 0) || 'Password is required',
+  ],
+};
+
+const onSubmit = async () => {
+  inProgress.value = true;
+
+  try {
+    await $account.signin(login.value, password.value);
+  } catch (error) {
+    const err = error as ApiError;
+
+    $q.notify({
+      message: err.response?.data.err_message,
+      type: 'negative',
+    });
+  } finally {
+    inProgress.value = false;
+  }
+};
+</script>
