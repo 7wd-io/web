@@ -8,7 +8,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/game/:id',
         name: 'game',
-        component: () => import('pages/Game.vue'),
+        component: () => import('pages/GamePage.vue'),
       },
       {
         path: '',
@@ -17,12 +17,12 @@ const routes: RouteRecordRaw[] = [
           {
             path: '',
             name: 'lobby',
-            component: () => import('pages/Lobby.vue'),
+            component: () => import('pages/LobbyPage.vue'),
           },
           {
             path: '/faq',
             name: 'faq',
-            component: () => import('pages/Faq.vue'),
+            component: () => import('pages/FaqPage.vue'),
           },
         ],
       },
@@ -38,7 +38,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Welcome.vue'),
+        component: () => import('pages/WelcomePage.vue'),
       },
       {
         path: '/about',
@@ -46,7 +46,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/About.vue'),
+        component: () => import('pages/AboutPage.vue'),
       },
       {
         path: '/register',
@@ -54,7 +54,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Register.vue'),
+        component: () => import('pages/RegisterPage.vue'),
       },
       {
         path: '/login',
@@ -62,7 +62,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Login.vue'),
+        component: () => import('pages/LoginPage.vue'),
       },
     ],
   },
@@ -73,7 +73,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'lobby',
-        component: () => import('pages/Lobby.vue'),
+        component: () => import('pages/LobbyPage.vue'),
       },
     ],
   },
@@ -87,7 +87,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Welcome.vue'),
+        component: () => import('pages/WelcomePage.vue'),
       },
       {
         path: '/register',
@@ -95,7 +95,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Register.vue'),
+        component: () => import('pages/RegisterPage.vue'),
       },
       {
         path: '/login',
@@ -103,7 +103,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           public: true,
         },
-        component: () => import('pages/Login.vue'),
+        component: () => import('pages/LoginPage.vue'),
       },
     ],
   },
@@ -113,7 +113,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       public: true,
     },
-    component: () => import('pages/Units.vue'),
+    component: () => import('pages/UnitsPage.vue'),
   },
   // Always leave this as last one,
   // but you can also remove it
