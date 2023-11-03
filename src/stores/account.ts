@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { User, Session } from 'src/models/account';
 import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
