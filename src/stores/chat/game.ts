@@ -58,7 +58,7 @@ export const useChat = defineStore('chat:game', {
       }
 
       Object.values(presence).forEach((item) => {
-        players.push(item.user as Nickname);
+        players.push(item.user.nickname as Nickname);
       });
 
       this.players = Array.from(new Set(players));

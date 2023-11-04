@@ -1,15 +1,8 @@
 <template>
   <div class="the-game-chat">
-    <q-scroll-area
-      ref="scroll"
-      class="messages"
-    >
+    <q-scroll-area ref="scroll" class="messages">
       <ul class="mute">
-        <Message
-          v-for="(m, ind) in messages"
-          :key="ind"
-          :value="m"
-        />
+        <Message v-for="(m, ind) in messages" :key="ind" :value="m" />
       </ul>
     </q-scroll-area>
     <div>
@@ -28,15 +21,13 @@
 </template>
 
 <script setup lang="ts">
-import centrifuge from 'src/centrifuge';
-import {
-  computed, onBeforeMount, onBeforeUnmount, ref, watch,
-} from 'vue';
+import cent from 'src/centrifuge';
+import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
 import { useChat } from 'src/stores/chat/game';
 import { QScrollArea } from 'quasar';
 import { useRoute } from 'vue-router';
 import { GameId } from 'src/models/game';
-import Centrifuge from 'centrifuge';
+import { Centrifuge } from 'centrifuge';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';
 
@@ -49,12 +40,15 @@ let sub: Centrifuge.Subscription;
 let presenceTimerId: number;
 
 onBeforeMount(() => {
-  sub = centrifuge.subscribe(channelName, (ctx: { data: MessageModel, info: {user: string} }) => {
-    const m: MessageModel = ctx.data;
-    m.author = ctx.info.user;
+  sub = cent.subscribe(
+    channelName,
+    (ctx: { data: MessageModel; info: { user: string } }) => {
+      const m: MessageModel = ctx.data;
+      m.author = ctx.info.user;
 
-    $chat.addMessage(m);
-  });
+      $chat.addMessage(m);
+    }
+  );
 
   void sub
     .history({
@@ -71,7 +65,7 @@ onBeforeMount(() => {
     });
 
   presenceTimerId = window.setInterval(() => {
-    void centrifuge.presence(channelName).then(({ presence }) => {
+    void cent.presence(channelName).then(({ presence }) => {
       $chat.setPlayers(presence);
     });
   }, 3000);
@@ -90,7 +84,7 @@ const submit = async () => {
     author: '',
   };
 
-  await centrifuge.publish(channelName, m);
+  await cent.publish(channelName, m);
   msg.value = '';
 };
 
@@ -101,7 +95,7 @@ watch(
   () => {
     scroll.value?.setScrollPercentage('vertical', 100);
   },
-  { flush: 'post' },
+  { flush: 'post' }
 );
 </script>
 
