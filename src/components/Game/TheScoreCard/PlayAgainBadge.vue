@@ -1,9 +1,5 @@
 <template>
-  <Badge
-    v-if="show"
-    pos="bottom"
-    y="-30%"
-  >
+  <Badge v-if="show" pos="bottom" y="-30%">
     <Text size="xs">
       {{ answer }}
     </Text>
@@ -35,5 +31,4 @@ const answer = computed(() => {
 
   return $playAgain.answers[name] ? 'Yes' : 'No';
 });
-
 </script>

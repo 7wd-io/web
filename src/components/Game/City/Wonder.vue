@@ -4,14 +4,10 @@
       :id="wid"
       :size="size"
       class="relative-position"
-      style="z-index: 3;"
+      style="z-index: 3"
     />
 
-    <Badge
-      v-if="cid"
-      :pos="pos"
-      x="-50%"
-    >
+    <Badge v-if="cid" :pos="pos" x="-50%">
       <WonderCard
         :id="cid"
         :size="wonderCardSize"
@@ -19,12 +15,7 @@
         :class="cardCo"
       />
     </Badge>
-    <Badge
-      v-if="!cid"
-      pos="bottom"
-      y="-60%"
-      style="z-index: 4;"
-    >
+    <Badge v-if="!cid" pos="bottom" y="-60%" style="z-index: 4">
       <PriceHint
         v-if="price !== undefined"
         :value="price"
@@ -51,16 +42,13 @@ interface Props {
 }
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  wid, cid, price, pos, size,
-} = defineProps<Props>();
+const { wid, cid, price, pos, size } = defineProps<Props>();
 
 const { wonderCardSize, wonderPriceBadgeSize } = useWonderCssVars();
 
 const cardCo = {
   [`${pos}`]: true,
 };
-
 </script>
 
 <style lang="scss" scoped>

@@ -1,13 +1,6 @@
 <template>
-  <Badge
-    pos="bottom"
-    y="-65%"
-    :x="x"
-  >
-    <PriceHint
-      :value="value"
-      :size="size"
-    />
+  <Badge pos="bottom" y="-65%" :x="x">
+    <PriceHint :value="value" :size="size" />
   </Badge>
 </template>
 
@@ -22,9 +15,7 @@ interface Props {
 }
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  value, pos, size,
-} = defineProps<Props>();
+const { value, pos, size } = defineProps<Props>();
 
 let x = '110%';
 

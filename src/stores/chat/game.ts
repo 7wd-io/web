@@ -3,7 +3,6 @@ import { Rating } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import { PresenceMap, PublicationContext } from 'centrifuge';
 import { useOnline } from 'src/stores/online';
-// @ts-ignore
 import _toPairs from 'lodash-es/toPairs';
 import { useGame } from 'src/stores/game/game';
 import { botNickname } from 'src/models/account';

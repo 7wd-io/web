@@ -4,12 +4,8 @@
     :class="BoardService.classnameDiscard"
     @click="onClick"
   >
-    <DiscardIcon :size="discardSize"/>
-    <Badge
-      pos="bottom"
-      x="-10%"
-      y="50%"
-    >
+    <DiscardIcon :size="discardSize" />
+    <Badge pos="bottom" x="-10%" y="50%">
       <div class="hints">
         <PriceHint
           :value="left.bank.discardReward"
@@ -25,10 +21,7 @@
       </div>
     </Badge>
 
-    <Badge
-      pos="top-left"
-      :class="BoardService.classnameDiscardCardHolder"
-    />
+    <Badge pos="top-left" :class="BoardService.classnameDiscardCardHolder" />
   </div>
 </template>
 

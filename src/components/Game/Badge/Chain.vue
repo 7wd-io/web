@@ -1,10 +1,5 @@
 <template>
-  <Badge
-    v-if="show"
-    :pos="pos"
-    :x="x"
-    :y="y"
-  >
+  <Badge v-if="show" :pos="pos" :x="x" :y="y">
     <q-tooltip
       class="bg-dark text-white"
       anchor="top middle"
@@ -49,10 +44,6 @@ interface Props {
 }
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  card, left, right, size,
-} = defineProps<Props>();
-const {
-  show, pos, x, y,
-} = use(left, right, card);
+const { card, left, right, size } = defineProps<Props>();
+const { show, pos, x, y } = use(left, right, card);
 </script>

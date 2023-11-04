@@ -72,8 +72,8 @@ import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
 import { useAccountStore } from 'src/stores/account';
 // import { useOnline } from 'src/stores/online';
-import Profile from 'components/Account/AccountProfile.vue';
-import Settings from 'components/Account/AccountSettings.vue';
+import Profile from 'components/Account/Profile.vue';
+import Settings from 'components/Account/Settings.vue';
 
 const tab = ref('');
 interface Action {

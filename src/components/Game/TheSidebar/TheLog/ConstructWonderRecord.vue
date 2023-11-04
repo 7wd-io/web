@@ -1,27 +1,15 @@
 <template>
-  <Record
-    name="construct wonder"
-    :actor="actor"
-    :n="n"
-    :name-size="nameSize"
-  >
+  <Record name="construct wonder" :actor="actor" :n="n" :name-size="nameSize">
     <div class="wonder-badger">
       <Wonder
         :id="wonder"
         :size="wonderSize"
         class="relative-position"
-        style="z-index: 3;"
+        style="z-index: 3"
       />
 
-      <Badge
-        pos="top"
-        :overlay="false"
-        :y="cardOverlaySize"
-      >
-        <Card
-          :id="card"
-          :size="cardSize"
-        />
+      <Badge pos="top" :overlay="false" :y="cardOverlaySize">
+        <Card :id="card" :size="cardSize" />
       </Badge>
     </div>
   </Record>
@@ -38,13 +26,7 @@ import Record from './Record.vue';
 import { useCssVars } from './useCssVars';
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  actor,
-  n,
-  width,
-  card,
-  wonder,
-} = defineProps({
+const { actor, n, width, card, wonder } = defineProps({
   ...useRecord(),
   wonder: {
     type: Number as PropType<WonderId>,
@@ -58,14 +40,17 @@ const {
 
 // eslint-disable-next-line
 const {
-  nameSize, cardSize, wonderSize, cardOverlaySize,
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  nameSize,
+  cardSize,
+  wonderSize,
+  cardOverlaySize,
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 } = useCssVars(width);
 </script>
 
 <style scoped>
 .wonder-badger {
   --overlay: v-bind(cardOverlaySize);
-  margin-top: calc(var(--overlay) * .21);
+  margin-top: calc(var(--overlay) * 0.21);
 }
 </style>

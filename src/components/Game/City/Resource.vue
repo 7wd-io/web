@@ -1,29 +1,11 @@
 <template>
-  <ResourceSymbol
-    :id="id"
-    :size="resourceSize"
-    class="relative-position"
-  >
-    <Badge
-      pos="top-left"
-      x="50%"
-      y="50%"
-    >
-      <Coin
-        :count="price"
-        :size="badgeSize"
-      />
+  <ResourceSymbol :id="id" :size="resourceSize" class="relative-position">
+    <Badge pos="top-left" x="50%" y="50%">
+      <Coin :count="price" :size="badgeSize" />
     </Badge>
 
-    <Badge
-      pos="bottom-right"
-      x="-50%"
-      y="-50%"
-    >
-      <Counter
-        :value="count"
-        :size="badgeSize"
-      />
+    <Badge pos="bottom-right" x="-50%" y="-50%">
+      <Counter :value="count" :size="badgeSize" />
     </Badge>
   </ResourceSymbol>
 </template>
@@ -46,5 +28,4 @@ const { id, count, price } = defineProps<Props>();
 
 const resourceSize = 'calc(var(--swd-game-unit) * 3.5)';
 const badgeSize = `calc(${resourceSize} * .34)`;
-
 </script>

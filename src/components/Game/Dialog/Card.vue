@@ -87,10 +87,10 @@
 import { CardId, WonderId } from 'src/models/game';
 import { useQuasar, useDialogPluginComponent } from 'quasar';
 import { useGame } from 'src/stores/game/game';
-import { useAccount } from 'src/stores/account';
+import { useAccountStore } from 'src/stores/account';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
 import { computed } from 'vue';
-import { ApiError, httpClient } from 'boot/api';
+import { ApiError, api } from 'boot/axios';
 import Wonder from 'components/Game/Wonder/Wonder.vue';
 import CardComp from 'components/Game/Card/Card.vue';
 import Button from 'components/Game/Button.vue';
@@ -115,10 +115,10 @@ const {
 const { onMouseDown } = useDraggble('#dialog-card-action .swd-dialog');
 
 const $q = useQuasar();
-const $account = useAccount();
+const $account = useAccountStore();
 const $game = useGame();
 const isMyTurn = computed(() => $game.isMyTurn);
-const city = computed(() => $game.city($account.name));
+const city = computed(() => $game.city($account.user.nickname));
 const priceHintSize = 'calc(var(--swd-game-unit) * 1.8)';
 
 const onDiscard = async () => {

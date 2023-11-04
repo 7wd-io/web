@@ -1,14 +1,11 @@
 <template>
   <Centered class="empty-stub">
-    <div>
-      Empty
-    </div>
+    <div>Empty</div>
   </Centered>
 </template>
 
 <script setup lang="ts">
 import Centered from 'components/Centered.vue';
-
 </script>
 
 <style lang="scss" scoped>

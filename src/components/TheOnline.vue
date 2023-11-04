@@ -32,7 +32,7 @@ import { computed } from 'vue';
 import { useOnline } from 'src/stores/online';
 import { useQuasar } from 'quasar';
 import Player from 'components/Player/Player.vue';
-import Profile from 'components/Account/AccountProfile.vue';
+import Profile from 'components/Account/Profile.vue';
 import { Nickname } from 'src/models/account';
 
 const $q = useQuasar();
