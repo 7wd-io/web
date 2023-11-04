@@ -1,7 +1,7 @@
 <template>
   <q-page class="full-height">
     <q-card class="q-pa-lg absolute-center" style="width: 300px">
-      <h3 class="text-weight-bold text-center">Log in</h3>
+      <h5 class="text-weight-bold text-center">Log in</h5>
       <q-form :autofocus="true" novalidate @submit.stop="onSubmit">
         <q-input
           v-model="login"

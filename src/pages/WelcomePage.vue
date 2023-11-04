@@ -7,32 +7,27 @@
             7wd is a platform to play the game, <br />
             based on <span style="white-space: nowrap">7 wonders duel</span>
           </h3>
-
         </div>
 
         <div class="row justify-center">
           <div class="screen" />
         </div>
 
-        <h4 class="text-center text-bold">
-          Why you will enjoy playing here?
-        </h4>
+        <h4 class="text-center text-bold">Why you will enjoy playing here?</h4>
 
         <div class="advantages row justify-center q-gutter-md q-mb-lg">
-          <q-card
-            class="col-3"
-            v-for="(card, i) in cards"
-            :key="i"
-          >
+          <q-card class="col-3" v-for="(card, i) in cards" :key="i">
             <q-card-section>
-              <div class="img" :class="`img-${card.img}`"/>
+              <div class="img" :class="`img-${card.img}`" />
             </q-card-section>
             <q-card-section>
               <div class="text-h5 text-bold">
                 {{ card.title }}
               </div>
             </q-card-section>
-            <q-card-section class="q-pt-none text-subtitle1" v-html="card.body" />
+            <q-card-section class="q-pt-none text-subtitle1">
+              <div v-html="card.body" />
+            </q-card-section>
           </q-card>
         </div>
       </div>
@@ -42,39 +37,42 @@
 
 <script setup lang="ts">
 interface Card {
-  title: string,
-  body: string,
-  img: string,
+  title: string;
+  body: string;
+  img: string;
 }
 
 const cards: Card[] = [
   {
-    title: 'It\'s free',
+    title: "It's free",
     body: 'Without functional limits',
     img: 'free',
   },
   {
     title: 'Advanced stats',
-    body: 'You can see your wins/losses both in general'
-      + ' and against specific players in terms of civilian/military/science',
+    body:
+      'You can see your wins/losses both in general' +
+      ' and against specific players in terms of civilian/military/science',
     img: 'stats',
   },
   {
     title: 'Game assistance',
-    body: '<ul>'
-      + '<li>Runtime scoring</li>'
-      + '<li>Final tile prices</li>'
-      + '<li>Resource counters and prices</li>'
-      + '</ul>',
+    body:
+      '<ul>' +
+      '<li>Runtime scoring</li>' +
+      '<li>Final tile prices</li>' +
+      '<li>Resource counters and prices</li>' +
+      '</ul>',
     img: 'assistance',
   },
   {
     title: 'Advanced room settings',
-    body: '<ul>'
-      + '<li>Fast game</li>'
-      + '<li>Private rooms</li>'
-      + '<li>Min/max rating</li>'
-      + '</ul>',
+    body:
+      '<ul>' +
+      '<li>Fast game</li>' +
+      '<li>Private rooms</li>' +
+      '<li>Min/max rating</li>' +
+      '</ul>',
     img: 'settings',
   },
   {

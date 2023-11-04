@@ -10,7 +10,7 @@ declare module '@vue/runtime-core' {
 }
 
 const api = axios.create({
-  baseURL: process.env.AGNY_API_URL,
+  baseURL: process.env.SWD_API_URL,
   withCredentials: true,
 });
 

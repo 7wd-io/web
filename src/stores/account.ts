@@ -25,9 +25,9 @@ export const useAccountStore = defineStore('account', {
       // this.nickname = nickname;
       this.token = () => token;
     },
-    async signin(email: string, password: string) {
+    async signin(login: string, password: string) {
       const { data } = await api.post<Session>('/account/signin', {
-        email,
+        login,
         password,
         fingerprint: this.fingerprint,
       });

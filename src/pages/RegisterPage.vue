@@ -24,7 +24,7 @@ const onSubmit = async () => {
       <q-input filled type="password" label="Your password" v-model="pass" />
 
       <q-card-actions align="center">
-        <q-btn label="Register" type="submit" color="primary" />
+        <q-btn label="Register" type="submit" color="welcome" />
       </q-card-actions>
     </q-form>
   </q-card>
