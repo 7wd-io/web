@@ -19,7 +19,7 @@ import Player from 'components/Player/Player.vue';
 import { useChat } from 'src/stores/chat/game';
 import { computed } from 'vue';
 import { Nickname } from 'src/models/account';
-import Profile from 'components/Account/Profile.vue';
+import Profile from 'components/Account/AccountProfile.vue';
 import { useQuasar } from 'quasar';
 
 const $q = useQuasar();

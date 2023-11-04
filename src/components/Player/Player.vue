@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { Nickname } from 'src/models/account';
 import { useQuasar } from 'quasar';
-import Profile from 'components/Account/Profile.vue';
+import Profile from 'components/Account/AccountProfile.vue';
 
 interface Props {
   name: Nickname;

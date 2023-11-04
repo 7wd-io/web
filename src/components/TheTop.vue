@@ -32,7 +32,7 @@ import { onBeforeMount, computed } from 'vue';
 import Player from 'components/Player/Player.vue';
 import { Nickname } from 'src/models/account';
 import { useQuasar } from 'quasar';
-import Profile from 'components/Account/Profile.vue';
+import Profile from 'components/Account/AccountProfile.vue';
 
 const $q = useQuasar();
 const $top = useTop();

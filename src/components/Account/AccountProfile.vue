@@ -116,8 +116,8 @@ import { ApiError, api } from 'boot/axios';
 import { computed, onBeforeMount, ref } from 'vue';
 import { GamesReport, Profile } from 'src/models/profile';
 import { useAccountStore } from 'src/stores/account';
-import Card from './Card.vue';
-import StatsCard from './StatsCard.vue';
+import Card from './AccountCard.vue';
+import StatsCard from './AccountStatsCard.vue';
 
 interface Props {
   name: Nickname;
