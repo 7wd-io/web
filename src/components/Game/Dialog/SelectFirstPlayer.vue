@@ -4,14 +4,9 @@
     :persistent="true"
     :model-value="show"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          Select first player
-        </Title>
+        <Title> Select first player </Title>
       </q-card-section>
 
       <q-card-actions align="between">
@@ -33,8 +28,9 @@
 import Button from 'components/Game/Button.vue';
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
-import { Nickname, Phase } from 'src/models/game';
-import { httpClient } from 'boot/api';
+import { Phase } from 'src/models/game';
+import { Nickname } from 'src/models/account';
+import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -42,18 +38,14 @@ const { onMouseDown } = useDraggble('#dialog-select-first-player .swd-dialog');
 const $game = useGame();
 
 const show = computed(
-  () => ($game.state.phase === Phase.selectWhoBeginsTheNextAge)
-  && $game.isMyTurn,
+  () => $game.state.phase === Phase.selectWhoBeginsTheNextAge && $game.isMyTurn
 );
 
 // order is matter
-const players = [
-  $game.left,
-  $game.right,
-];
+const players = [$game.left, $game.right];
 
 const onClick = async (name: Nickname) => {
-  await httpClient.post('/game/select-move', {
+  await api.post('/game/select-move', {
     gid: $game.id,
     player: name,
   });

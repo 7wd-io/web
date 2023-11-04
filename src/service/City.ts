@@ -1,4 +1,5 @@
-import { Nickname, WonderId } from 'src/models/game';
+import { WonderId } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 
 export default class City {
   static classWonderHolder = 'swd-js-city-wonder-holder';
@@ -37,53 +38,51 @@ export default class City {
 
   getElementCity() {
     if (!this.$city) {
-      this.$city = document
-        .querySelector(`.${this.getClassnameCity()}`) as HTMLElement;
+      this.$city = document.querySelector(
+        `.${this.getClassnameCity()}`
+      ) as HTMLElement;
     }
 
     return this.$city;
   }
 
   getElementWonderHolder() {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.classWonderHolder}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.classWonderHolder}`
+    ) as HTMLElement;
   }
 
   getElementWondersBar() {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.classWondersBar}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.classWondersBar}`
+    ) as HTMLElement;
   }
 
   getElementWonder(id: WonderId) {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.getClassnameWonder(id)}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.getClassnameWonder(id)}`
+    ) as HTMLElement;
   }
 
   getElementBurnHolder() {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.classBurnHolder}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.classBurnHolder}`
+    ) as HTMLElement;
   }
 
   getElementCardInHolder() {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.classCardInHolder}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.classCardInHolder}`
+    ) as HTMLElement;
   }
 
   getElementTokensBar() {
-    return this
-      .getElementCity()
-      .querySelector(`.${City.classTokensBar}`) as HTMLElement;
+    return this.getElementCity().querySelector(
+      `.${City.classTokensBar}`
+    ) as HTMLElement;
   }
 
   isLeft() {
-    return this
-      .getElementCity()
-      .classList
-      .contains(City.classLeftMarker);
+    return this.getElementCity().classList.contains(City.classLeftMarker);
   }
 }

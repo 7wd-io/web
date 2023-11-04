@@ -1,17 +1,10 @@
 <template>
-  <div
-    class="city-score"
-    :class="co"
-  >
-    <Point
-      :count="city.score.total"
-      :size="size"
-      class="item"
-    />
+  <div class="city-score" :class="co">
+    <Point :count="city.score.total" :size="size" class="item" />
 
     <Coin
       :count="city.treasure.coins"
-      :font-ratio=".5"
+      :font-ratio="0.5"
       :size="size"
       class="item"
     />
@@ -19,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import Coin from 'components/Game/Coin/Coin.vue';
 import Point from 'components/Game/Point/Point.vue';
 import { useGame } from 'src/stores/game/game';

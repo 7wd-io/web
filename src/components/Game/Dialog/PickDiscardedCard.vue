@@ -4,14 +4,9 @@
     :persistent="true"
     :model-value="show"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          Select discarded card
-        </Title>
+        <Title> Select discarded card </Title>
       </q-card-section>
 
       <q-card-section>
@@ -33,7 +28,7 @@
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
-import { httpClient } from 'boot/api';
+import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -41,14 +36,13 @@ const { onMouseDown } = useDraggble('#dialog-pick-discarded-card .swd-dialog');
 const $game = useGame();
 
 const show = computed(
-  () => ($game.state.phase === Phase.pickDiscardedCard)
-    && $game.isMyTurn,
+  () => $game.state.phase === Phase.pickDiscardedCard && $game.isMyTurn
 );
 
 const cards = computed(() => $game.state.dialogItems.cards);
 
 const onClick = async (card: CardId) => {
-  await httpClient.post('/game/pick-discarded-card', {
+  await api.post('/game/pick-discarded-card', {
     gid: $game.id,
     cid: card,
   });

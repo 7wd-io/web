@@ -4,14 +4,9 @@
     :persistent="true"
     :model-value="show"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          Select top line card
-        </Title>
+        <Title> Select top line card </Title>
       </q-card-section>
 
       <q-card-section>
@@ -33,7 +28,7 @@
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
-import { httpClient } from 'boot/api';
+import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -41,14 +36,13 @@ const { onMouseDown } = useDraggble('#dialog-pick-topline-card .swd-dialog');
 const $game = useGame();
 
 const show = computed(
-  () => ($game.state.phase === Phase.pickTopLineCard)
-    && $game.isMyTurn,
+  () => $game.state.phase === Phase.pickTopLineCard && $game.isMyTurn
 );
 
 const cards = computed(() => $game.state.dialogItems.cards);
 
 const onClick = async (card: CardId) => {
-  await httpClient.post('/game/pick-topline-card', {
+  await api.post('/game/pick-topline-card', {
     gid: $game.id,
     cid: card,
   });

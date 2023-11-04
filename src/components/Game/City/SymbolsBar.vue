@@ -1,25 +1,14 @@
 <template>
   <div class="symbols-bar">
-    <div
-      v-for="id in city.symbols.order"
-      :key="id"
-      class="item"
-    >
+    <div v-for="id in city.symbols.order" :key="id" class="item">
       <Symbol
         v-if="id !== SymbolId.law"
         :id="id"
         :size="symbolSize"
         class="relative-position"
       >
-        <Badge
-          pos="bottom-right"
-          x="-20%"
-          y="-20%"
-        >
-          <Counter
-            :value="city.symbols.data[id]"
-            :size="badgeSize"
-          />
+        <Badge pos="bottom-right" x="-20%" y="-20%">
+          <Counter :value="city.symbols.data[id]" :size="badgeSize" />
         </Badge>
       </Symbol>
     </div>
@@ -30,8 +19,9 @@
 import Symbol from 'components/Game/Symbol/Symbol.vue';
 import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
-import { Nickname, SymbolId } from 'src/models/game';
+import { SymbolId } from 'src/models/game';
 import { useGame } from 'src/stores/game/game';
+import { Nickname } from 'src/models/account';
 import { computed } from 'vue';
 
 interface Props {

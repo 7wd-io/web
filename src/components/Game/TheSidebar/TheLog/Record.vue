@@ -1,18 +1,11 @@
 <template>
-  <q-item
-    :class="co"
-    class="record"
-    clickable
-  >
+  <q-item :class="co" class="record" clickable>
     <q-item-section>
-      <q-item-label
-        overline
-        class="name text-uppercase text-white"
-      >
+      <q-item-label overline class="name text-uppercase text-white">
         #{{ n }} {{ name }}
       </q-item-label>
       <div class="row justify-center q-pa-md">
-        <slot/>
+        <slot />
       </div>
       <q-item-label caption class="actor text-bold text-white">
         {{ actor }}
@@ -23,7 +16,7 @@
 
 <script setup lang="ts">
 import { useGame } from 'src/stores/game/game';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 
 interface Props {
   name: string;
@@ -33,12 +26,7 @@ interface Props {
 }
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const {
-  name,
-  nameSize,
-  actor,
-  n,
-} = defineProps<Props>();
+const { name, nameSize, actor, n } = defineProps<Props>();
 const $game = useGame();
 
 const co = {

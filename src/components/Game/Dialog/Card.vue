@@ -5,24 +5,20 @@
     @hide="onDialogHide"
     :persistent="false"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
         <div class="row no-wrap q-gutter-lg">
           <div class="column justify-center q-gutter-md">
             <div class="row justify-center">
-              <CardComp
-                :id="id"
-                size="calc(var(--swd-game-unit) * 8)"
-              />
+              <CardComp :id="id" size="calc(var(--swd-game-unit) * 8)" />
             </div>
 
             <div>
               <Button
                 class="full-width"
-                :disable="!isMyTurn || (city.bank.cardPrice[id] > city.treasure.coins)"
+                :disable="
+                  !isMyTurn || city.bank.cardPrice[id] > city.treasure.coins
+                "
                 @click="onConstructCard"
                 v-close-popup
               >
@@ -55,20 +51,16 @@
           </div>
           <div class="col-auto">
             <div class="wonders-box fit">
-              <template
-                v-for="id in city.wonders.list"
-                :key="id"
-              >
+              <template v-for="id in city.wonders.list" :key="id">
                 <div>
-                  <Wonder
-                    :id="id"
-                    size="calc(var(--swd-game-unit) * 14)"
-                  />
+                  <Wonder :id="id" size="calc(var(--swd-game-unit) * 14)" />
                   <div class="text-center q-mt-sm">
                     <Button
                       v-if="!city.wonders.constructed[id]"
-                      :disable="!isMyTurn
-                  || (city.bank.wonderPrice[id] > city.treasure.coins)"
+                      :disable="
+                        !isMyTurn ||
+                        city.bank.wonderPrice[id] > city.treasure.coins
+                      "
                       @click="onConstructWonder(id)"
                       v-close-popup
                     >
@@ -131,7 +123,7 @@ const priceHintSize = 'calc(var(--swd-game-unit) * 1.8)';
 
 const onDiscard = async () => {
   try {
-    await httpClient.post('/game/discard-card', {
+    await api.post('/game/discard-card', {
       gid: $game.id,
       cid: id,
     });
@@ -147,7 +139,7 @@ const onDiscard = async () => {
 
 const onConstructCard = async () => {
   try {
-    await httpClient.post('/game/construct-card', {
+    await api.post('/game/construct-card', {
       gid: $game.id,
       cid: id,
     });
@@ -163,7 +155,7 @@ const onConstructCard = async () => {
 
 const onConstructWonder = async (wid: WonderId) => {
   try {
-    await httpClient.post('/game/construct-wonder', {
+    await api.post('/game/construct-wonder', {
       gid: $game.id,
       wid,
       cid: id,

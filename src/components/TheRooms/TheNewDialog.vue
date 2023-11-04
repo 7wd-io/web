@@ -1,65 +1,36 @@
 <template>
-  <q-dialog
-    ref="dialogRef"
-    @hide="onDialogHide"
-  >
+  <q-dialog ref="dialogRef" @hide="onDialogHide">
     <q-card class="q-dialog-plugin text-dark">
-      <q-tabs
-        v-model="tab"
-        align="justify"
-      >
-        <q-tab
-          label="rating"
-          name="rating"
-        />
-        <q-tab
-          label="vs bot"
-          name="bot"
-        />
+      <q-tabs v-model="tab" align="justify">
+        <q-tab label="rating" name="rating" />
+        <q-tab label="vs bot" name="bot" />
       </q-tabs>
 
       <q-separator />
 
-      <q-tab-panels
-        v-model="tab"
-        animated
-      >
-        <q-tab-panel
-          name="rating"
-          dark
-          class="no-padding"
-        >
+      <q-tab-panels v-model="tab" animated>
+        <q-tab-panel name="rating" dark class="no-padding">
           <q-list>
-            <q-item
-              v-ripple
-              tag="label"
-            >
+            <q-item v-ripple tag="label">
               <q-item-section avatar>
                 <q-icon name="bolt" />
               </q-item-section>
 
               <q-item-section>
-                <q-item-label class="text-weight-bold">
-                  Fast
-                </q-item-label>
+                <q-item-label class="text-weight-bold"> Fast </q-item-label>
                 <q-item-label caption>
                   3 min on clock, +5 sec per move
                 </q-item-label>
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle
-                  v-model="flagFast"
-                />
+                <q-toggle v-model="flagFast" />
               </q-item-section>
             </q-item>
 
             <q-separator />
 
-            <q-item
-              v-ripple
-              tag="label"
-            >
+            <q-item v-ripple tag="label">
               <q-item-section avatar>
                 <q-icon name="star" />
               </q-item-section>
@@ -74,18 +45,13 @@
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle
-                  v-model="flagMinRating"
-                />
+                <q-toggle v-model="flagMinRating" />
               </q-item-section>
             </q-item>
 
             <q-item>
               <q-item-section avatar>
-                <div
-                  v-show="flagMinRating"
-                  class="text-bold text-primary"
-                >
+                <div v-show="flagMinRating" class="text-bold text-primary">
                   {{ minRating }}
                 </div>
               </q-item-section>
@@ -103,27 +69,18 @@
 
             <q-separator />
 
-            <q-item
-              v-ripple
-              tag="label"
-            >
+            <q-item v-ripple tag="label">
               <q-item-section avatar>
                 <q-icon name="lock" />
               </q-item-section>
 
               <q-item-section>
-                <q-item-label class="text-weight-bold">
-                  Private
-                </q-item-label>
-                <q-item-label caption>
-                  Who can join to game
-                </q-item-label>
+                <q-item-label class="text-weight-bold"> Private </q-item-label>
+                <q-item-label caption> Who can join to game </q-item-label>
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle
-                  v-model="flagPrivate"
-                />
+                <q-toggle v-model="flagPrivate" />
               </q-item-section>
             </q-item>
 
@@ -147,10 +104,7 @@
 
           <q-separator />
 
-          <q-card-actions
-            align="center"
-            class="q-pa-lg"
-          >
+          <q-card-actions align="center" class="q-pa-lg">
             <q-btn
               :loading="inProgress"
               color="primary"
@@ -166,15 +120,11 @@
           </q-card-actions>
         </q-tab-panel>
 
-        <q-tab-panel
-          name="bot"
-          dark
-          class="no-padding"
-        >
+        <q-tab-panel name="bot" dark class="no-padding">
           <q-card-section>
             <div class="text-subtitle2">
-              Playing against a bot is the best way
-              to get acquainted with the UI and functionality.
+              Playing against a bot is the best way to get acquainted with the
+              UI and functionality.
             </div>
 
             <br />
@@ -189,10 +139,7 @@
 
           <q-separator />
 
-          <q-card-actions
-            align="center"
-            class="q-pa-lg"
-          >
+          <q-card-actions align="center" class="q-pa-lg">
             <q-btn
               :loading="inProgress"
               color="primary"
@@ -216,18 +163,15 @@
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { ref, watch, computed } from 'vue';
 import { useOnline } from 'src/stores/online';
-import { Nickname, RoomOptions } from 'src/models/game';
-import { ApiError, httpClient } from 'boot/api';
+import { RoomOptions } from 'src/models/game';
+import { Nickname } from 'src/models/account';
+import { ApiError, api } from 'boot/axios';
 
 const MIN_RATING = 1500;
 const MAX_RATING = 2000;
 
-const {
-  dialogRef,
-  onDialogHide,
-  onDialogOK,
-  onDialogCancel,
-} = useDialogPluginComponent();
+const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
+  useDialogPluginComponent();
 
 // runtime
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -263,7 +207,7 @@ const search = computed(() => $online.search);
 const privateOptions = ref(search.value);
 const inProgress = ref(false);
 
-const searchPlayer = (val: Nickname, update: (f: () => void)=> void) => {
+const searchPlayer = (val: Nickname, update: (f: () => void) => void) => {
   if (val === '') {
     update(() => {
       privateOptions.value = search.value;
@@ -275,8 +219,7 @@ const searchPlayer = (val: Nickname, update: (f: () => void)=> void) => {
   update(() => {
     const needle = val.toLowerCase();
     privateOptions.value = search.value.filter(
-      (v) => v.toLowerCase()
-        .indexOf(needle) > -1,
+      (v) => v.toLowerCase().indexOf(needle) > -1
     );
   });
 };
@@ -307,7 +250,7 @@ const onCreate = async () => {
   }
 
   try {
-    await httpClient.post('/room', params);
+    await api.post('/room', params);
   } catch (error) {
     const err = error as ApiError;
 
@@ -325,7 +268,7 @@ const onCreateWithBot = async () => {
   inProgress.value = true;
 
   try {
-    await httpClient.post('/game-with-bot');
+    await api.post('/game-with-bot');
   } catch (error) {
     const err = error as ApiError;
 

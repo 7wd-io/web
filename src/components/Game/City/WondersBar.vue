@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="wonders-bar"
-    :class="CityService.classWondersBar"
-  >
+  <div class="wonders-bar" :class="CityService.classWondersBar">
     <Wonder
       v-for="id in wonders"
       :key="id"
@@ -15,16 +12,9 @@
       :class="CityService.getClassnameWonder(id)"
     />
 
-    <div
-      class="wonder-holder item"
-      :class="CityService.classWonderHolder"
-    />
+    <div class="wonder-holder item" :class="CityService.classWonderHolder" />
 
-    <Badge
-      pos="center"
-      class="z-top"
-      :class="CityService.classBurnHolder"
-    >
+    <Badge pos="center" class="z-top" :class="CityService.classBurnHolder">
       <!--           programmatically insert-->
     </Badge>
     <Badge
@@ -42,7 +32,7 @@
 import CityService from 'src/service/City';
 import { useGame } from 'src/stores/game/game';
 import { computed, ref, watch } from 'vue';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import Wonder from 'components/Game/City/Wonder.vue';
 import Badge from 'components/Badge.vue';
 
@@ -63,7 +53,7 @@ watch(
   () => $game.chan,
   () => {
     wonders.value = $game.city(name).wonders.list;
-  },
+  }
 );
 </script>
 

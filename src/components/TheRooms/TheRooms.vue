@@ -1,8 +1,6 @@
 <template>
   <div class="row justify-between">
-    <div class="text-h6 text-weight-bolder">
-      Rooms
-    </div>
+    <div class="text-h6 text-weight-bolder">Rooms</div>
     <div>
       <q-btn
         :disabled="hasRoom"
@@ -13,23 +11,19 @@
     </div>
   </div>
 
-  <RoomComponent
-    v-for="room in rooms"
-    :key="room.host"
-    :data="room"
-  />
+  <RoomComponent v-for="room in rooms" :key="room.host" :data="room" />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useAccount } from 'src/stores/account';
+import { useAccountStore } from 'src/stores/account';
 import { useRooms } from 'src/stores/rooms';
 import { useQuasar } from 'quasar';
 import TheNewDialog from './TheNewDialog.vue';
 import RoomComponent from './Room.vue';
 
 const $q = useQuasar();
-const $account = useAccount();
+const $account = useAccountStore();
 const $rooms = useRooms();
 
 const hasRoom = computed(() => $account.hasRoom);

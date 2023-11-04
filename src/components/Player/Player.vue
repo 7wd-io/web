@@ -1,14 +1,11 @@
 <template>
-  <span
-    class="cursor-pointer"
-    @click="profile && onClick()"
-  >
+  <span class="cursor-pointer" @click="profile && onClick()">
     {{ body || name }}
   </span>
 </template>
 
 <script setup lang="ts">
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import { useQuasar } from 'quasar';
 import Profile from 'components/Account/Profile.vue';
 

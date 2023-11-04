@@ -13,25 +13,15 @@
     <q-card-section>
       <div class="row justify-between items-center">
         <div class="text-weight-bolder q-pr-lg">
-          <Player
-            :name="data.host"
-            class="text-weight-bolder"
-          />
+          <Player :name="data.host" class="text-weight-bolder" />
           <span>({{ data.hostRating }})</span>
           <template v-if="data.guest">
             <span class="inline-block relative-position">
               <span class="text-weight-regular q-mx-md">VS</span>
-              <Player
-                :name="data.guest"
-                class="text-weight-bolder"
-              />
+              <Player :name="data.guest" class="text-weight-bolder" />
               <span>({{ data.guestRating }})</span>
 
-              <Badge
-                v-if="isHost() && !data.gameId"
-                pos="right"
-                x="10px"
-              >
+              <Badge v-if="isHost() && !data.gameId" pos="right" x="10px">
                 <q-icon
                   name="close"
                   color="negative"
@@ -51,9 +41,7 @@
             size="xxs"
             class="text-primary"
           >
-            <q-tooltip class="bg-dark text-white">
-              Fast on
-            </q-tooltip>
+            <q-tooltip class="bg-dark text-white"> Fast on </q-tooltip>
           </q-icon>
           <q-chip
             v-show="data.options.enemy"
@@ -63,9 +51,7 @@
             text-color="white"
           >
             <span class="text-weight-bolder">{{ data.options.enemy }}</span>
-            <q-tooltip class="bg-dark text-white">
-              Private game
-            </q-tooltip>
+            <q-tooltip class="bg-dark text-white"> Private game </q-tooltip>
           </q-chip>
 
           <q-chip
@@ -76,7 +62,9 @@
             color="primary"
             text-color="white"
           >
-            <span class="text-weight-bolder">> {{ data.options.minRating }}</span>
+            <span class="text-weight-bolder"
+              >> {{ data.options.minRating }}</span
+            >
             <q-tooltip class="bg-dark text-white">
               Min rating who can join
             </q-tooltip>
@@ -137,10 +125,10 @@
 import Player from 'components/Player/Player.vue';
 import { Room } from 'src/models/game';
 import { computed, ref } from 'vue';
-import { useAccount } from 'src/stores/account';
+import { useAccountStore } from 'src/stores/account';
 import { useOnline } from 'src/stores/online';
 import router from 'src/router';
-import { ApiError, httpClient } from 'boot/api';
+import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';
 import Badge from 'components/Badge.vue';
 
@@ -151,7 +139,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { data } = defineProps<Props>();
 const $q = useQuasar();
-const $account = useAccount();
+const $account = useAccountStore();
 const $online = useOnline();
 const inProgressCancel = ref(false);
 const hasRoom = computed(() => $account.hasRoom);
@@ -160,11 +148,14 @@ const joinDenied = computed(() => {
     return true;
   }
 
-  if (data.options.minRating && $online.players[$account.name] < data.options.minRating) {
+  if (
+    data.options.minRating &&
+    $online.players[$account.user.nickname] < data.options.minRating
+  ) {
     return true;
   }
 
-  if (data.options.enemy && $account.name !== data.options.enemy) {
+  if (data.options.enemy && $account.user.nickname !== data.options.enemy) {
     return true;
   }
 
@@ -180,12 +171,12 @@ const openGame = async () => {
   });
 };
 
-const isHost = () => data.host === $account.name;
-const isGuest = () => data.guest === $account.name;
+const isHost = () => data.host === $account.user.nickname;
+const isGuest = () => data.guest === $account.user.nickname;
 
 const onKick = async () => {
   try {
-    await httpClient.post('/room/kick');
+    await api.post('/room/kick');
   } catch (error) {
     const err = error as ApiError;
 
@@ -200,7 +191,7 @@ const onCancel = async () => {
   inProgressCancel.value = true;
 
   try {
-    await httpClient.delete('/room');
+    await api.delete('/room');
   } catch (error) {
     const err = error as ApiError;
 
@@ -215,7 +206,7 @@ const onCancel = async () => {
 
 const onJoin = async () => {
   try {
-    await httpClient.post(`/room/${data.host}/join`);
+    await api.post(`/room/${data.host}/join`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -228,7 +219,7 @@ const onJoin = async () => {
 
 const onLeave = async () => {
   try {
-    await httpClient.post(`/room/${data.host}/leave`);
+    await api.post(`/room/${data.host}/leave`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -241,7 +232,7 @@ const onLeave = async () => {
 
 const onStart = async () => {
   try {
-    await httpClient.post('/game');
+    await api.post('/game');
   } catch (error) {
     const err = error as ApiError;
 
@@ -259,7 +250,6 @@ const onPlay = async () => {
 const onSpectate = async () => {
   await openGame();
 };
-
 </script>
 
 <style scoped lang="scss">

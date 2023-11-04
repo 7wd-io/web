@@ -1,17 +1,8 @@
 <template>
-  <q-dialog
-    id="dialog-burn-card"
-    :persistent="true"
-    :model-value="show"
-  >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+  <q-dialog id="dialog-burn-card" :persistent="true" :model-value="show">
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          Select a card to burn
-        </Title>
+        <Title> Select a card to burn </Title>
       </q-card-section>
       <q-card-section>
         <div class="row q-gutter-md">
@@ -32,7 +23,7 @@
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
-import { httpClient } from 'boot/api';
+import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -40,14 +31,13 @@ const { onMouseDown } = useDraggble('#dialog-burn-card .swd-dialog');
 const $game = useGame();
 
 const show = computed(
-  () => ($game.state.phase === Phase.burnCard)
-    && $game.isMyTurn,
+  () => $game.state.phase === Phase.burnCard && $game.isMyTurn
 );
 
 const cards = computed(() => $game.state.dialogItems.cards);
 
 const onClick = async (card: CardId) => {
-  await httpClient.post('/game/burn-card', {
+  await api.post('/game/burn-card', {
     gid: $game.id,
     cid: card,
   });

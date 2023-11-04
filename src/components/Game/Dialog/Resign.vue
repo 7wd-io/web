@@ -7,20 +7,11 @@
   >
     <q-card class="swd-dialog q-pa-lg">
       <q-card-section>
-        <Title>
-          Are you sure?
-        </Title>
+        <Title> Are you sure? </Title>
       </q-card-section>
       <q-card-actions align="center">
-        <Button
-          label="resign"
-          @click="confirm"
-          v-close-popup
-        />
-        <Button
-          label="cancel"
-          v-close-popup
-        />
+        <Button label="resign" @click="confirm" v-close-popup />
+        <Button label="cancel" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -30,24 +21,21 @@
 import Button from 'components/Game/Button.vue';
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { useGame } from 'src/stores/game/game';
-import { ApiError, httpClient } from 'boot/api';
+import { ApiError, api } from 'boot/axios';
 import Title from './Title.vue';
 
 // runtime
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const emit = defineEmits([...useDialogPluginComponent.emits]);
 
-const {
-  dialogRef,
-  onDialogHide,
-} = useDialogPluginComponent();
+const { dialogRef, onDialogHide } = useDialogPluginComponent();
 
 const $q = useQuasar();
 const $game = useGame();
 
 const confirm = async () => {
   try {
-    await httpClient.post('/game/resign', {
+    await api.post('/game/resign', {
       gid: $game.id,
     });
   } catch (error) {

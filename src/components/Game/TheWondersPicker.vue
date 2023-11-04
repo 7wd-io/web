@@ -1,9 +1,6 @@
 <template>
   <div class="the-wonders-picker">
-    <div
-      v-for="(id, ind) in wonders"
-      :key="`${id}-${ind}`"
-    >
+    <div v-for="(id, ind) in wonders" :key="`${id}-${ind}`">
       <Wonder
         v-if="id"
         :id="id"
@@ -22,20 +19,22 @@ import Wonder from 'components/Game/Wonder/Wonder.vue';
 import { useGame } from 'src/stores/game/game';
 import { computed, ref, watch } from 'vue';
 import { WonderId } from 'src/models/game';
-import { ApiError, httpClient } from 'boot/api';
+import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';
 import BoardService from 'src/service/Board';
 
 const $q = useQuasar();
 const $game = useGame();
-const { wonderWidth, wonderHeight } = useWonderCssVars('calc(var(--swd-game-unit) * 20)');
+const { wonderWidth, wonderHeight } = useWonderCssVars(
+  'calc(var(--swd-game-unit) * 20)'
+);
 const wonders = ref($game.state.dialogItems.wonders);
 
 watch(
   () => $game.chan,
   () => {
     wonders.value = $game.state.dialogItems.wonders;
-  },
+  }
 );
 
 const isMyTurn = computed(() => $game.isMyTurn);
@@ -46,7 +45,7 @@ const onClick = async (id: WonderId) => {
   }
 
   try {
-    await httpClient.post('/game/pick-wonder', {
+    await api.post('/game/pick-wonder', {
       gid: $game.id,
       wid: id,
     });

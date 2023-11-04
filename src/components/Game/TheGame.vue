@@ -1,17 +1,11 @@
 <template>
   <div class="the-game">
-    <div
-      style="grid-area: main"
-      class="main swd-game-cover"
-    >
+    <div style="grid-area: main" class="main swd-game-cover">
       <div class="row justify-center">
         <TheBoard />
       </div>
 
-      <div
-        v-if="!isOver"
-        class="section-move-info"
-      >
+      <div v-if="!isOver" class="section-move-info">
         <TheMoveInfo />
       </div>
 
@@ -25,10 +19,7 @@
       </template>
 
       <template v-else>
-        <div
-          v-if="wonderPickInProgress"
-          class="section-wonder-picker"
-        >
+        <div v-if="wonderPickInProgress" class="section-wonder-picker">
           <TheWondersPicker />
         </div>
         <template v-else>
@@ -36,12 +27,7 @@
         </template>
       </template>
 
-      <Badge
-        pos="bottom-right"
-        y="-130%"
-        x="-130%"
-        class="z-top"
-      >
+      <Badge pos="bottom-right" y="-130%" x="-130%" class="z-top">
         <TheDiscard />
       </Badge>
     </div>
@@ -81,13 +67,9 @@ import City from 'components/Game/City/City.vue';
 import Card from 'components/Game/Card/Card.vue';
 import { useGame } from 'src/stores/game/game';
 import { useLog } from 'src/stores/game/log';
-import { useAccount } from 'src/stores/account';
-import {
-  watch, createApp, ref, computed,
-} from 'vue';
-import {
-  CardId, Phase,
-} from 'src/models/game';
+import { useAccountStore } from 'src/stores/account';
+import { watch, createApp, ref, computed } from 'vue';
+import { CardId, Phase } from 'src/models/game';
 import { MoveValidator } from 'src/models/move';
 import BoardService from 'src/service/Board';
 import CityService from 'src/service/City';
@@ -101,13 +83,13 @@ import PickDiscardedCardDialog from 'components/Game/Dialog/PickDiscardedCard.vu
 import PickReturnedCardsDialog from 'components/Game/Dialog/PickReturnedCards.vue';
 import ReplayPanel from 'components/Game/TheSidebar/TheLog/ReplayPanel.vue';
 import { LogRecord } from 'src/models/log';
-import { ApiError } from 'boot/api';
+import { ApiError } from 'boot/axios';
 import { useQuasar } from 'quasar';
 import gsap from 'gsap';
 import { AnimationSpeed } from 'src/models/account';
 
 const $q = useQuasar();
-const $account = useAccount();
+const $account = useAccountStore();
 const $game = useGame();
 const $log = useLog();
 const isOver = ref($game.isOver);
@@ -138,31 +120,24 @@ const speed: Record<AnimationSpeed, number> = {
 const animationFn = 'power1.in';
 
 const handleMove = (record: LogRecord) => {
-  const {
-    move,
-    meta,
-  } = record;
+  const { move, meta } = record;
 
   let toX = 0;
   let toY = 0;
 
   const $myCity = new CityService(meta.actor);
   const $enemyCity = new CityService($game.enemy(meta.actor));
-  const durationMedium = computed(() => speed[$account.profile.settings.game.animationSpeed]);
+  const durationMedium = computed(
+    () => speed[$account.user.settings.game.animationSpeed]
+  );
   const durationFast = computed(() => durationMedium.value * 0.7);
 
   if (MoveValidator.isPickWonder(move)) {
     const $wonder = BoardService.getWonder(move.wonder);
-    const {
-      x: wonderX,
-      y: wonderY,
-    } = $wonder.getBoundingClientRect();
+    const { x: wonderX, y: wonderY } = $wonder.getBoundingClientRect();
 
     const $wonderHolder = $myCity.getElementWonderHolder();
-    const {
-      x: wHolderX,
-      y: wHolderY,
-    } = $wonderHolder.getBoundingClientRect();
+    const { x: wHolderX, y: wHolderY } = $wonderHolder.getBoundingClientRect();
 
     gsap.to($wonder, {
       x: wHolderX - wonderX,
@@ -181,7 +156,10 @@ const handleMove = (record: LogRecord) => {
     return;
   }
 
-  if (MoveValidator.isConstructCard(move) || MoveValidator.isPickTopLineCard(move)) {
+  if (
+    MoveValidator.isConstructCard(move) ||
+    MoveValidator.isPickTopLineCard(move)
+  ) {
     const $wondersBar = $myCity.getElementWondersBar();
     const {
       x: cityX,
@@ -198,11 +176,9 @@ const handleMove = (record: LogRecord) => {
       height: cardH,
     } = $card.getBoundingClientRect();
 
-    toX = $myCity.isLeft()
-      ? cityX + cityW - cardW
-      : cityX;
+    toX = $myCity.isLeft() ? cityX + cityW - cardW : cityX;
 
-    toY = cityY + (cityH / 2) - (cardH / 2);
+    toY = cityY + cityH / 2 - cardH / 2;
 
     gsap.to($card, {
       x: toX - cardX,
@@ -222,11 +198,8 @@ const handleMove = (record: LogRecord) => {
 
   if (MoveValidator.isDiscardCard(move)) {
     // right top card corner to bottom left discard corner
-    const {
-      x: discardX,
-      y: discardY,
-    } = BoardService.getDiscard()
-      .getBoundingClientRect();
+    const { x: discardX, y: discardY } =
+      BoardService.getDiscard().getBoundingClientRect();
 
     const $elCard = BoardService.getCard(move.card);
     const {
@@ -269,8 +242,8 @@ const handleMove = (record: LogRecord) => {
       height: cardH,
     } = $elCard.getBoundingClientRect();
 
-    toX = wonderX + (wonderW / 2) - (cardW / 2);
-    toY = wonderY + (wonderH / 2) - (cardH / 2);
+    toX = wonderX + wonderW / 2 - cardW / 2;
+    toY = wonderY + wonderH / 2 - cardH / 2;
 
     gsap.to(`.${BoardService.getClassnameCard(move.card)}`, {
       rotate: 90,
@@ -310,8 +283,8 @@ const handleMove = (record: LogRecord) => {
     $token.classList.add('z-top');
 
     gsap.to($token, {
-      x: tokensBarX + (tokensBarW / 2) - (tokenW / 2) - tokenX,
-      y: tokensBarY + (tokensBarH / 2) - (tokenH / 2) - tokenY,
+      x: tokensBarX + tokensBarW / 2 - tokenW / 2 - tokenX,
+      y: tokensBarY + tokensBarH / 2 - tokenH / 2 - tokenY,
       duration: durationMedium.value,
       ease: 'power1.in',
       onComplete() {
@@ -326,33 +299,30 @@ const handleMove = (record: LogRecord) => {
     const $burnHolder = $enemyCity.getElementBurnHolder();
     const $elCard = createCard(move.card);
 
-    void $elCard
-      .mount($burnHolder)
-      .$nextTick(() => {
-        const {
-          x: burnX,
-          y: burnY,
-          height: burnH,
-        } = $burnHolder.getBoundingClientRect();
+    void $elCard.mount($burnHolder).$nextTick(() => {
+      const {
+        x: burnX,
+        y: burnY,
+        height: burnH,
+      } = $burnHolder.getBoundingClientRect();
 
-        const {
-          x: discardX,
-          y: discardY,
-          width: discardW,
-        } = BoardService.getDiscard()
-          .getBoundingClientRect();
+      const {
+        x: discardX,
+        y: discardY,
+        width: discardW,
+      } = BoardService.getDiscard().getBoundingClientRect();
 
-        gsap.to($burnHolder, {
-          x: (discardX - discardW) - burnX,
-          y: (discardY - burnH) - burnY,
-          duration: durationMedium.value,
-          ease: animationFn,
-          onComplete() {
-            $elCard.unmount();
-            $game.tick();
-          },
-        });
+      gsap.to($burnHolder, {
+        x: discardX - discardW - burnX,
+        y: discardY - burnH - burnY,
+        duration: durationMedium.value,
+        ease: animationFn,
+        onComplete() {
+          $elCard.unmount();
+          $game.tick();
+        },
       });
+    });
 
     return;
   }
@@ -361,44 +331,39 @@ const handleMove = (record: LogRecord) => {
     const $discardHolder = BoardService.getDiscardCardHolder();
     const $elCard = createCard(move.card);
 
-    void $elCard
-      .mount($discardHolder)
-      .$nextTick(() => {
-        const {
-          x: discardX,
-          y: discardY,
-          width: discardW,
-          height: discardH,
-        } = $discardHolder.getBoundingClientRect();
+    void $elCard.mount($discardHolder).$nextTick(() => {
+      const {
+        x: discardX,
+        y: discardY,
+        width: discardW,
+        height: discardH,
+      } = $discardHolder.getBoundingClientRect();
 
-        const $wondersBar = $myCity.getElementWondersBar();
-        const {
-          x: cityX,
-          y: cityY,
-          height: cityH,
-          width: cityW,
-        } = $wondersBar.getBoundingClientRect();
+      const $wondersBar = $myCity.getElementWondersBar();
+      const {
+        x: cityX,
+        y: cityY,
+        height: cityH,
+        width: cityW,
+      } = $wondersBar.getBoundingClientRect();
 
-        gsap.to($discardHolder, {
-          x: cityX + (cityW / 2) - (discardW / 2) - discardX,
-          y: cityY + (cityH / 2) - (discardH / 2) - discardY,
-          duration: durationMedium.value,
-          ease: animationFn,
-          onComplete() {
-            $elCard.unmount();
-            $game.tick();
-          },
-        });
+      gsap.to($discardHolder, {
+        x: cityX + cityW / 2 - discardW / 2 - discardX,
+        y: cityY + cityH / 2 - discardH / 2 - discardY,
+        duration: durationMedium.value,
+        ease: animationFn,
+        onComplete() {
+          $elCard.unmount();
+          $game.tick();
+        },
       });
+    });
 
     return;
   }
 
   if (MoveValidator.isPickReturnedCards(move)) {
-    const {
-      pick,
-      give,
-    } = move;
+    const { pick, give } = move;
 
     const $pick = $myCity.getElementCardInHolder();
     const $pickCard = createCard(pick);
@@ -448,20 +413,18 @@ watch(
   () => {
     const { move } = $log.last;
 
-    const wondersCount = $game.state.me.wonders.list.length
-    + $game.state.enemy.wonders.list.length;
+    const wondersCount =
+      $game.state.me.wonders.list.length +
+      $game.state.enemy.wonders.list.length;
 
     const draftSize = 8;
-    if (
-      MoveValidator.isPickWonder(move)
-      && wondersCount === draftSize
-    ) {
+    if (MoveValidator.isPickWonder(move) && wondersCount === draftSize) {
       // drop prepare phase only after wonders bar animation finished
       wonderPickInProgress.value = false;
     }
 
     isOver.value = $game.isOver;
-  },
+  }
 );
 
 watch(
@@ -476,7 +439,7 @@ watch(
     } catch (error) {
       // hack mute
     }
-  },
+  }
 );
 
 watch(
@@ -487,7 +450,7 @@ watch(
       // hack to avoid errors because wonders picker DOM don't exist in normally way
       wonderPickInProgress.value = $game.state.phase === Phase.prepare;
 
-      const isSerial = (newValue - oldValue) === 1;
+      const isSerial = newValue - oldValue === 1;
       if (isSerial) {
         handleMove($log.records[newValue - 1]);
       } else {
@@ -501,9 +464,8 @@ watch(
         type: 'negative',
       });
     }
-  },
+  }
 );
-
 </script>
 
 <style lang="scss" scoped>
@@ -513,8 +475,8 @@ watch(
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
-    "left main right"
-    "left main right";
+    'left main right'
+    'left main right';
 
   padding: var(--swd-game-gap-lg);
 }

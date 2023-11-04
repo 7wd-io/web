@@ -6,10 +6,7 @@
     :y="offset"
   >
     <div class="absolute-center">
-      <Counter
-        :value="counter"
-        :size="size"
-      />
+      <Counter :value="counter" :size="size" />
     </div>
   </Badge>
 </template>
@@ -17,7 +14,8 @@
 <script setup lang="ts">
 import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
-import { Nickname, DiscounterContext, ResourceId } from 'src/models/game';
+import { DiscounterContext, ResourceId } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
 
@@ -63,7 +61,7 @@ const counter = computed(() => {
 .one-from-resource-badge {
   --size: v-bind(size);
   background-color: $primary;
-  height: calc(var(--size) * .2);
+  height: calc(var(--size) * 0.2);
   border-radius: 2px;
 }
 </style>

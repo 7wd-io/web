@@ -5,10 +5,7 @@
     @click="showOverview"
   >
     <Badge pos="top">
-      <Text
-        size="sm"
-        class="city-badge"
-      >
+      <Text size="sm" class="city-badge">
         <Player
           :name="name"
           :body="`${name} (${rating})`"
@@ -17,23 +14,15 @@
       </Text>
     </Badge>
 
-    <Badge
-      v-if="showClock"
-      pos="bottom"
-    >
-      <Text
-        size="xs"
-        class="city-badge"
-      >
+    <Badge v-if="showClock" pos="bottom">
+      <Text size="xs" class="city-badge">
         <Clock :name="name" />
       </Text>
     </Badge>
 
     <Score :name="name" />
 
-    <div class="bar">
-
-    </div>
+    <div class="bar"></div>
 
     <div class="provision-bar bar">
       <Provision :name="name" />
@@ -48,10 +37,7 @@
     </div>
 
     <div class="bar">
-      <TokensBar
-        :name="name"
-        :class="CityService.classTokensBar"
-      />
+      <TokensBar :name="name" :class="CityService.classTokensBar" />
     </div>
   </div>
 </template>
@@ -63,7 +49,7 @@ import TokensBar from 'components/Game/City/TokensBar.vue';
 import SymbolsBar from 'components/Game/City/SymbolsBar.vue';
 import Clock from 'components/Game/City/Clock.vue';
 import Score from 'components/Game/City/Score.vue';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import Badge from 'components/Badge.vue';
 import Text from 'components/Game/Text.vue';
 import CityService from 'src/service/City';
@@ -83,10 +69,12 @@ const { name } = defineProps<Props>();
 const $q = useQuasar();
 const $game = useGame();
 
-const showClock = computed(() => !$game.isOver && $game.players[name].clock > 0);
+const showClock = computed(
+  () => !$game.isOver && $game.players[name].clock > 0
+);
 const { rating } = $game.players[name];
 
-const showOverview = (e:PointerEvent) => {
+const showOverview = (e: PointerEvent) => {
   if ((e.target as HTMLElement).classList.contains('js-city-name')) {
     return;
   }

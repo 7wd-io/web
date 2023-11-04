@@ -10,11 +10,7 @@
           :price="city.bank.resourcePrice[id]"
         />
 
-        <OneFromResourceBadge
-          :name="name"
-          pos="top"
-          :group="rawMaterials"
-        />
+        <OneFromResourceBadge :name="name" pos="top" :group="rawMaterials" />
       </div>
 
       <div class="manufactured-goods relative-position">
@@ -38,7 +34,8 @@
 
 <script setup lang="ts">
 import Resource from 'components/Game/City/Resource.vue';
-import { rawMaterials, manufacturedGoods, Nickname } from 'src/models/game';
+import { rawMaterials, manufacturedGoods } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import { useGame } from 'src/stores/game/game';
 import { computed } from 'vue';
 import OneFromResourceBadge from 'components/Game/Badge/OneFromResource.vue';
@@ -60,7 +57,8 @@ const city = computed(() => $game.city(name));
   margin-bottom: var(--swd-game-gap-sm);
 }
 
-.raw-materials, .manufactured-goods {
+.raw-materials,
+.manufactured-goods {
   display: flex;
   flex-direction: row;
   justify-content: center;

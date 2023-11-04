@@ -1,40 +1,22 @@
 <template>
   <q-card class="swd-cover-dark">
     <q-card-section>
-      <div class="text-positive text-weight-bolder">
-        {{ count }} online now
-      </div>
+      <div class="text-positive text-weight-bolder">{{ count }} online now</div>
     </q-card-section>
     <q-card-section class="no-padding">
-      <q-list
-        padding
-        class="list"
-      >
-        <q-scroll-area
-          class="players"
-        >
+      <q-list padding class="list">
+        <q-scroll-area class="players">
           <template
             v-for="player in players"
             :key="`${player[0]}:${player[1]}`"
           >
-            <q-separator dark/>
+            <q-separator dark />
 
-            <q-item
-              dense
-              clickable
-              v-ripple
-              @click="onClick(player[0])"
-            >
+            <q-item dense clickable v-ripple @click="onClick(player[0])">
               <q-item-section>
-                <Player
-                  :name="player[0]"
-                  :profile="false"
-                />
+                <Player :name="player[0]" :profile="false" />
               </q-item-section>
-              <q-item-section
-                side
-                class="text-white text-weight-bolder"
-              >
+              <q-item-section side class="text-white text-weight-bolder">
                 {{ player[1] }}
               </q-item-section>
             </q-item>
@@ -51,7 +33,7 @@ import { useOnline } from 'src/stores/online';
 import { useQuasar } from 'quasar';
 import Player from 'components/Player/Player.vue';
 import Profile from 'components/Account/Profile.vue';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 
 const $q = useQuasar();
 const $online = useOnline();

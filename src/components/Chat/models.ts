@@ -1,4 +1,4 @@
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 
 export interface Message {
   author: Nickname;

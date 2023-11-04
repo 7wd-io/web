@@ -1,15 +1,11 @@
 <template>
-  <span class="clock">
-     {{ clock.m }}:{{ clock.s }}
-  </span>
+  <span class="clock"> {{ clock.m }}:{{ clock.s }} </span>
 </template>
 
 <script setup lang="ts">
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import { useGame } from 'src/stores/game/game';
-import {
-  computed, ref, watch,
-} from 'vue';
+import { computed, ref, watch } from 'vue';
 
 interface Props {
   name: Nickname;
@@ -46,7 +42,7 @@ watch(
   () => $game.lastMoveAt,
   () => {
     active.value = $game.state.me.name === name;
-  },
+  }
 );
 
 watch(active, (newValue) => (newValue ? runTimer() : stopTimer()));
