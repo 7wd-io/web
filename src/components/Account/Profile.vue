@@ -1,18 +1,9 @@
 <template>
-  <q-dialog
-    ref="dialogRef"
-    @hide="onDialogHide"
-  >
-    <q-card
-      class="panel bg-accent"
-      style="width: 700px;"
-    >
+  <q-dialog ref="dialogRef" @hide="onDialogHide">
+    <q-card class="panel bg-accent" style="width: 700px">
       <q-card-section class="text-dark">
         <div class="row justify-between">
-          <div
-            class="text-weight-bolder text-h6"
-            style="height: 100px"
-          >
+          <div class="text-weight-bolder text-h6" style="height: 100px">
             {{ name }}
           </div>
 
@@ -24,31 +15,19 @@
               class="text-weight-bold"
               @update:model-value="onChangeTab"
             >
-              <q-tab
-                name="overview"
-                label="Overview"
-              />
+              <q-tab name="overview" label="Overview" />
 
-              <q-tab name="stats">
-                Stats
-              </q-tab>
+              <q-tab name="stats"> Stats </q-tab>
 
-              <q-tab
-                v-if="$account.name !== name"
-                name="vs"
-              >
+              <q-tab v-if="$account.user.nickname !== name" name="vs">
                 Me vs {{ name }}
               </q-tab>
             </q-tabs>
           </div>
         </div>
-
       </q-card-section>
       <q-card-section class="no-padding text-dark">
-        <q-card
-          class="no-box-shadow panel-card"
-          style="height: 320px;"
-        >
+        <q-card class="no-box-shadow panel-card" style="height: 320px">
           <q-tab-panels
             v-model="tab"
             animated
@@ -58,46 +37,28 @@
             <q-tab-panel name="overview">
               <template v-if="profile">
                 <div class="row justify-center q-gutter-lg q-mb-lg">
-                  <Card
-                    label="Rank"
-                    :body="profile.rank"
-                  />
+                  <Card label="Rank" :body="profile.rank" />
 
-                  <Card
-                    label="Rating"
-                    :body="profile.rating"
-                  />
+                  <Card label="Rating" :body="profile.rating" />
                 </div>
 
                 <div class="row justify-center q-gutter-lg">
-                  <Card
-                    label="Games played"
-                    :body="gamesPlayed"
-                  />
+                  <Card label="Games played" :body="gamesPlayed" />
 
-                  <Card
-                    label="Games won"
-                    :body="`${gamesWonRate}%`"
-                  />
+                  <Card label="Games won" :body="`${gamesWonRate}%`" />
                 </div>
               </template>
             </q-tab-panel>
 
             <q-tab-panel name="stats">
               <div class="row justify-center q-gutter-lg">
-                <StatsCard
-                  :data="profile.games.won"
-                  :total="gamesPlayed"
-                >
+                <StatsCard :data="profile.games.won" :total="gamesPlayed">
                   <template #title>
                     <span class="text-positive">Won</span>
                   </template>
                 </StatsCard>
 
-                <StatsCard
-                  :data="profile.games.lose"
-                  :total="gamesPlayed"
-                >
+                <StatsCard :data="profile.games.lose" :total="gamesPlayed">
                   <template #title>
                     <span class="text-negative">Lost</span>
                   </template>
@@ -106,13 +67,14 @@
             </q-tab-panel>
 
             <q-tab-panel name="vs">
-              <template
-                v-if="profileVersus"
-              >
+              <template v-if="profileVersus">
                 <div class="row justify-center q-gutter-lg">
                   <StatsCard
                     :data="profileVersus.games.won"
-                    :total="profileVersus.games.won.total + profileVersus.games.lose.total"
+                    :total="
+                      profileVersus.games.won.total +
+                      profileVersus.games.lose.total
+                    "
                   >
                     <template #title>
                       <span class="text-positive">Won</span>
@@ -121,7 +83,10 @@
 
                   <StatsCard
                     :data="profileVersus.games.lose"
-                    :total="profileVersus.games.won.total + profileVersus.games.lose.total"
+                    :total="
+                      profileVersus.games.won.total +
+                      profileVersus.games.lose.total
+                    "
                   >
                     <template #title>
                       <span class="text-negative">Lost</span>
@@ -146,11 +111,11 @@
 
 <script setup lang="ts">
 import { useQuasar, useDialogPluginComponent } from 'quasar';
-import { Nickname } from 'src/models/game';
-import { ApiError, httpClient } from 'boot/api';
+import { Nickname } from 'src/models/account';
+import { ApiError, api } from 'boot/axios';
 import { computed, onBeforeMount, ref } from 'vue';
 import { GamesReport, Profile } from 'src/models/profile';
-import { useAccount } from 'src/stores/account';
+import { useAccountStore } from 'src/stores/account';
 import Card from './Card.vue';
 import StatsCard from './StatsCard.vue';
 
@@ -158,10 +123,7 @@ interface Props {
   name: Nickname;
 }
 
-const {
-  dialogRef,
-  onDialogHide,
-} = useDialogPluginComponent();
+const { dialogRef, onDialogHide } = useDialogPluginComponent();
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
@@ -171,7 +133,7 @@ const { name } = defineProps<Props>();
 const emit = defineEmits([...useDialogPluginComponent.emits]);
 
 const $q = useQuasar();
-const $account = useAccount();
+const $account = useAccountStore();
 
 const loading = ref(false);
 const profile = ref<Profile>();
@@ -181,7 +143,7 @@ onBeforeMount(async () => {
   loading.value = true;
 
   try {
-    const { data } = await httpClient.get<{profile: Profile}>(`/profile/${name}`);
+    const { data } = await api.get<{ profile: Profile }>(`/profile/${name}`);
     profile.value = data.profile;
   } catch (error) {
     const err = error as ApiError;
@@ -221,7 +183,9 @@ const onChangeTab = async (value: string) => {
   loading.value = true;
 
   try {
-    const { data } = await httpClient.get<{profile: GamesReport}>(`/profile/versus/${name}`);
+    const { data } = await api.get<{ profile: GamesReport }>(
+      `/profile/versus/${name}`
+    );
     profileVersus.value = data.profile;
   } catch (error) {
     const err = error as ApiError;

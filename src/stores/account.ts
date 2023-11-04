@@ -19,10 +19,7 @@ export const useAccountStore = defineStore('account', {
   },
   actions: {
     parseToken(token: string) {
-      // const user = jwtDecode<User>(token);
       this.user = jwtDecode<User>(token);
-      // this.id = id;
-      // this.nickname = nickname;
       this.token = () => token;
     },
     async signin(login: string, password: string) {

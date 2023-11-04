@@ -16,6 +16,7 @@
     "@fingerprintjs/fingerprintjs": "^4.1.0",
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
+    "javascript-time-ago": "^2.5.9",
     "jwt-decode": "^4.0.0",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
