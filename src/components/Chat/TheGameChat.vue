@@ -27,21 +27,21 @@ import { useChat } from 'src/stores/chat/game';
 import { QScrollArea } from 'quasar';
 import { useRoute } from 'vue-router';
 import { GameId } from 'src/models/game';
-import { Centrifuge } from 'centrifuge';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';
+import { HistoryResult, PresenceResult } from 'centrifuge/build/types';
 
 const $chat = useChat();
 const scroll = ref<QScrollArea>();
 
 const $route = useRoute();
 const channelName = `game:chat_${$route.params.id as unknown as GameId}`;
-let sub: Centrifuge.Subscription;
+let sub = cent.newSubscription(channelName);
 let presenceTimerId: number;
 
 onBeforeMount(() => {
-  sub = cent.subscribe(
-    channelName,
+  sub.on(
+    'publication',
     (ctx: { data: MessageModel; info: { user: string } }) => {
       const m: MessageModel = ctx.data;
       m.author = ctx.info.user;
@@ -56,8 +56,8 @@ onBeforeMount(() => {
       since: undefined,
       reverse: false,
     })
-    .then(({ publications }) => {
-      $chat.setHistory(publications);
+    .then((ctx: HistoryResult) => {
+      $chat.setHistory(ctx);
       // hack, after first load watch did't work (
       setTimeout(() => {
         scroll.value?.setScrollPercentage('vertical', 100);
@@ -65,8 +65,8 @@ onBeforeMount(() => {
     });
 
   presenceTimerId = window.setInterval(() => {
-    void cent.presence(channelName).then(({ presence }) => {
-      $chat.setPlayers(presence);
+    void sub.presence().then((ctx: PresenceResult) => {
+      $chat.setPlayers(ctx);
     });
   }, 3000);
 });
@@ -84,7 +84,7 @@ const submit = async () => {
     author: '',
   };
 
-  await cent.publish(channelName, m);
+  await sub.publish(m);
   msg.value = '';
 };
 
