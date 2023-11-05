@@ -77,14 +77,14 @@ onBeforeMount(() => {
 
   subUpd = cent.newSubscription(`upd_play_again_${gameId}`);
 
-  subUpd.on(`publication`, (ctx: { data: PlayAgainUpdated }) => {
+  subUpd.on('publication', (ctx: { data: PlayAgainUpdated }) => {
     const { player, answer } = ctx.data;
     $playAgain.answers[player] = answer;
   });
 
   subApproved = cent.newSubscription(`play_again_approved_${gameId}`);
 
-  subApproved.on(`publication`, (ctx: { data: PlayAgainApproved }) => {
+  subApproved.on('publication', (ctx: { data: PlayAgainApproved }) => {
     const { next } = ctx.data;
     approved.value = true;
 
