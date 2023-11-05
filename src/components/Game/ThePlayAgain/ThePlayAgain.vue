@@ -32,8 +32,8 @@ import Text from 'components/Game/Text.vue';
 import Button from 'components/Game/Button.vue';
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useGame } from 'src/stores/game/game';
-import Centrifuge from 'centrifuge';
-import centrifuge from 'src/centrifuge';
+import { Centrifuge } from 'centrifuge';
+import cent from 'src/centrifuge';
 import { PlayAgainApproved, PlayAgainUpdated } from 'src/models/messages';
 import { useRoute } from 'vue-router';
 import { GameId } from 'src/models/game';
@@ -75,25 +75,23 @@ onBeforeMount(() => {
   const $route = useRoute();
   const gameId = $route.params.id as unknown as GameId;
 
-  subUpd = centrifuge.subscribe(
-    `upd_play_again_${gameId}`,
-    (ctx: { data: PlayAgainUpdated }) => {
-      const { player, answer } = ctx.data;
-      $playAgain.answers[player] = answer;
-    }
-  );
+  subUpd = cent.newSubscription(`upd_play_again_${gameId}`);
 
-  subApproved = centrifuge.subscribe(
-    `play_again_approved_${gameId}`,
-    (ctx: { data: PlayAgainApproved }) => {
-      const { next } = ctx.data;
-      approved.value = true;
+  subUpd.on(`publication`, (ctx: { data: PlayAgainUpdated }) => {
+    const { player, answer } = ctx.data;
+    $playAgain.answers[player] = answer;
+  });
 
-      setTimeout(() => {
-        window.open(`/game/${next}`, '_self');
-      }, 3000);
-    }
-  );
+  subApproved = cent.newSubscription(`play_again_approved_${gameId}`);
+
+  subApproved.on(`publication`, (ctx: { data: PlayAgainApproved }) => {
+    const { next } = ctx.data;
+    approved.value = true;
+
+    setTimeout(() => {
+      window.open(`/game/${next}`, '_self');
+    }, 3000);
+  });
 });
 
 onBeforeUnmount(() => {

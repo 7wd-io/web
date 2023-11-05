@@ -23,20 +23,20 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
-import centrifuge from 'src/centrifuge';
+import cent from 'src/centrifuge';
 import { useChat } from 'src/stores/chat/public';
 import { QScrollArea } from 'quasar';
-import Centrifuge from 'centrifuge';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';
+import { HistoryResult } from 'centrifuge/build/types';
 
 const $chat = useChat();
 const scroll = ref<QScrollArea>();
-let sub: Centrifuge.Subscription;
+let sub = cent.newSubscription('public:chat');
 
 onBeforeMount(() => {
-  sub = centrifuge.subscribe(
-    'public:chat',
+  sub.on(
+    'publication',
     (ctx: { data: MessageModel; info: { user: string } }) => {
       const m: MessageModel = ctx.data;
       m.author = ctx.info.user;
@@ -51,8 +51,8 @@ onBeforeMount(() => {
       since: undefined,
       reverse: false,
     })
-    .then(({ publications }) => {
-      $chat.setHistory(publications);
+    .then((ctx: HistoryResult) => {
+      $chat.setHistory(ctx);
       // hack, after first load watch did't work (
       setTimeout(() => {
         scroll.value?.setScrollPercentage('vertical', 100);
@@ -72,12 +72,11 @@ const submit = async () => {
     author: '',
   };
 
-  await centrifuge.publish('public:chat', m);
+  await sub.publish(m);
   msg.value = '';
 };
 
 const messages = computed(() => $chat.messages);
-const messages = [];
 
 watch(
   messages,
