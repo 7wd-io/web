@@ -17,7 +17,7 @@ const $online = useOnline();
 const $rooms = useRooms();
 const $account = useAccountStore();
 
-let subOnline = cent.newSubscription('stats:online');
+let subOnline = cent.newSubscription('online');
 let subNewRoom = cent.newSubscription('new_room');
 let subUpdRoom = cent.newSubscription('upd_room');
 let subDelRoom = cent.newSubscription('del_room');
@@ -63,8 +63,8 @@ onBeforeMount(async () => {
     }
   });
 
-  subDelRoom.on('publication', (ctx: { data: { host: string } }) => {
-    $rooms.remove(ctx.data.host);
+  subDelRoom.on('publication', (ctx: { data: { id: string } }) => {
+    $rooms.remove(ctx.data.id);
 
     title.value = config.defaultTitle;
   });

@@ -97,6 +97,7 @@ export interface RoomOptions {
 }
 
 export interface Room {
+  id: string;
   gameId?: string;
   host: Nickname;
   hostRating: Rating;

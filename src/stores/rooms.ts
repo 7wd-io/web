@@ -45,14 +45,14 @@ export const useRooms = defineStore('rooms', {
     },
     update(room: Room) {
       for (let i = 0; i < this.rooms.length; i += 1) {
-        if (this.rooms[i].host === room.host) {
+        if (this.rooms[i].id === room.id) {
           this.rooms[i] = room;
           break;
         }
       }
     },
-    remove(host: Nickname) {
-      const pos = this.rooms.findIndex((r) => r.host === host);
+    remove(id: string) {
+      const pos = this.rooms.findIndex((r) => r.id === id);
 
       if (pos !== -1) {
         this.rooms.splice(pos, 1);
