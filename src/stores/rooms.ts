@@ -35,7 +35,7 @@ export const useRooms = defineStore('rooms', {
   },
   actions: {
     async load() {
-      const { data } = await api.get<{ data: Room[] }>('/rooms');
+      const { data } = await api.get<{ data: Room[] }>('/room');
       this.rooms = data.data;
     },
     add(room: Room) {

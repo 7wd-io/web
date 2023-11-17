@@ -17,7 +17,7 @@
             >
               <q-tab name="overview" label="Overview" />
 
-              <q-tab name="stats"> Stats </q-tab>
+              <q-tab name="stats"> Stats</q-tab>
 
               <q-tab v-if="$account.user.nickname !== name" name="vs">
                 Me vs {{ name }}
@@ -143,7 +143,7 @@ onBeforeMount(async () => {
   loading.value = true;
 
   try {
-    const { data } = await api.get<{ profile: Profile }>(`/profile/${name}`);
+    const { data } = await api.get<{ profile: Profile }>(`/account/${name}`);
     profile.value = data.profile;
   } catch (error) {
     const err = error as ApiError;
@@ -184,7 +184,7 @@ const onChangeTab = async (value: string) => {
 
   try {
     const { data } = await api.get<{ profile: GamesReport }>(
-      `/profile/versus/${name}`
+      `account/${$account.user.nickname}/vs/${name}`
     );
     profileVersus.value = data.profile;
   } catch (error) {

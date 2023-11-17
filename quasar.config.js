@@ -92,7 +92,7 @@ module.exports = configure(function (ctx) {
         app: { name: 'google chrome' },
       },
       host: '7wd.io.local',
-      // port: 8078,
+      port: 8078,
       https: {
         key: ctx.prod
           ? null
