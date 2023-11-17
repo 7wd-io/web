@@ -67,47 +67,6 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [
-      {
-        path: '',
-        name: 'lobby',
-        component: () => import('pages/LobbyPage.vue'),
-      },
-    ],
-  },
-  {
-    path: '/',
-    component: () => import('layouts/GuestLayout.vue'),
-    children: [
-      {
-        path: '/welcome',
-        name: 'welcome',
-        meta: {
-          public: true,
-        },
-        component: () => import('pages/WelcomePage.vue'),
-      },
-      {
-        path: '/register',
-        name: 'register',
-        meta: {
-          public: true,
-        },
-        component: () => import('pages/RegisterPage.vue'),
-      },
-      {
-        path: '/login',
-        name: 'login',
-        meta: {
-          public: true,
-        },
-        component: () => import('pages/LoginPage.vue'),
-      },
-    ],
-  },
-  {
     path: '/units',
     name: 'units',
     meta: {

@@ -62,7 +62,7 @@ export const useAccountStore = defineStore('account', {
     },
 
     async logout() {
-      await api.post('/logout', {
+      await api.post('/account/logout', {
         fingerprint: this.fingerprint,
       });
 
