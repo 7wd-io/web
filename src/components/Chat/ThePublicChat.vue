@@ -35,29 +35,46 @@ const scroll = ref<QScrollArea>();
 let sub = cent.newSubscription('public:chat');
 
 onBeforeMount(() => {
+  sub.subscribe();
+
   sub.on(
     'publication',
-    (ctx: { data: MessageModel; info: { user: string } }) => {
+    // (ctx: { data: MessageModel; info: { user: string } }) => {
+    (ctx) => {
       const m: MessageModel = ctx.data;
-      m.author = ctx.info.user;
+      m.author = ctx.info!.user;
 
       $chat.addMessage(m);
     }
   );
 
-  void sub
-    .history({
-      limit: -1,
-      since: undefined,
-      reverse: false,
-    })
-    .then((ctx: HistoryResult) => {
-      $chat.setHistory(ctx);
-      // hack, after first load watch did't work (
-      setTimeout(() => {
-        scroll.value?.setScrollPercentage('vertical', 100);
-      }, 100);
-    });
+  // sub.ready(100000).then(
+  //   () => {
+  //     console.log('ready then');
+  //     sub
+  //       .history({
+  //         limit: -1,
+  //         since: undefined,
+  //         reverse: false,
+  //       })
+  //       .then(
+  //         (ctx: HistoryResult) => {
+  //           $chat.setHistory(ctx);
+  //           // hack, after first load watch did't work (
+  //           setTimeout(() => {
+  //             scroll.value?.setScrollPercentage('vertical', 100);
+  //           }, 100);
+  //         },
+  //         (reason) => {
+  //           console.log(reason);
+  //         }
+  //       );
+  //   },
+  //   (reason) => {
+  //     console.log('ready failed');
+  //     console.log(reason);
+  //   }
+  // );
 });
 
 onBeforeUnmount(() => {

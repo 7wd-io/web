@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { Room } from 'src/models/game';
-import { Nickname } from 'src/models/account';
 import { api } from 'boot/axios';
 import { useAccountStore } from 'src/stores/account';
 
@@ -35,8 +34,8 @@ export const useRooms = defineStore('rooms', {
   },
   actions: {
     async load() {
-      const { data } = await api.get<{ data: Room[] }>('/room');
-      this.rooms = data.data;
+      const { data } = await api.get<{ items: Room[] }>('/room');
+      this.rooms = data.items;
     },
     add(room: Room) {
       if (!this.rooms.includes(room)) {

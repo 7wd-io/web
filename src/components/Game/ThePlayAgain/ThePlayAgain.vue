@@ -32,7 +32,7 @@ import Text from 'components/Game/Text.vue';
 import Button from 'components/Game/Button.vue';
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import { useGame } from 'src/stores/game/game';
-import { Centrifuge } from 'centrifuge';
+import { Subscription } from 'centrifuge';
 import cent from 'src/centrifuge';
 import { PlayAgainApproved, PlayAgainUpdated } from 'src/models/messages';
 import { useRoute } from 'vue-router';
@@ -68,14 +68,15 @@ const onClick = async (answer: boolean) => {
 
 runTimer();
 
-let subUpd: Centrifuge.Subscription;
-let subApproved: Centrifuge.Subscription;
+let subUpd: Subscription;
+let subApproved: Subscription;
 
 onBeforeMount(() => {
   const $route = useRoute();
   const gameId = $route.params.id as unknown as GameId;
 
   subUpd = cent.newSubscription(`upd_play_again_${gameId}`);
+  subUpd.subscribe();
 
   subUpd.on('publication', (ctx: { data: PlayAgainUpdated }) => {
     const { player, answer } = ctx.data;
@@ -83,6 +84,7 @@ onBeforeMount(() => {
   });
 
   subApproved = cent.newSubscription(`play_again_approved_${gameId}`);
+  subApproved.subscribe();
 
   subApproved.on('publication', (ctx: { data: PlayAgainApproved }) => {
     const { next } = ctx.data;

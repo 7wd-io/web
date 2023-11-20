@@ -29,6 +29,11 @@ useMeta(() => ({
 }));
 
 onBeforeMount(async () => {
+  subOnline.subscribe();
+  subNewRoom.subscribe();
+  subUpdRoom.subscribe();
+  subDelRoom.subscribe();
+
   subOnline.on('publication', (ctx: { data: RatingMap }) => {
     $online.players = ctx.data;
   });

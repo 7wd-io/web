@@ -40,15 +40,14 @@ let sub = cent.newSubscription(channelName);
 let presenceTimerId: number;
 
 onBeforeMount(() => {
-  sub.on(
-    'publication',
-    (ctx: { data: MessageModel; info: { user: string } }) => {
-      const m: MessageModel = ctx.data;
-      m.author = ctx.info.user;
+  sub.subscribe();
 
-      $chat.addMessage(m);
-    }
-  );
+  sub.on('publication', (ctx) => {
+    const m: MessageModel = ctx.data;
+    m.author = ctx.info!.user;
+
+    $chat.addMessage(m);
+  });
 
   void sub
     .history({
