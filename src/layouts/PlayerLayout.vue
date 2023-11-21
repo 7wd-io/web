@@ -17,7 +17,7 @@ const $online = useOnline();
 const $rooms = useRooms();
 const $account = useAccountStore();
 
-let subOnline = cent.newSubscription('online');
+let subOnline = cent.newSubscription('service:online');
 let subNewRoom = cent.newSubscription('new_room');
 let subUpdRoom = cent.newSubscription('upd_room');
 let subDelRoom = cent.newSubscription('del_room');

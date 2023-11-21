@@ -34,7 +34,7 @@ const $chat = useChat();
 const scroll = ref<QScrollArea>();
 let sub = cent.newSubscription('public:chat');
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   sub.subscribe();
 
   sub.on(
@@ -48,33 +48,21 @@ onBeforeMount(() => {
     }
   );
 
-  // sub.ready(100000).then(
-  //   () => {
-  //     console.log('ready then');
-  //     sub
-  //       .history({
-  //         limit: -1,
-  //         since: undefined,
-  //         reverse: false,
-  //       })
-  //       .then(
-  //         (ctx: HistoryResult) => {
-  //           $chat.setHistory(ctx);
-  //           // hack, after first load watch did't work (
-  //           setTimeout(() => {
-  //             scroll.value?.setScrollPercentage('vertical', 100);
-  //           }, 100);
-  //         },
-  //         (reason) => {
-  //           console.log(reason);
-  //         }
-  //       );
-  //   },
-  //   (reason) => {
-  //     console.log('ready failed');
-  //     console.log(reason);
-  //   }
-  // );
+  try {
+    const history = await sub.history({
+      limit: -1,
+      since: undefined,
+      reverse: false,
+    });
+
+    $chat.setHistory(history);
+    // hack, after first load watch did't work (
+    setTimeout(() => {
+      scroll.value?.setScrollPercentage('vertical', 100);
+    }, 100);
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 onBeforeUnmount(() => {
