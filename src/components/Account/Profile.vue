@@ -149,7 +149,7 @@ onBeforeMount(async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   } finally {
@@ -191,7 +191,7 @@ const onChangeTab = async (value: string) => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   } finally {

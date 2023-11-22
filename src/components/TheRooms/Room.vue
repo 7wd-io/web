@@ -181,7 +181,7 @@ const onKick = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
@@ -196,7 +196,7 @@ const onCancel = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   } finally {
@@ -211,7 +211,7 @@ const onJoin = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
@@ -224,7 +224,7 @@ const onLeave = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
@@ -237,7 +237,7 @@ const onStart = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }

@@ -53,7 +53,7 @@ const onClick = async (id: WonderId) => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }

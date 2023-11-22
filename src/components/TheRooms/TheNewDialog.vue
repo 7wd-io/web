@@ -255,7 +255,7 @@ const onCreate = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   } finally {
@@ -273,7 +273,7 @@ const onCreateWithBot = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   } finally {

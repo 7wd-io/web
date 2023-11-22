@@ -131,7 +131,7 @@ const onDiscard = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
@@ -147,7 +147,7 @@ const onConstructCard = async () => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
@@ -164,7 +164,7 @@ const onConstructWonder = async (wid: WonderId) => {
     const err = error as ApiError;
 
     $q.notify({
-      message: err.response?.data.err_message,
+      message: err.response?.data.err,
       type: 'negative',
     });
   }
