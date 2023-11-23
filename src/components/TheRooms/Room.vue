@@ -8,7 +8,7 @@
       size="sm"
       round
       icon="close"
-      @click="onCancel"
+      @click="onCancel(data.id)"
     />
     <q-card-section>
       <div class="row justify-between items-center">
@@ -187,11 +187,11 @@ const onKick = async () => {
   }
 };
 
-const onCancel = async () => {
+const onCancel = async (id: string) => {
   inProgressCancel.value = true;
 
   try {
-    await api.delete('/room');
+    await api.delete(`/room/${id}`);
   } catch (error) {
     const err = error as ApiError;
 

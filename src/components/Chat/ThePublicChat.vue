@@ -28,25 +28,20 @@ import { useChat } from 'src/stores/chat/public';
 import { QScrollArea } from 'quasar';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';
-import { HistoryResult } from 'centrifuge/build/types';
 
 const $chat = useChat();
 const scroll = ref<QScrollArea>();
-let sub = cent.newSubscription('public:chat');
+let sub = cent.newSubscription('chat-public:messages');
 
 onBeforeMount(async () => {
   sub.subscribe();
 
-  sub.on(
-    'publication',
-    // (ctx: { data: MessageModel; info: { user: string } }) => {
-    (ctx) => {
-      const m: MessageModel = ctx.data;
-      m.author = ctx.info!.user;
+  sub.on('publication', (ctx) => {
+    const m: MessageModel = ctx.data;
+    m.author = ctx.info!.user;
 
-      $chat.addMessage(m);
-    }
-  );
+    $chat.addMessage(m);
+  });
 
   try {
     const history = await sub.history({

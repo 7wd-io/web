@@ -18,9 +18,9 @@ const $rooms = useRooms();
 const $account = useAccountStore();
 
 let subOnline = cent.newSubscription('service:online');
-let subNewRoom = cent.newSubscription('new_room');
-let subUpdRoom = cent.newSubscription('upd_room');
-let subDelRoom = cent.newSubscription('del_room');
+let subRoomCreate = cent.newSubscription('room:create');
+let subRoomUpdate = cent.newSubscription('room:update');
+let subRoomDelete = cent.newSubscription('room:delete');
 
 const title = ref(config.defaultTitle);
 
@@ -30,9 +30,9 @@ useMeta(() => ({
 
 onBeforeMount(async () => {
   subOnline.subscribe();
-  subNewRoom.subscribe();
-  subUpdRoom.subscribe();
-  subDelRoom.subscribe();
+  subRoomCreate.subscribe();
+  subRoomUpdate.subscribe();
+  subRoomDelete.subscribe();
 
   subOnline.on('publication', (ctx: { data: RatingMap }) => {
     $online.players = ctx.data;
@@ -40,11 +40,11 @@ onBeforeMount(async () => {
 
   await $rooms.load();
 
-  subNewRoom.on('publication', (ctx: { data: Room }) => {
+  subRoomCreate.on('publication', (ctx: { data: Room }) => {
     $rooms.add(ctx.data);
   });
 
-  subUpdRoom.on('publication', (ctx: { data: Room }) => {
+  subRoomUpdate.on('publication', (ctx: { data: Room }) => {
     $rooms.update(ctx.data);
 
     if (ctx.data.host !== $account.user.nickname) {
@@ -68,7 +68,7 @@ onBeforeMount(async () => {
     }
   });
 
-  subDelRoom.on('publication', (ctx: { data: { id: string } }) => {
+  subRoomDelete.on('publication', (ctx: { data: { id: string } }) => {
     $rooms.remove(ctx.data.id);
 
     title.value = config.defaultTitle;
@@ -77,8 +77,8 @@ onBeforeMount(async () => {
 
 onBeforeUnmount(() => {
   subOnline.unsubscribe();
-  subNewRoom.unsubscribe();
-  subUpdRoom.unsubscribe();
-  subDelRoom.unsubscribe();
+  subRoomCreate.unsubscribe();
+  subRoomUpdate.unsubscribe();
+  subRoomDelete.unsubscribe();
 });
 </script>

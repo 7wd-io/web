@@ -35,7 +35,7 @@ const $chat = useChat();
 const scroll = ref<QScrollArea>();
 
 const $route = useRoute();
-const channelName = `game:chat_${$route.params.id as unknown as GameId}`;
+const channelName = `chat-game:${$route.params.id as unknown as GameId}`;
 let sub = cent.newSubscription(channelName);
 let presenceTimerId: number;
 

@@ -68,25 +68,22 @@ const onClick = async (answer: boolean) => {
 
 runTimer();
 
-let subUpd: Subscription;
-let subApproved: Subscription;
+const $route = useRoute();
+const gameId = $route.params.id as unknown as GameId;
+
+let subUpdate = cent.newSubscription(`play-again:update_${gameId}`);
+let subApprove = cent.newSubscription(`play-again:approve_${gameId}`);
 
 onBeforeMount(() => {
-  const $route = useRoute();
-  const gameId = $route.params.id as unknown as GameId;
+  subUpdate.subscribe();
+  subApprove.subscribe();
 
-  subUpd = cent.newSubscription(`upd_play_again_${gameId}`);
-  subUpd.subscribe();
-
-  subUpd.on('publication', (ctx: { data: PlayAgainUpdated }) => {
+  subUpdate.on('publication', (ctx: { data: PlayAgainUpdated }) => {
     const { player, answer } = ctx.data;
     $playAgain.answers[player] = answer;
   });
 
-  subApproved = cent.newSubscription(`play_again_approved_${gameId}`);
-  subApproved.subscribe();
-
-  subApproved.on('publication', (ctx: { data: PlayAgainApproved }) => {
+  subApprove.on('publication', (ctx: { data: PlayAgainApproved }) => {
     const { next } = ctx.data;
     approved.value = true;
 
@@ -97,7 +94,7 @@ onBeforeMount(() => {
 });
 
 onBeforeUnmount(() => {
-  subUpd.unsubscribe();
-  subApproved.unsubscribe();
+  subUpdate.unsubscribe();
+  subApprove.unsubscribe();
 });
 </script>
