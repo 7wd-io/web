@@ -8,7 +8,7 @@
       size="sm"
       round
       icon="close"
-      @click="onCancel(data.id)"
+      @click="onCancel"
     />
     <q-card-section>
       <div class="row justify-between items-center">
@@ -176,7 +176,7 @@ const isGuest = () => data.guest === $account.user.nickname;
 
 const onKick = async () => {
   try {
-    await api.post('/room/kick');
+    await api.post(`/room/${data.id}/kick`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -187,11 +187,11 @@ const onKick = async () => {
   }
 };
 
-const onCancel = async (id: string) => {
+const onCancel = async () => {
   inProgressCancel.value = true;
 
   try {
-    await api.delete(`/room/${id}`);
+    await api.delete(`/room/${data.id}`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -206,7 +206,7 @@ const onCancel = async (id: string) => {
 
 const onJoin = async () => {
   try {
-    await api.post(`/room/${data.host}/join`);
+    await api.post(`/room/${data.id}/join`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -219,7 +219,7 @@ const onJoin = async () => {
 
 const onLeave = async () => {
   try {
-    await api.post(`/room/${data.host}/leave`);
+    await api.post(`/room/${data.id}/leave`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -232,7 +232,7 @@ const onLeave = async () => {
 
 const onStart = async () => {
   try {
-    await api.post('/game');
+    await api.post(`/room/${data.id}/start`);
   } catch (error) {
     const err = error as ApiError;
 
