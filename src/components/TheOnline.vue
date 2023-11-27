@@ -12,9 +12,14 @@
           >
             <q-separator dark />
 
-            <q-item dense clickable v-ripple @click="onClick(player[0])">
+            <q-item
+              dense
+              clickable
+              v-ripple
+              @click.capture.stop="onClick(player[0])"
+            >
               <q-item-section>
-                <Player :name="player[0]" :profile="false" />
+                <Player :name="player[0]" />
               </q-item-section>
               <q-item-section side class="text-white text-weight-bolder">
                 {{ player[1] }}

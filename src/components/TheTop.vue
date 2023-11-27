@@ -9,12 +9,12 @@
         <template v-for="(player, ind) in players" :key="ind">
           <q-separator dark />
 
-          <q-item clickable v-ripple @click="onClick(player.name)">
+          <q-item clickable v-ripple @click.capture.stop="onClick(player.name)">
             <q-item-section class="text-white" side>
               #{{ ind + 1 }}
             </q-item-section>
             <q-item-section>
-              <Player :name="player.name" :profile="false" />
+              <Player :name="player.name" />
             </q-item-section>
             <q-item-section side class="text-white text-weight-bolder">
               {{ player.rating }}

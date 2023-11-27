@@ -1,5 +1,5 @@
 <template>
-  <span class="cursor-pointer" @click="profile && onClick()">
+  <span class="cursor-pointer" @click="onClick()">
     {{ body || name }}
   </span>
 </template>
@@ -12,11 +12,9 @@ import Profile from 'components/Account/Profile.vue';
 interface Props {
   name: Nickname;
   body?: string;
-  profile?: boolean;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
-const { name, body, profile = true } = defineProps<Props>();
+const props = defineProps<Props>();
 
 const $q = useQuasar();
 
@@ -24,7 +22,7 @@ const onClick = () => {
   $q.dialog({
     component: Profile,
     componentProps: {
-      name,
+      name: props.name,
     },
   });
 };
