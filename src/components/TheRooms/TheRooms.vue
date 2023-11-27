@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <RoomComponent v-for="room in rooms" :key="room.host" :data="room" />
+  <RoomComponent v-for="(room, index) in rooms" :key="index" :data="room" />
 </template>
 
 <script setup lang="ts">

@@ -137,25 +137,28 @@ interface Props {
 }
 
 // eslint-disable-next-line vue/no-setup-props-destructure
-const { data } = defineProps<Props>();
+const props = defineProps<Props>();
 const $q = useQuasar();
 const $account = useAccountStore();
 const $online = useOnline();
 const inProgressCancel = ref(false);
 const hasRoom = computed(() => $account.hasRoom);
 const joinDenied = computed(() => {
-  if (data.guest) {
+  if (props.data.guest) {
     return true;
   }
 
   if (
-    data.options.minRating &&
-    $online.players[$account.user.nickname] < data.options.minRating
+    props.data.options.minRating &&
+    $online.players[$account.user.nickname] < props.data.options.minRating
   ) {
     return true;
   }
 
-  if (data.options.enemy && $account.user.nickname !== data.options.enemy) {
+  if (
+    props.data.options.enemy &&
+    $account.user.nickname !== props.data.options.enemy
+  ) {
     return true;
   }
 
@@ -166,17 +169,17 @@ const openGame = async () => {
   await router.push({
     name: 'game',
     params: {
-      id: data.gameId as string,
+      id: props.data.gameId as string,
     },
   });
 };
 
-const isHost = () => data.host === $account.user.nickname;
-const isGuest = () => data.guest === $account.user.nickname;
+const isHost = () => props.data.host === $account.user.nickname;
+const isGuest = () => props.data.guest === $account.user.nickname;
 
 const onKick = async () => {
   try {
-    await api.post(`/room/${data.id}/kick`);
+    await api.post(`/room/${props.data.id}/kick`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -191,7 +194,7 @@ const onCancel = async () => {
   inProgressCancel.value = true;
 
   try {
-    await api.delete(`/room/${data.id}`);
+    await api.delete(`/room/${props.data.id}`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -206,7 +209,7 @@ const onCancel = async () => {
 
 const onJoin = async () => {
   try {
-    await api.post(`/room/${data.id}/join`);
+    await api.post(`/room/${props.data.id}/join`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -219,7 +222,7 @@ const onJoin = async () => {
 
 const onLeave = async () => {
   try {
-    await api.post(`/room/${data.id}/leave`);
+    await api.post(`/room/${props.data.id}/leave`);
   } catch (error) {
     const err = error as ApiError;
 
@@ -232,7 +235,7 @@ const onLeave = async () => {
 
 const onStart = async () => {
   try {
-    await api.post(`/room/${data.id}/start`);
+    await api.post(`/room/${props.data.id}/start`);
   } catch (error) {
     const err = error as ApiError;
 
