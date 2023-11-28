@@ -52,13 +52,13 @@
 
             <q-tab-panel name="stats">
               <div class="row justify-center q-gutter-lg">
-                <StatsCard :data="profile.games.won" :total="gamesPlayed">
+                <StatsCard :data="profile!.games.won" :total="gamesPlayed">
                   <template #title>
                     <span class="text-positive">Won</span>
                   </template>
                 </StatsCard>
 
-                <StatsCard :data="profile.games.lose" :total="gamesPlayed">
+                <StatsCard :data="profile!.games.lose" :total="gamesPlayed">
                   <template #title>
                     <span class="text-negative">Lost</span>
                   </template>
@@ -70,11 +70,8 @@
               <template v-if="profileVersus">
                 <div class="row justify-center q-gutter-lg">
                   <StatsCard
-                    :data="profileVersus.games.won"
-                    :total="
-                      profileVersus.games.won.total +
-                      profileVersus.games.lose.total
-                    "
+                    :data="profileVersus.won"
+                    :total="profileVersus.won.total + profileVersus.lose.total"
                   >
                     <template #title>
                       <span class="text-positive">Won</span>
@@ -82,11 +79,8 @@
                   </StatsCard>
 
                   <StatsCard
-                    :data="profileVersus.games.lose"
-                    :total="
-                      profileVersus.games.won.total +
-                      profileVersus.games.lose.total
-                    "
+                    :data="profileVersus.lose"
+                    :total="profileVersus.won.total + profileVersus.lose.total"
                   >
                     <template #title>
                       <span class="text-negative">Lost</span>
