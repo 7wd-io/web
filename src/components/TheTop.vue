@@ -9,7 +9,11 @@
         <template v-for="(player, ind) in players" :key="ind">
           <q-separator dark />
 
-          <q-item clickable v-ripple @click.capture.stop="onClick(player.name)">
+          <q-item
+            clickable
+            v-ripple
+            @click.capture.stop="onPlayerClick(player.name)"
+          >
             <q-item-section class="text-white" side>
               #{{ ind + 1 }}
             </q-item-section>
@@ -30,11 +34,8 @@
 import { useTop } from 'src/stores/top';
 import { onBeforeMount, computed } from 'vue';
 import Player from 'components/Player/Player.vue';
-import { Nickname } from 'src/models/account';
-import { useQuasar } from 'quasar';
-import Profile from 'components/Account/Profile.vue';
+import { usePlayerComponent } from 'components/Player/composables';
 
-const $q = useQuasar();
 const $top = useTop();
 
 onBeforeMount(() => {
@@ -43,14 +44,7 @@ onBeforeMount(() => {
 
 const players = computed(() => $top.players);
 
-const onClick = (name: Nickname) => {
-  $q.dialog({
-    component: Profile,
-    componentProps: {
-      name,
-    },
-  });
-};
+const { onPlayerClick } = usePlayerComponent();
 </script>
 
 <style lang="scss" scoped>

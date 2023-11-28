@@ -16,7 +16,7 @@
               dense
               clickable
               v-ripple
-              @click.capture.stop="onClick(player[0])"
+              @click.capture.stop="onPlayerClick(player[0])"
             >
               <q-item-section>
                 <Player :name="player[0]" />
@@ -35,25 +35,15 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useOnline } from 'src/stores/online';
-import { useQuasar } from 'quasar';
 import Player from 'components/Player/Player.vue';
-import Profile from 'components/Account/Profile.vue';
-import { Nickname } from 'src/models/account';
+import { usePlayerComponent } from 'components/Player/composables';
 
-const $q = useQuasar();
 const $online = useOnline();
 
 const players = computed(() => $online.desc);
 const count = computed(() => $online.count);
 
-const onClick = (name: Nickname) => {
-  $q.dialog({
-    component: Profile,
-    componentProps: {
-      name,
-    },
-  });
-};
+const { onPlayerClick } = usePlayerComponent();
 </script>
 
 <style lang="scss" scoped>
