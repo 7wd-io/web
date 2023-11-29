@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTopStore } from 'src/stores/top';
+import { useTopStore } from 'stores/top';
 import { onBeforeMount, computed } from 'vue';
 import Player from 'components/Player/Player.vue';
 import { usePlayerComponent } from 'components/Player/composables';

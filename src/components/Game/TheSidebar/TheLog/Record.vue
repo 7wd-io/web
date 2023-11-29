@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { Nickname } from 'src/models/account';
 
 interface Props {

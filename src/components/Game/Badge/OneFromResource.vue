@@ -16,7 +16,7 @@ import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
 import { DiscounterContext, ResourceId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 
 interface Props {

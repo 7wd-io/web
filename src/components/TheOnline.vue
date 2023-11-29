@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useOnlineStore } from 'src/stores/online';
+import { useOnlineStore } from 'stores/online';
 import Player from 'components/Player/Player.vue';
 import { usePlayerComponent } from 'components/Player/composables';
 

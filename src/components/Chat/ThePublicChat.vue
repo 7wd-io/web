@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
 import cent from 'src/centrifuge';
-import { useChatStore } from 'src/stores/chat/public';
+import { useChatStore } from 'stores/chat/public';
 import { QScrollArea } from 'quasar';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';

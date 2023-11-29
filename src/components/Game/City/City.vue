@@ -55,7 +55,7 @@ import Text from 'components/Game/Text.vue';
 import CityService from 'src/service/City';
 import { useQuasar } from 'quasar';
 import CityOverview from 'components/Game/Dialog/CityOverview.vue';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import Player from 'components/Player/Player.vue';
 

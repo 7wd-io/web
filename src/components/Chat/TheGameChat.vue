@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import cent from 'src/centrifuge';
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
-import { useChatStore } from 'src/stores/chat/game';
+import { useChatStore } from 'stores/chat/game';
 import { QScrollArea } from 'quasar';
 import { useRoute } from 'vue-router';
 import { GameId } from 'src/models/game';

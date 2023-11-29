@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import Token from 'components/Game/Token.vue';
 import { Nickname } from 'src/models/account';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 
 interface Props {

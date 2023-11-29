@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { useDialogPluginComponent } from 'quasar';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import Title from './Title.vue';
 import EmptyStub from './EmptyStub.vue';

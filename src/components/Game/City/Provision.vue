@@ -36,7 +36,7 @@
 import Resource from 'components/Game/City/Resource.vue';
 import { rawMaterials, manufacturedGoods } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import OneFromResourceBadge from 'components/Game/Badge/OneFromResource.vue';
 

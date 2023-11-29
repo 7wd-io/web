@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useAccountStore } from 'src/stores/account';
-import { useRoomsStore } from 'src/stores/rooms';
+import { useAccountStore } from 'stores/account';
+import { useRoomsStore } from 'stores/rooms';
 import { useQuasar } from 'quasar';
 import TheNewDialog from './TheNewDialog.vue';
 import RoomComponent from './Room.vue';

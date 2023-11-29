@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { useDialogPluginComponent } from 'quasar';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';

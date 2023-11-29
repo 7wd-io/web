@@ -162,7 +162,7 @@
 <script setup lang="ts">
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { ref, watch, computed } from 'vue';
-import { useOnlineStore } from 'src/stores/online';
+import { useOnlineStore } from 'stores/online';
 import { RoomOptions } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import { ApiError, api } from 'boot/axios';

@@ -125,8 +125,8 @@
 import Player from 'components/Player/Player.vue';
 import { Room } from 'src/models/game';
 import { computed, ref } from 'vue';
-import { useAccountStore } from 'src/stores/account';
-import { useOnlineStore } from 'src/stores/online';
+import { useAccountStore } from 'stores/account';
+import { useOnlineStore } from 'stores/online';
 import router from 'src/router';
 import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';

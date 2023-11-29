@@ -109,7 +109,7 @@ import { Nickname } from 'src/models/account';
 import { ApiError, api } from 'boot/axios';
 import { computed, onBeforeMount, ref } from 'vue';
 import { GamesReport, Profile } from 'src/models/profile';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 import Card from './Card.vue';
 import StatsCard from './StatsCard.vue';
 

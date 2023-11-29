@@ -86,7 +86,7 @@
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { reactive, ref } from 'vue';
 import { ApiError, api } from 'boot/axios';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 
 const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
   useDialogPluginComponent();

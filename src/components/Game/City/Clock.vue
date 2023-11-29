@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { Nickname } from 'src/models/account';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
 
 interface Props {

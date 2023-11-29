@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
 import { ApiError } from 'boot/axios';

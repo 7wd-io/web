@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import Text from 'components/Game/Text.vue';
 import { Phase } from 'src/models/game';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { watch, ref } from 'vue';
 
 const labels = {

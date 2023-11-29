@@ -6,9 +6,9 @@
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 import cent from 'src/centrifuge';
 import { RatingMap, Room } from 'src/models/game';
-import { useOnlineStore } from 'src/stores/online';
-import { useRoomsStore } from 'src/stores/rooms';
-import { useAccountStore } from 'src/stores/account';
+import { useOnlineStore } from 'stores/online';
+import { useRoomsStore } from 'stores/rooms';
+import { useAccountStore } from 'stores/account';
 import { useMeta } from 'quasar';
 import config from 'src/config';
 import { sound } from 'src/service/sound';

@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
 import { useCssVars } from 'components/Game/Card/useCssVars';
 import { CardId } from 'src/models/game';

@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import ProgressToken from 'components/Game/Token.vue';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
 import BoardService from 'src/service/Board';
 import ConflictPawn from './ConflictPawn.vue';

@@ -20,7 +20,7 @@ import Symbol from 'components/Game/Symbol/Symbol.vue';
 import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
 import { SymbolId } from 'src/models/game';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { Nickname } from 'src/models/account';
 import { computed } from 'vue';
 

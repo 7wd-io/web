@@ -10,7 +10,7 @@
 import Text from 'components/Game/Text.vue';
 import Badge from 'components/Badge.vue';
 import { Nickname } from 'src/models/account';
-import { usePlayAgainStore } from 'src/stores/game/playAgain';
+import { usePlayAgainStore } from 'stores/game/playAgain';
 import { computed } from 'vue';
 
 interface Props {

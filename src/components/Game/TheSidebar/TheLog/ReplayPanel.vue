@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
-import { useLogStore } from 'src/stores/game/log';
+import { useLogStore } from 'stores/game/log';
 
 // runtime
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

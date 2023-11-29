@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import CityService from 'src/service/City';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
 import { Nickname } from 'src/models/account';
 import Wonder from 'components/Game/City/Wonder.vue';

@@ -217,7 +217,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import VictoryIcon from 'components/Game/Icon/Victory/Victory.vue';

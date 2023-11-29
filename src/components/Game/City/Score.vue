@@ -15,7 +15,7 @@
 import { Nickname } from 'src/models/account';
 import Coin from 'components/Game/Coin/Coin.vue';
 import Point from 'components/Game/Point/Point.vue';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 
 interface Props {

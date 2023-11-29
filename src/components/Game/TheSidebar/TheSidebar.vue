@@ -42,9 +42,9 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useChatStore } from 'src/stores/chat/game';
-import { useGameStore } from 'src/stores/game/game';
-import { useAccountStore } from 'src/stores/account';
+import { useChatStore } from 'stores/chat/game';
+import { useGameStore } from 'stores/game/game';
+import { useAccountStore } from 'stores/account';
 import TheLog from './TheLog/TheLog.vue';
 import Resign from './Resign.vue';
 import TheChat from '../../Chat/TheGameChat.vue';

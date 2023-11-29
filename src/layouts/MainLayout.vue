@@ -70,8 +70,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useQuasar } from 'quasar';
-import { useAccountStore } from 'src/stores/account';
-// import { useOnline } from 'src/stores/online';
+import { useAccountStore } from 'stores/account';
+// import { useOnline } from 'stores/online';
 import Profile from 'components/Account/Profile.vue';
 import Settings from 'components/Account/Settings.vue';
 

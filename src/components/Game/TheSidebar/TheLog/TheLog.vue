@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { Id } from 'src/models/move';
-import { useLogStore } from 'src/stores/game/log';
+import { useLogStore } from 'stores/game/log';
 import { computed } from 'vue';
 import PickWonderRecord from './PickWonderRecord.vue';
 import PickBoardTokenRecord from './PickBoardTokenRecord.vue';

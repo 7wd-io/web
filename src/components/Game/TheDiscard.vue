@@ -30,7 +30,7 @@ import DiscardIcon from 'components/Game/Icon/Discard.vue';
 import Badge from 'components/Badge.vue';
 import PriceHint from 'components/Game/PriceHint/PriceHint.vue';
 import { useQuasar } from 'quasar';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import BoardService from 'src/service/Board';
 import LookDiscardDialog from 'components/Game/Dialog/LookDiscard.vue';
