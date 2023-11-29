@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 
 export function useRecord() {
   return {

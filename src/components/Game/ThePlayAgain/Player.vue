@@ -1,11 +1,12 @@
 <template>
   <Text size="sm" class="text-dark">
-    {{ name }} <b :class="co" style="display: inline-block; width: 23px;">{{ value }}</b>
+    {{ name }}
+    <b :class="co" style="display: inline-block; width: 23px">{{ value }}</b>
   </Text>
 </template>
 
 <script setup lang="ts">
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import Text from 'components/Game/Text.vue';
 import { computed } from 'vue';
 

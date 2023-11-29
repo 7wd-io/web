@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import Text from 'components/Game/Text.vue';
 import Badge from 'components/Badge.vue';
-import { Nickname } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import { usePlayAgain } from 'src/stores/game/playAgain';
 import { computed } from 'vue';
 
