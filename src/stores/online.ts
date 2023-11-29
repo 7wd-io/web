@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { Rating, RatingMap } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import { botNickname } from 'src/models/account';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 import { api } from 'boot/axios';
 import _toPairs from 'lodash-es/toPairs';
 

@@ -1,5 +1,5 @@
 import { Centrifuge } from 'centrifuge';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 
 const cent = new Centrifuge(
   `${process.env.SWD_CENTRIFUGO_URL as string}/connection/websocket`,

@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import { Rating } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useOnlineStore } from 'src/stores/online';
+import { useOnlineStore } from 'stores/online';
 import _toPairs from 'lodash-es/toPairs';
-import { useGameStore } from 'src/stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { botNickname } from 'src/models/account';
 import { Message } from 'components/Chat/models';
 import { HistoryResult, PresenceResult } from 'centrifuge/build/types';

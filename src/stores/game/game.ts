@@ -9,10 +9,10 @@ import {
   UpdateMessage,
 } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 import { api } from 'boot/axios';
-import { useLogStore } from 'src/stores/game/log';
-import { usePlayAgainStore } from 'src/stores/game/playAgain';
+import { useLogStore } from 'stores/game/log';
+import { usePlayAgainStore } from 'stores/game/playAgain';
 
 export const useGameStore = defineStore('game', {
   state: () => ({

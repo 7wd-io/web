@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Room } from 'src/models/game';
 import { api } from 'boot/axios';
-import { useAccountStore } from 'src/stores/account';
+import { useAccountStore } from 'stores/account';
 
 export const useRoomsStore = defineStore('rooms', {
   state: () => ({
