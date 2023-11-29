@@ -40,13 +40,15 @@ import { GameId } from 'src/models/game';
 import { api } from 'boot/axios';
 import { usePlayAgain } from 'src/stores/game/playAgain';
 
-const $game = useGame();
 const $playAgain = usePlayAgain();
 
 const countdown = ref(60);
 
 const show = computed(() => $playAgain.show);
 const approved = ref(false);
+
+const $route = useRoute();
+const gameId = $route.params.id as unknown as GameId;
 
 const runTimer = () => {
   window.setTimeout(function clock() {
@@ -61,15 +63,13 @@ const runTimer = () => {
 };
 
 const onClick = async (answer: boolean) => {
-  await api.post(`/play-again/${$game.id}`, {
+  await api.post(`/game/play-again`, {
+    gameId,
     answer,
   });
 };
 
 runTimer();
-
-const $route = useRoute();
-const gameId = $route.params.id as unknown as GameId;
 
 let subUpdate = cent.newSubscription(`play-again:update_${gameId}`);
 let subApprove = cent.newSubscription(`play-again:approve_${gameId}`);
