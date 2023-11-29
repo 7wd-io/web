@@ -36,7 +36,7 @@
               <Button
                 class="full-width"
                 :disable="!isMyTurn"
-                @click="onDiscard"
+                @click="onDiscardCard"
                 v-close-popup
               >
                 <div class="row justify-center q-gutter-sm">
@@ -85,12 +85,12 @@
 
 <script setup lang="ts">
 import { CardId, WonderId } from 'src/models/game';
-import { useQuasar, useDialogPluginComponent } from 'quasar';
-import { useGame } from 'src/stores/game/game';
-import { useAccountStore } from 'src/stores/account';
+import { useDialogPluginComponent } from 'quasar';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
+import { useAccountStore } from 'stores/account';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
 import { computed } from 'vue';
-import { ApiError, api } from 'boot/axios';
 import Wonder from 'components/Game/Wonder/Wonder.vue';
 import CardComp from 'components/Game/Card/Card.vue';
 import Button from 'components/Game/Button.vue';
@@ -114,60 +114,23 @@ const {
 
 const { onMouseDown } = useDraggble('#dialog-card-action .swd-dialog');
 
-const $q = useQuasar();
 const $account = useAccountStore();
+const $move = useMoveStore();
 const $game = useGame();
 const isMyTurn = computed(() => $game.isMyTurn);
 const city = computed(() => $game.city($account.user.nickname));
 const priceHintSize = 'calc(var(--swd-game-unit) * 1.8)';
 
-const onDiscard = async () => {
-  try {
-    await api.post('/game/move/discard-card', {
-      gid: $game.id,
-      cid: id,
-    });
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+const onDiscardCard = () => {
+  $move.discardCard($game.id, id);
 };
 
-const onConstructCard = async () => {
-  try {
-    await api.post('/game/move/construct-card', {
-      gid: $game.id,
-      cid: id,
-    });
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+const onConstructCard = () => {
+  $move.constructCard($game.id, id);
 };
 
-const onConstructWonder = async (wid: WonderId) => {
-  try {
-    await api.post('/game/move/construct-wonder', {
-      gid: $game.id,
-      wid,
-      cid: id,
-    });
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+const onConstructWonder = (wid: WonderId) => {
+  $move.constructWonder($game.id, wid, id);
 };
 </script>
 

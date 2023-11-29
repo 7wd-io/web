@@ -10,7 +10,7 @@
 import Text from 'components/Game/Text.vue';
 import Badge from 'components/Badge.vue';
 import { Nickname } from 'src/models/account';
-import { usePlayAgain } from 'src/stores/game/playAgain';
+import { usePlayAgainStore } from 'src/stores/game/playAgain';
 import { computed } from 'vue';
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-const $playAgain = usePlayAgain();
+const $playAgain = usePlayAgainStore();
 
 const show = computed(() => $playAgain.showBadges);
 

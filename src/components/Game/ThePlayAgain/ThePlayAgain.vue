@@ -35,10 +35,9 @@ import cent from 'src/centrifuge';
 import { PlayAgainApproved, PlayAgainUpdated } from 'src/models/messages';
 import { useRoute } from 'vue-router';
 import { GameId } from 'src/models/game';
-import { api } from 'boot/axios';
-import { usePlayAgain } from 'src/stores/game/playAgain';
+import { usePlayAgainStore } from 'stores/game/playAgain';
 
-const $playAgain = usePlayAgain();
+const $playAgain = usePlayAgainStore();
 
 const countdown = ref(60);
 
@@ -60,11 +59,8 @@ const runTimer = () => {
   }, 1000);
 };
 
-const onClick = async (answer: boolean) => {
-  await api.post('/game/play-again', {
-    gameId,
-    answer,
-  });
+const onClick = (answer: boolean) => {
+  $playAgain.answer(gameId, answer);
 };
 
 runTimer();

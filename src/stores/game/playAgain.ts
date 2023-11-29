@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia';
 import { Nickname } from 'src/models/account';
+import { GameId } from 'src/models/game';
+import { api } from 'boot/axios';
 
-export const usePlayAgain = defineStore('game:playAgain', {
+export const usePlayAgainStore = defineStore('game:playAgain', {
   state: () => ({
     answers: {} as Record<Nickname, boolean>,
     show: false,
     showBadges: false,
   }),
+  actions: {
+    async answer(gameId: GameId, answer: boolean) {
+      await api.post('/game/play-again', {
+        gameId,
+        answer,
+      });
+    },
+  },
 });
-
-export type PlayAgainStore = ReturnType<typeof usePlayAgain>;

@@ -26,10 +26,10 @@
 
 <script setup lang="ts">
 import Token from 'components/Game/Token.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
 import { Phase, TokenId } from 'src/models/game';
-import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -42,10 +42,7 @@ const show = computed(
 
 const tokens = computed(() => $game.state.dialogItems.tokens);
 
-const onClick = async (token: TokenId) => {
-  await api.post('/game/move/pick-random-token', {
-    gid: $game.id,
-    tid: token,
-  });
+const onClick = (token: TokenId) => {
+  useMoveStore().pickRandomToken($game.id, token);
 };
 </script>

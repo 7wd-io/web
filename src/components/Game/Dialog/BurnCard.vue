@@ -20,10 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { useGame } from 'src/stores/game/game';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
-import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -36,10 +36,7 @@ const show = computed(
 
 const cards = computed(() => $game.state.dialogItems.cards);
 
-const onClick = async (card: CardId) => {
-  await api.post('/game/move/burn-card', {
-    gid: $game.id,
-    cid: card,
-  });
+const onClick = (card: CardId) => {
+  useMoveStore().burnCard($game.id, card);
 };
 </script>

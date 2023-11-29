@@ -12,7 +12,7 @@ import { Nickname } from 'src/models/account';
 import { useAccountStore } from 'src/stores/account';
 import { api } from 'boot/axios';
 import { useLog } from 'src/stores/game/log';
-import { usePlayAgain } from 'src/stores/game/playAgain';
+import { usePlayAgainStore } from 'src/stores/game/playAgain';
 
 export const useGame = defineStore('game', {
   state: () => ({
@@ -105,7 +105,7 @@ export const useGame = defineStore('game', {
     },
     update(m: UpdateMessage) {
       const $log = useLog();
-      const $playAgain = usePlayAgain();
+      const $playAgain = usePlayAgainStore();
 
       this.state = m.state;
       this.lastMoveAt = m.clock.lastMoveAt;

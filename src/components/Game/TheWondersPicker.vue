@@ -16,15 +16,16 @@
 <script setup lang="ts">
 import useWonderCssVars from 'components/Game/Wonder/useCssVars';
 import Wonder from 'components/Game/Wonder/Wonder.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
 import { computed, ref, watch } from 'vue';
 import { WonderId } from 'src/models/game';
-import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';
 import BoardService from 'src/service/Board';
 
 const $q = useQuasar();
 const $game = useGame();
+const $move = useMoveStore();
 const { wonderWidth, wonderHeight } = useWonderCssVars(
   'calc(var(--swd-game-unit) * 20)'
 );
@@ -39,24 +40,12 @@ watch(
 
 const isMyTurn = computed(() => $game.isMyTurn);
 
-const onClick = async (id: WonderId) => {
+const onClick = (id: WonderId) => {
   if (!isMyTurn.value) {
     return;
   }
 
-  try {
-    await api.post('/game/move/pick-wonder', {
-      gid: $game.id,
-      wid: id,
-    });
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+  $move.pickWonder($game.id, id);
 };
 </script>
 

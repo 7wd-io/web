@@ -26,11 +26,11 @@
 
 <script setup lang="ts">
 import Button from 'components/Game/Button.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
 import { Phase } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -44,10 +44,7 @@ const show = computed(
 // order is matter
 const players = [$game.left, $game.right];
 
-const onClick = async (name: Nickname) => {
-  await api.post('/game/move/select-move', {
-    gid: $game.id,
-    player: name,
-  });
+const onClick = (user: Nickname) => {
+  useMoveStore().selectMove($game.id, user);
 };
 </script>

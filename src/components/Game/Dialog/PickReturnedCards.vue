@@ -34,7 +34,7 @@
           </div>
 
           <div class="row justify-center">
-            <Button :disabled="!picked" @click="onSubmit"> Apply </Button>
+            <Button :disabled="!picked" @click="onSubmit"> Apply</Button>
           </div>
         </div>
       </q-card-section>
@@ -44,10 +44,10 @@
 
 <script setup lang="ts">
 import Button from 'components/Game/Button.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGame } from 'stores/game/game';
+import { useMoveStore } from 'stores/game/move';
 import { computed, reactive } from 'vue';
 import { CardId, Phase } from 'src/models/game';
-import { api } from 'boot/axios';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
@@ -86,11 +86,7 @@ const onUpdate = (value: choice, card: CardId) => {
   picks[value] = card;
 };
 
-const onSubmit = async () => {
-  await api.post('/game/move/pick-returned-cards', {
-    gid: $game.id,
-    pick: picks.pick,
-    give: picks.give,
-  });
+const onSubmit = () => {
+  useMoveStore().pickReturnedCards($game.id, picks.pick, picks.give);
 };
 </script>
