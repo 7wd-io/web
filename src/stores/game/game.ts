@@ -11,10 +11,10 @@ import {
 import { Nickname } from 'src/models/account';
 import { useAccountStore } from 'src/stores/account';
 import { api } from 'boot/axios';
-import { useLog } from 'src/stores/game/log';
+import { useLogStore } from 'src/stores/game/log';
 import { usePlayAgainStore } from 'src/stores/game/playAgain';
 
-export const useGame = defineStore('game', {
+export const useGameStore = defineStore('game', {
   state: () => ({
     id: 0 as GameId,
     state: {} as State,
@@ -66,7 +66,7 @@ export const useGame = defineStore('game', {
   actions: {
     async load(id: GameId) {
       const $account = useAccountStore();
-      const $log = useLog();
+      const $log = useLogStore();
       const { data } = await api.get<Game>(`/game/${id}`);
 
       this.id = data.id;
@@ -104,7 +104,7 @@ export const useGame = defineStore('game', {
       this.state = data.state;
     },
     update(m: UpdateMessage) {
-      const $log = useLog();
+      const $log = useLogStore();
       const $playAgain = usePlayAgainStore();
 
       this.state = m.state;
@@ -123,5 +123,3 @@ export const useGame = defineStore('game', {
     },
   },
 });
-
-export type GameStore = ReturnType<typeof useGame>;

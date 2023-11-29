@@ -20,7 +20,7 @@ import Symbol from 'components/Game/Symbol/Symbol.vue';
 import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
 import { SymbolId } from 'src/models/game';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { Nickname } from 'src/models/account';
 import { computed } from 'vue';
 
@@ -34,7 +34,7 @@ const { name } = defineProps<Props>();
 const symbolSize = 'calc(var(--swd-game-unit) * 2.9)';
 const badgeSize = `calc(${symbolSize} * .3)`;
 
-const $game = useGame();
+const $game = useGameStore();
 const city = computed(() => $game.city(name));
 </script>
 

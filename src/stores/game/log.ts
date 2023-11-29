@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { Log } from 'src/models/log';
 
-export const useLog = defineStore('game:log', {
+export const useLogStore = defineStore('game:log', {
   state: () => ({
     records: [] as Log,
     replay: false as boolean,
@@ -29,5 +29,3 @@ export const useLog = defineStore('game:log', {
     },
   },
 });
-
-export type LogStore = ReturnType<typeof useLog>

@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import useWonderCssVars from 'components/Game/Wonder/useCssVars';
 import Wonder from 'components/Game/Wonder/Wonder.vue';
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed, ref, watch } from 'vue';
 import { WonderId } from 'src/models/game';
@@ -24,7 +24,7 @@ import { useQuasar } from 'quasar';
 import BoardService from 'src/service/Board';
 
 const $q = useQuasar();
-const $game = useGame();
+const $game = useGameStore();
 const $move = useMoveStore();
 const { wonderWidth, wonderHeight } = useWonderCssVars(
   'calc(var(--swd-game-unit) * 20)'

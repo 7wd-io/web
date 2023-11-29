@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import Token from 'components/Game/Token.vue';
 import { Nickname } from 'src/models/account';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 
 interface Props {
@@ -27,7 +27,7 @@ const { name } = defineProps<Props>();
 
 const size = 'calc(var(--swd-game-unit) * 3.6)';
 
-const $game = useGame();
+const $game = useGameStore();
 const city = computed(() => $game.city(name));
 </script>
 

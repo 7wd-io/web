@@ -8,18 +8,15 @@
     :seamless="true"
     class="z-max"
   >
-    <q-card
-      class="swd-dialog no-border"
-      style="width: 200px;"
-    >
+    <q-card class="swd-dialog no-border" style="width: 200px">
       <q-linear-progress
         dark
         size="20px"
-        :value="index/length"
+        :value="index / length"
         color="accent"
       >
         <div class="absolute-full flex flex-center">
-          <div class="text-black" style="font-size: .6em">
+          <div class="text-black" style="font-size: 0.6em">
             <b>{{ index }}/{{ length }}</b>
           </div>
         </div>
@@ -44,12 +41,7 @@
         </div>
 
         <div>
-          <q-btn
-            flat
-            round
-            icon="close"
-            @click="onOff"
-          />
+          <q-btn flat round icon="close" @click="onOff" />
         </div>
       </div>
     </q-card>
@@ -59,18 +51,14 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
-import { useLog } from 'src/stores/game/log';
+import { useLogStore } from 'src/stores/game/log';
 
 // runtime
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const emit = defineEmits([...useDialogPluginComponent.emits]);
-const {
-  dialogRef,
-  onDialogHide,
-  onDialogOK,
-} = useDialogPluginComponent();
+const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent();
 
-const $log = useLog();
+const $log = useLogStore();
 const index = computed(() => $log.index);
 const length = computed(() => $log.records.length);
 const show = computed(() => $log.replay);

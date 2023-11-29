@@ -36,7 +36,7 @@
 import Resource from 'components/Game/City/Resource.vue';
 import { rawMaterials, manufacturedGoods } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 import OneFromResourceBadge from 'components/Game/Badge/OneFromResource.vue';
 
@@ -47,7 +47,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-const $game = useGame();
+const $game = useGameStore();
 
 const city = computed(() => $game.city(name));
 </script>

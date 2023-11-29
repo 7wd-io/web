@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import Button from 'components/Game/Button.vue';
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed, reactive } from 'vue';
 import { CardId, Phase } from 'src/models/game';
@@ -54,7 +54,7 @@ import { useDraggble } from './useDraggble';
 type choice = 'pick' | 'give' | '';
 
 const { onMouseDown } = useDraggble('#dialog-pick-returned-cards .swd-dialog');
-const $game = useGame();
+const $game = useGameStore();
 
 const show = computed(
   () => $game.state.phase === Phase.pickReturnedCards && $game.isMyTurn

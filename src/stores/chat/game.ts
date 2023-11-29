@@ -1,21 +1,21 @@
 import { defineStore } from 'pinia';
 import { Rating } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useOnline } from 'src/stores/online';
+import { useOnlineStore } from 'src/stores/online';
 import _toPairs from 'lodash-es/toPairs';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { botNickname } from 'src/models/account';
 import { Message } from 'components/Chat/models';
 import { HistoryResult, PresenceResult } from 'centrifuge/build/types';
 
-export const useChat = defineStore('chat:game', {
+export const useChatStore = defineStore('chat:game', {
   state: () => ({
     messages: [] as Message[],
     players: [] as Nickname[],
   }),
   getters: {
     descPlayers(state): [Nickname, Rating][] {
-      const $online = useOnline();
+      const $online = useOnlineStore();
 
       const m: Record<Nickname, Rating> = {};
 
@@ -49,7 +49,7 @@ export const useChat = defineStore('chat:game', {
       this.messages = messages;
     },
     setPlayers(presence: PresenceResult) {
-      const $game = useGame();
+      const $game = useGameStore();
 
       const players: Nickname[] = [];
 
@@ -65,5 +65,3 @@ export const useChat = defineStore('chat:game', {
     },
   },
 });
-
-export type ChatStore = ReturnType<typeof useChat>;

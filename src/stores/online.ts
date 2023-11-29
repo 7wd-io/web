@@ -6,7 +6,7 @@ import { useAccountStore } from 'src/stores/account';
 import { api } from 'boot/axios';
 import _toPairs from 'lodash-es/toPairs';
 
-export const useOnline = defineStore('online', {
+export const useOnlineStore = defineStore('online', {
   state: () => ({
     players: {} as RatingMap,
   }),
@@ -32,5 +32,3 @@ export const useOnline = defineStore('online', {
     },
   },
 });
-
-export type OnlineStore = ReturnType<typeof useOnline>;

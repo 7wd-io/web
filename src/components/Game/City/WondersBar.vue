@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import CityService from 'src/service/City';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed, ref, watch } from 'vue';
 import { Nickname } from 'src/models/account';
 import Wonder from 'components/Game/City/Wonder.vue';
@@ -42,7 +42,7 @@ interface Props {
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
-const $game = useGame();
+const $game = useGameStore();
 const size = 'calc(var(--swd-game-unit) * 12)';
 
 const city = computed(() => $game.city(name));

@@ -42,8 +42,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useChat } from 'src/stores/chat/game';
-import { useGame } from 'src/stores/game/game';
+import { useChatStore } from 'src/stores/chat/game';
+import { useGameStore } from 'src/stores/game/game';
 import { useAccountStore } from 'src/stores/account';
 import TheLog from './TheLog/TheLog.vue';
 import Resign from './Resign.vue';
@@ -51,8 +51,8 @@ import TheChat from '../../Chat/TheGameChat.vue';
 import ThePlayers from './ThePlayers.vue';
 
 const $account = useAccountStore();
-const $game = useGame();
-const $chat = useChat();
+const $game = useGameStore();
+const $chat = useChatStore();
 const tab = ref('log');
 const countPlayers = computed(() => $chat.countPlayers);
 const showResign = computed(

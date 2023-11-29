@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import Token from 'components/Game/Token.vue';
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
 import { Phase, TokenId } from 'src/models/game';
@@ -34,7 +34,7 @@ import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
 const { onMouseDown } = useDraggble('#dialog-pick-random-token .swd-dialog');
-const $game = useGame();
+const $game = useGameStore();
 
 const show = computed(
   () => $game.state.phase === Phase.pickRandomToken && $game.isMyTurn

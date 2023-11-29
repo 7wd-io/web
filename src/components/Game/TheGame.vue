@@ -65,8 +65,8 @@ import TheScoreCard from 'components/Game/TheScoreCard/TheScoreCard.vue';
 import ThePlayAgain from 'components/Game/ThePlayAgain/ThePlayAgain.vue';
 import City from 'components/Game/City/City.vue';
 import Card from 'components/Game/Card/Card.vue';
-import { useGame } from 'src/stores/game/game';
-import { useLog } from 'src/stores/game/log';
+import { useGameStore } from 'src/stores/game/game';
+import { useLogStore } from 'src/stores/game/log';
 import { useAccountStore } from 'src/stores/account';
 import { watch, createApp, ref, computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
@@ -90,8 +90,8 @@ import { AnimationSpeed } from 'src/models/account';
 
 const $q = useQuasar();
 const $account = useAccountStore();
-const $game = useGame();
-const $log = useLog();
+const $game = useGameStore();
+const $log = useLogStore();
 const isOver = ref($game.isOver);
 const wonderPickInProgress = ref($game.state.phase === Phase.prepare);
 

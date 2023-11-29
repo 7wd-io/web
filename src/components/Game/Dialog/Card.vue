@@ -86,7 +86,7 @@
 <script setup lang="ts">
 import { CardId, WonderId } from 'src/models/game';
 import { useDialogPluginComponent } from 'quasar';
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { useAccountStore } from 'stores/account';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
@@ -116,7 +116,7 @@ const { onMouseDown } = useDraggble('#dialog-card-action .swd-dialog');
 
 const $account = useAccountStore();
 const $move = useMoveStore();
-const $game = useGame();
+const $game = useGameStore();
 const isMyTurn = computed(() => $game.isMyTurn);
 const city = computed(() => $game.city($account.user.nickname));
 const priceHintSize = 'calc(var(--swd-game-unit) * 1.8)';

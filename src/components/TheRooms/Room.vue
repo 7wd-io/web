@@ -126,7 +126,7 @@ import Player from 'components/Player/Player.vue';
 import { Room } from 'src/models/game';
 import { computed, ref } from 'vue';
 import { useAccountStore } from 'src/stores/account';
-import { useOnline } from 'src/stores/online';
+import { useOnlineStore } from 'src/stores/online';
 import router from 'src/router';
 import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';
@@ -140,7 +140,7 @@ interface Props {
 const props = defineProps<Props>();
 const $q = useQuasar();
 const $account = useAccountStore();
-const $online = useOnline();
+const $online = useOnlineStore();
 const inProgressCancel = ref(false);
 const hasRoom = computed(() => $account.hasRoom);
 const joinDenied = computed(() => {

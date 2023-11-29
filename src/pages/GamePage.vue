@@ -3,10 +3,9 @@ import { onBeforeMount, onBeforeUnmount, ref } from 'vue';
 import TheGame from 'components/Game/TheGame.vue';
 import TheSidebar from 'components/Game/TheSidebar/TheSidebar.vue';
 import { useRoute } from 'vue-router';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { useAccountStore } from 'src/stores/account';
-import centrifuge from 'src/centrifuge';
-import { GameId, UpdateMessage } from 'src/models/game';
+import { GameId } from 'src/models/game';
 import router from 'src/router';
 import { useMeta } from 'quasar';
 import config from 'src/config';
@@ -14,7 +13,7 @@ import { sound } from 'src/service/sound';
 import cent from 'src/centrifuge';
 
 const $route = useRoute();
-const $game = useGame();
+const $game = useGameStore();
 const $account = useAccountStore();
 
 const gameId = $route.params.id as unknown as GameId;

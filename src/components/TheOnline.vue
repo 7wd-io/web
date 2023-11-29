@@ -34,11 +34,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useOnline } from 'src/stores/online';
+import { useOnlineStore } from 'src/stores/online';
 import Player from 'components/Player/Player.vue';
 import { usePlayerComponent } from 'components/Player/composables';
 
-const $online = useOnline();
+const $online = useOnlineStore();
 
 const players = computed(() => $online.desc);
 const count = computed(() => $online.count);

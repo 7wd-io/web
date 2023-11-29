@@ -30,13 +30,13 @@ import DiscardIcon from 'components/Game/Icon/Discard.vue';
 import Badge from 'components/Badge.vue';
 import PriceHint from 'components/Game/PriceHint/PriceHint.vue';
 import { useQuasar } from 'quasar';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 import BoardService from 'src/service/Board';
 import LookDiscardDialog from 'components/Game/Dialog/LookDiscard.vue';
 
 const $q = useQuasar();
-const $game = useGame();
+const $game = useGameStore();
 
 const left = computed(() => $game.city($game.left));
 const right = computed(() => $game.city($game.right));

@@ -17,14 +17,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useAccountStore } from 'src/stores/account';
-import { useRooms } from 'src/stores/rooms';
+import { useRoomsStore } from 'src/stores/rooms';
 import { useQuasar } from 'quasar';
 import TheNewDialog from './TheNewDialog.vue';
 import RoomComponent from './Room.vue';
 
 const $q = useQuasar();
 const $account = useAccountStore();
-const $rooms = useRooms();
+const $rooms = useRoomsStore();
 
 const hasRoom = computed(() => $account.hasRoom);
 const rooms = computed(() => $rooms.ordered);

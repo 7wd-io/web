@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { RatingTop } from 'src/models/game';
 import { api } from 'boot/axios';
 
-export const useTop = defineStore('top', {
+export const useTopStore = defineStore('top', {
   state: () => ({
     players: [] as RatingTop,
   }),
@@ -13,5 +13,3 @@ export const useTop = defineStore('top', {
     },
   },
 });
-
-export type TopStore = ReturnType<typeof useTop>;

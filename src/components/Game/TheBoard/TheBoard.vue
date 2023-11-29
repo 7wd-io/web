@@ -11,11 +11,7 @@
       />
     </div>
 
-    <ConflictPawn
-      class="pawn"
-      :class="pawnCo"
-      size="var(--pawn-size)"
-    />
+    <ConflictPawn class="pawn" :class="pawnCo" size="var(--pawn-size)" />
 
     <transition
       enter-active-class="animated animate__fadeInDown"
@@ -73,31 +69,30 @@
 
 <script setup lang="ts">
 import ProgressToken from 'components/Game/Token.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed, ref, watch } from 'vue';
 import BoardService from 'src/service/Board';
 import ConflictPawn from './ConflictPawn.vue';
 import MilitaryToken from './MilitaryToken.vue';
 
-const $game = useGame();
+const $game = useGameStore();
 const left = computed(() => $game.city($game.left));
 const right = computed(() => $game.city($game.right));
 const pOffset = 10;
 
 const pos = computed(
-  () => pOffset
-    + Math.max(left.value.track.pos, right.value.track.pos)
-    * (left.value.track.pos > 0 ? 1 : -1),
+  () =>
+    pOffset +
+    Math.max(left.value.track.pos, right.value.track.pos) *
+      (left.value.track.pos > 0 ? 1 : -1)
 );
 
 const mtoken2Size = 'var(--mtoken-5-size)';
 const mtoken5Size = 'var(--mtoken-5-size)';
 
-const pawnCo = computed(() => (
-  {
-    [`pos-${pos.value}`]: true,
-  }
-));
+const pawnCo = computed(() => ({
+  [`pos-${pos.value}`]: true,
+}));
 
 const tokens = ref($game.state.tokens);
 
@@ -105,7 +100,7 @@ watch(
   () => $game.chan,
   () => {
     tokens.value = $game.state.tokens;
-  },
+  }
 );
 </script>
 
@@ -113,10 +108,10 @@ watch(
 .the-board {
   --width: calc(var(--swd-game-unit) * 50);
   --height: calc(var(--width) / 3.541);
-  --progress-token-size: calc(var(--width) * .09);
-  --pawn-size: calc(var(--width) * .04);
-  --mtoken-2-size: calc(var(--width) * .1);
-  --mtoken-5-size: calc(var(--width) * .115);
+  --progress-token-size: calc(var(--width) * 0.09);
+  --pawn-size: calc(var(--width) * 0.04);
+  --mtoken-2-size: calc(var(--width) * 0.1);
+  --mtoken-5-size: calc(var(--width) * 0.115);
   width: var(--width);
   height: var(--height);
   background: url('/img/game/board.png') center/cover no-repeat;
@@ -125,11 +120,11 @@ watch(
     display: flex;
     flex-direction: row;
     position: absolute;
-    top: calc(var(--height) * .03);
+    top: calc(var(--height) * 0.03);
     left: calc(var(--width) / 19 * 4.75);
 
     .board-token {
-      margin-left: calc(var(--width) * .012);
+      margin-left: calc(var(--width) * 0.012);
       &:first-child {
         margin-left: 0;
       }
@@ -138,8 +133,8 @@ watch(
 
   .pawn {
     position: absolute;
-    transition: all .2s linear;
-    top: calc(var(--height) * .37);
+    transition: all 0.2s linear;
+    top: calc(var(--height) * 0.37);
     left: 0;
   }
 
@@ -151,27 +146,26 @@ watch(
 
   .mtoken-l-5 {
     position: absolute;
-    bottom: calc(var(--height) * .085);
+    bottom: calc(var(--height) * 0.085);
     left: calc(var(--width) / 19 * 2);
   }
 
   .mtoken-l-2 {
     position: absolute;
-    bottom: calc(var(--height) * .085);
+    bottom: calc(var(--height) * 0.085);
     left: calc(var(--width) / 19 * 4.75);
   }
 
   .mtoken-r-2 {
     position: absolute;
-    bottom: calc(var(--height) * .085);
+    bottom: calc(var(--height) * 0.085);
     right: calc(var(--width) / 19 * 4.75);
   }
 
   .mtoken-r-5 {
     position: absolute;
-    bottom: calc(var(--height) * .081);
+    bottom: calc(var(--height) * 0.081);
     right: calc(var(--width) / 19 * 2);
   }
 }
-
 </style>

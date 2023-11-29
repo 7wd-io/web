@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import Button from 'components/Game/Button.vue';
 import { useDialogPluginComponent } from 'quasar';
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import Title from './Title.vue';
 
@@ -30,9 +30,7 @@ const emit = defineEmits([...useDialogPluginComponent.emits]);
 
 const { dialogRef, onDialogHide } = useDialogPluginComponent();
 
-const $game = useGame();
-
 const onConfirm = () => {
-  useMoveStore().resign($game.id);
+  useMoveStore().resign(useGameStore().id);
 };
 </script>

@@ -5,23 +5,14 @@
     @hide="onDialogHide"
     :persistent="false"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          Discarded cards
-        </Title>
+        <Title> Discarded cards </Title>
       </q-card-section>
       <EmptyStub v-if="!cards?.length" />
       <q-card-section v-else>
         <div class="row q-gutter-md">
-          <swd-card
-            v-for="id in cards"
-            :key="id"
-            :id="id"
-          />
+          <swd-card v-for="id in cards" :key="id" :id="id" />
         </div>
       </q-card-section>
     </q-card>
@@ -31,7 +22,7 @@
 <script setup lang="ts">
 import { useDialogPluginComponent } from 'quasar';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 import Title from './Title.vue';
 import EmptyStub from './EmptyStub.vue';
@@ -45,7 +36,7 @@ const {
   // onDialogOK,
 } = useDialogPluginComponent();
 
-const $game = useGame();
+const $game = useGameStore();
 
 const cards = computed(() => $game.state.cardItems.discarded);
 const { onMouseDown } = useDraggble('#dialog-look-discard .swd-dialog');

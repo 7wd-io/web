@@ -5,7 +5,7 @@ import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
 import $router from 'src/router';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
-import { useRooms } from 'stores/rooms';
+import { useRoomsStore } from 'stores/rooms';
 
 const sessionCookie = 'refresh_token';
 
@@ -18,7 +18,7 @@ export const useAccountStore = defineStore('account', {
   getters: {
     isLoggedIn: (state) => state.token() !== '',
     hasRoom(state) {
-      const $rooms = useRooms();
+      const $rooms = useRoomsStore();
 
       return $rooms.rooms.some(
         (room) =>

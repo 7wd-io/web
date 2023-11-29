@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { Nickname } from 'src/models/account';
 
 interface Props {
@@ -27,7 +27,7 @@ interface Props {
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name, nameSize, actor, n } = defineProps<Props>();
-const $game = useGame();
+const $game = useGameStore();
 
 const co = {
   'left-record': $game.left === actor,

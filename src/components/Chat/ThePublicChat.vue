@@ -24,12 +24,12 @@
 <script setup lang="ts">
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
 import cent from 'src/centrifuge';
-import { useChat } from 'src/stores/chat/public';
+import { useChatStore } from 'src/stores/chat/public';
 import { QScrollArea } from 'quasar';
 import Message from './Message.vue';
 import { Message as MessageModel } from './models';
 
-const $chat = useChat();
+const $chat = useChatStore();
 const scroll = ref<QScrollArea>();
 let sub = cent.newSubscription('chat-public:messages');
 

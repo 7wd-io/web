@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { Nickname } from 'src/models/account';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed, ref, watch } from 'vue';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-const $game = useGame();
+const $game = useGameStore();
 
 let timerId: number;
 const seconds = computed(() => $game.players[name].clock);

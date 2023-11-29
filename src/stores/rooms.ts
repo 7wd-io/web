@@ -3,7 +3,7 @@ import { Room } from 'src/models/game';
 import { api } from 'boot/axios';
 import { useAccountStore } from 'src/stores/account';
 
-export const useRooms = defineStore('rooms', {
+export const useRoomsStore = defineStore('rooms', {
   state: () => ({
     rooms: [] as Room[],
   }),
@@ -59,5 +59,3 @@ export const useRooms = defineStore('rooms', {
     },
   },
 });
-
-export type RoomsStore = ReturnType<typeof useRooms>;

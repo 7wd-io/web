@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { Message } from 'components/Chat/models';
 import { HistoryResult } from 'centrifuge/build/types';
 
-export const useChat = defineStore('chat:public', {
+export const useChatStore = defineStore('chat:public', {
   state: () => ({
     messages: [] as Message[],
   }),
@@ -27,5 +27,3 @@ export const useChat = defineStore('chat:public', {
     },
   },
 });
-
-export type ChatStore = ReturnType<typeof useChat>;

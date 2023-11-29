@@ -1,24 +1,15 @@
 <template>
-  <Text
-    size="sm"
-    class="text-center text-bold"
-  >
-    <q-icon
-      v-if="meOnLeft"
-      name="arrow_back"
-    />
+  <Text size="sm" class="text-center text-bold">
+    <q-icon v-if="meOnLeft" name="arrow_back" />
     {{ label }}
-    <q-icon
-      v-if="!meOnLeft"
-      name="arrow_forward"
-    />
+    <q-icon v-if="!meOnLeft" name="arrow_forward" />
   </Text>
 </template>
 
 <script setup lang="ts">
 import Text from 'components/Game/Text.vue';
 import { Phase } from 'src/models/game';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { watch, ref } from 'vue';
 
 const labels = {
@@ -34,7 +25,7 @@ const labels = {
   [Phase.over]: '',
 };
 
-const $game = useGame();
+const $game = useGameStore();
 
 const label = ref(labels[$game.state.phase]);
 const meOnLeft = ref($game.state.me.name === $game.left);
@@ -44,6 +35,6 @@ watch(
   () => {
     label.value = labels[$game.state.phase];
     meOnLeft.value = $game.state.me.name === $game.left;
-  },
+  }
 );
 </script>

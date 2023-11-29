@@ -31,12 +31,12 @@
 </template>
 
 <script setup lang="ts">
-import { useTop } from 'src/stores/top';
+import { useTopStore } from 'src/stores/top';
 import { onBeforeMount, computed } from 'vue';
 import Player from 'components/Player/Player.vue';
 import { usePlayerComponent } from 'components/Player/composables';
 
-const $top = useTop();
+const $top = useTopStore();
 
 onBeforeMount(() => {
   void $top.load();

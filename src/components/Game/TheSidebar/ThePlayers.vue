@@ -17,10 +17,10 @@
 <script setup lang="ts">
 import Player from 'components/Player/Player.vue';
 import { usePlayerComponent } from 'components/Player/composables';
-import { useChat } from 'src/stores/chat/game';
+import { useChatStore } from 'src/stores/chat/game';
 import { computed } from 'vue';
 
-const $chat = useChat();
+const $chat = useChatStore();
 const players = computed(() => $chat.descPlayers);
 
 const { onPlayerClick } = usePlayerComponent();

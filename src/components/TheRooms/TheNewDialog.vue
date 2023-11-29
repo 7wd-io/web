@@ -162,7 +162,7 @@
 <script setup lang="ts">
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { ref, watch, computed } from 'vue';
-import { useOnline } from 'src/stores/online';
+import { useOnlineStore } from 'src/stores/online';
 import { RoomOptions } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import { ApiError, api } from 'boot/axios';
@@ -178,7 +178,7 @@ const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
 const emit = defineEmits([...useDialogPluginComponent.emits]);
 
 const $q = useQuasar();
-const $online = useOnline();
+const $online = useOnlineStore();
 
 const tab = ref('rating');
 

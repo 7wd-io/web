@@ -5,26 +5,15 @@
     @hide="onDialogHide"
     :persistent="false"
   >
-    <q-card
-      class="swd-dialog"
-      @mousedown="onMouseDown"
-    >
+    <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title>
-          City cards
-        </Title>
+        <Title> City cards </Title>
       </q-card-section>
-      <EmptyStub v-if="!hasCards"/>
+      <EmptyStub v-if="!hasCards" />
       <q-card-section v-else>
         <div class="row no-wrap q-gutter-xs-xs q-gutter-md-md q-gutter-lg-lg">
-          <template
-            v-for="gid in groups"
-            :key="gid"
-          >
-            <div
-              v-if="city.cards.data[gid]"
-              class="column q-gutter-y-xs"
-            >
+          <template v-for="gid in groups" :key="gid">
+            <div v-if="city.cards.data[gid]" class="column q-gutter-y-xs">
               <swd-card
                 v-for="cid in city.cards.data[gid]"
                 :key="cid"
@@ -42,9 +31,10 @@
 <script setup lang="ts">
 import { useDialogPluginComponent } from 'quasar';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
-import { CardGroupId, Nickname } from 'src/models/game';
+import { CardGroupId } from 'src/models/game';
+import { Nickname } from 'src/models/account';
 import EmptyStub from './EmptyStub.vue';
 import Title from './Title.vue';
 
@@ -69,18 +59,14 @@ const groups = [
   CardGroupId.guild,
 ];
 
-const $game = useGame();
+const $game = useGameStore();
 const city = computed(() => $game.city(name));
 
-const hasCards = computed(
-  () => Object.values(city.value.cards.data)
-    .some((cards) => cards.length > 0),
+const hasCards = computed(() =>
+  Object.values(city.value.cards.data).some((cards) => cards.length > 0)
 );
 
 const { onMouseDown } = useDraggble('#dialog-city-overview .swd-dialog');
 
-const {
-  dialogRef,
-  onDialogHide,
-} = useDialogPluginComponent();
+const { dialogRef, onDialogHide } = useDialogPluginComponent();
 </script>

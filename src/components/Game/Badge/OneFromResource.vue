@@ -16,7 +16,7 @@ import Badge from 'components/Badge.vue';
 import Counter from 'components/Game/Counter.vue';
 import { DiscounterContext, ResourceId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 
 interface Props {
@@ -35,7 +35,7 @@ if (pos === 'top') {
   offset = `-${offset}`;
 }
 
-const $game = useGame();
+const $game = useGameStore();
 const city = computed(() => $game.city(name));
 const counter = computed(() => {
   let c = 0;

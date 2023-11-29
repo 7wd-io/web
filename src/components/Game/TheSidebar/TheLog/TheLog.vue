@@ -1,9 +1,6 @@
 <template>
   <q-list class="the-log bg-transparent">
-    <template
-      v-for="(record, ind) in log"
-      :key="ind"
-    >
+    <template v-for="(record, ind) in log" :key="ind">
       <component
         :is="components[record.move.id]"
         :n="ind + 1"
@@ -20,7 +17,7 @@
 
 <script setup lang="ts">
 import { Id } from 'src/models/move';
-import { useLog } from 'src/stores/game/log';
+import { useLogStore } from 'src/stores/game/log';
 import { computed } from 'vue';
 import PickWonderRecord from './PickWonderRecord.vue';
 import PickBoardTokenRecord from './PickBoardTokenRecord.vue';
@@ -50,7 +47,7 @@ const components = {
   [Id.over]: OverRecord,
 };
 
-const $log = useLog();
+const $log = useLogStore();
 const log = computed(() => $log.records);
 
 const onClick = (ind: number) => {
@@ -58,7 +55,7 @@ const onClick = (ind: number) => {
 };
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .the-log {
   display: flex;
   flex-direction: column-reverse;

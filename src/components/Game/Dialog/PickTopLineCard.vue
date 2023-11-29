@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { useGame } from 'stores/game/game';
+import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
@@ -33,7 +33,7 @@ import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
 
 const { onMouseDown } = useDraggble('#dialog-pick-topline-card .swd-dialog');
-const $game = useGame();
+const $game = useGameStore();
 
 const show = computed(
   () => $game.state.phase === Phase.pickTopLineCard && $game.isMyTurn

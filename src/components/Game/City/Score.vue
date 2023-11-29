@@ -15,7 +15,7 @@
 import { Nickname } from 'src/models/account';
 import Coin from 'components/Game/Coin/Coin.vue';
 import Point from 'components/Game/Point/Point.vue';
-import { useGame } from 'src/stores/game/game';
+import { useGameStore } from 'src/stores/game/game';
 import { computed } from 'vue';
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-const $game = useGame();
+const $game = useGameStore();
 const city = computed(() => $game.city(name));
 const side = $game.left === name ? 'left' : 'right';
 const size = 'calc(var(--swd-game-unit) * 3)';
