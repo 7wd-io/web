@@ -35,7 +35,7 @@ const $game = useGame();
 
 const confirm = async () => {
   try {
-    await api.post('/game/resign', {
+    await api.post('/game/move/resign', {
       gid: $game.id,
     });
   } catch (error) {

@@ -45,7 +45,7 @@ const show = computed(
 const players = [$game.left, $game.right];
 
 const onClick = async (name: Nickname) => {
-  await api.post('/game/select-move', {
+  await api.post('/game/move/select-move', {
     gid: $game.id,
     player: name,
   });

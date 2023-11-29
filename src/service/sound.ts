@@ -1,4 +1,4 @@
-const s = new Audio('sound/notify.mp3');
+const s = new Audio('/sound/notify.mp3');
 s.volume = 0.3;
 
 const sound = async () => {
@@ -9,6 +9,4 @@ const sound = async () => {
   }
 };
 
-export {
-  sound,
-};
+export { sound };

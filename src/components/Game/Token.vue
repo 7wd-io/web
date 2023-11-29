@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="token"
-    :class="co"
-  />
+  <div class="token" :class="co" />
 </template>
 
 <script setup lang="ts">
@@ -13,16 +10,17 @@ interface Props {
   size?: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
-const { id, size = 'calc(var(--swd-game-unit) * 5)' } = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  size: 'calc(var(--swd-game-unit) * 5)',
+});
 
 const co = {
-  [`id-${id}`]: true,
+  [`id-${props.id}`]: true,
 };
 </script>
 
 <style lang="scss" scoped>
-@use "sass:math";
+@use 'sass:math';
 
 .token {
   --sprite-units-count: 4;
@@ -30,7 +28,7 @@ const co = {
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
-  background-image: url("/img/game/tokens.jpeg");
+  background-image: url('/img/game/tokens.jpeg');
   background-repeat: no-repeat;
   background-size: calc(var(--size) * var(--sprite-units-count));
 

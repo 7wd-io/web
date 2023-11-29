@@ -45,7 +45,7 @@ const onClick = async (id: WonderId) => {
   }
 
   try {
-    await api.post('/game/pick-wonder', {
+    await api.post('/game/move/pick-wonder', {
       gid: $game.id,
       wid: id,
     });

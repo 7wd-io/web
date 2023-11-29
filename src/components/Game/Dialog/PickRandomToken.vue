@@ -43,7 +43,7 @@ const show = computed(
 const tokens = computed(() => $game.state.dialogItems.tokens);
 
 const onClick = async (token: TokenId) => {
-  await api.post('/game/pick-random-token', {
+  await api.post('/game/move/pick-random-token', {
     gid: $game.id,
     tid: token,
   });

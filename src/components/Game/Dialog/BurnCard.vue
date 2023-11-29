@@ -37,7 +37,7 @@ const show = computed(
 const cards = computed(() => $game.state.dialogItems.cards);
 
 const onClick = async (card: CardId) => {
-  await api.post('/game/burn-card', {
+  await api.post('/game/move/burn-card', {
     gid: $game.id,
     cid: card,
   });

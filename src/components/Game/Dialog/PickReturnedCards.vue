@@ -87,7 +87,7 @@ const onUpdate = (value: choice, card: CardId) => {
 };
 
 const onSubmit = async () => {
-  await api.post('/game/pick-returned-cards', {
+  await api.post('/game/move/pick-returned-cards', {
     gid: $game.id,
     pick: picks.pick,
     give: picks.give,

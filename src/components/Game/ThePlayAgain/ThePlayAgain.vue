@@ -31,8 +31,6 @@
 import Text from 'components/Game/Text.vue';
 import Button from 'components/Game/Button.vue';
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue';
-import { useGame } from 'src/stores/game/game';
-import { Subscription } from 'centrifuge';
 import cent from 'src/centrifuge';
 import { PlayAgainApproved, PlayAgainUpdated } from 'src/models/messages';
 import { useRoute } from 'vue-router';
@@ -48,7 +46,7 @@ const show = computed(() => $playAgain.show);
 const approved = ref(false);
 
 const $route = useRoute();
-const gameId = $route.params.id as unknown as GameId;
+const gameId: GameId = +$route.params.id;
 
 const runTimer = () => {
   window.setTimeout(function clock() {
@@ -63,7 +61,7 @@ const runTimer = () => {
 };
 
 const onClick = async (answer: boolean) => {
-  await api.post(`/game/play-again`, {
+  await api.post('/game/play-again', {
     gameId,
     answer,
   });
@@ -79,8 +77,8 @@ onBeforeMount(() => {
   subApprove.subscribe();
 
   subUpdate.on('publication', (ctx: { data: PlayAgainUpdated }) => {
-    const { player, answer } = ctx.data;
-    $playAgain.answers[player] = answer;
+    const { user, answer } = ctx.data;
+    $playAgain.answers[user] = answer;
   });
 
   subApprove.on('publication', (ctx: { data: PlayAgainApproved }) => {

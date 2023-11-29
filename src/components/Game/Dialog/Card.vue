@@ -123,7 +123,7 @@ const priceHintSize = 'calc(var(--swd-game-unit) * 1.8)';
 
 const onDiscard = async () => {
   try {
-    await api.post('/game/discard-card', {
+    await api.post('/game/move/discard-card', {
       gid: $game.id,
       cid: id,
     });
@@ -139,7 +139,7 @@ const onDiscard = async () => {
 
 const onConstructCard = async () => {
   try {
-    await api.post('/game/construct-card', {
+    await api.post('/game/move/construct-card', {
       gid: $game.id,
       cid: id,
     });
@@ -155,7 +155,7 @@ const onConstructCard = async () => {
 
 const onConstructWonder = async (wid: WonderId) => {
   try {
-    await api.post('/game/construct-wonder', {
+    await api.post('/game/move/construct-wonder', {
       gid: $game.id,
       wid,
       cid: id,
