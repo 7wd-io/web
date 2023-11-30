@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { jwtDecode } from 'jwt-decode';
-import { User, Session } from 'src/models/account';
+import { User, Session, Settings } from 'src/models/account';
 import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
 import $router from 'src/router';
@@ -32,6 +32,7 @@ export const useAccountStore = defineStore('account', {
       this.user = jwtDecode<User>(token);
       this.token = () => token;
     },
+
     async signin(login: string, password: string) {
       const { data } = await api.post<Session>('/account/signin', {
         login,
@@ -51,6 +52,7 @@ export const useAccountStore = defineStore('account', {
 
       await $router.push({ name: 'lobby' });
     },
+
     async signup(email: string, password: string, nickname: string) {
       await api.post('/account/signup', {
         email,
@@ -70,6 +72,7 @@ export const useAccountStore = defineStore('account', {
 
       window.open('/', '_self');
     },
+
     async refreshSession() {
       const { data } = await api.post<Session>('/account/refresh', {
         fingerprint: this.fingerprint,
@@ -86,6 +89,7 @@ export const useAccountStore = defineStore('account', {
 
       this.parseToken(data.accessToken);
     },
+
     async getFingerprint() {
       const fpPromise = FingerprintJS.load();
       const fp = await fpPromise;
@@ -94,6 +98,16 @@ export const useAccountStore = defineStore('account', {
       this.$patch({
         fingerprint: result.visitorId,
       });
+    },
+
+    async updateSettings(s: Settings) {
+      await api.put('/account/settings', {
+        animationSpeed: s.game.animationSpeed,
+        opponentJoined: s.sounds.opponentJoined,
+        myTurn: s.sounds.myTurn,
+      });
+
+      this.user.settings = s;
     },
   },
 });

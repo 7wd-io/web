@@ -3,7 +3,7 @@
     <q-card class="q-dialog-plugin text-dark">
       <q-card-section>
         <q-list>
-          <q-item-label header> Game </q-item-label>
+          <q-item-label header> Game</q-item-label>
 
           <q-item>
             <q-item-section>
@@ -20,7 +20,7 @@
 
             <q-item-section>
               <q-slider
-                v-model="settings.animationSpeed"
+                v-model="settings.game.animationSpeed"
                 markers
                 snap
                 :min="1"
@@ -35,7 +35,7 @@
 
           <q-separator />
 
-          <q-item-label header> Sounds </q-item-label>
+          <q-item-label header> Sounds</q-item-label>
 
           <q-item v-ripple tag="label">
             <q-item-section>
@@ -48,7 +48,7 @@
             </q-item-section>
 
             <q-item-section avatar>
-              <q-toggle v-model="settings.opponentJoined" />
+              <q-toggle v-model="settings.sounds.opponentJoined" />
             </q-item-section>
           </q-item>
 
@@ -56,12 +56,12 @@
 
           <q-item v-ripple tag="label">
             <q-item-section>
-              <q-item-label class="text-weight-bold"> My turn </q-item-label>
-              <q-item-label caption> Notify when it is my turn </q-item-label>
+              <q-item-label class="text-weight-bold"> My turn</q-item-label>
+              <q-item-label caption> Notify when it is my turn</q-item-label>
             </q-item-section>
 
             <q-item-section avatar>
-              <q-toggle v-model="settings.myTurn" />
+              <q-toggle v-model="settings.sounds.myTurn" />
             </q-item-section>
           </q-item>
         </q-list>
@@ -84,54 +84,26 @@
 
 <script setup lang="ts">
 import { useDialogPluginComponent, useQuasar } from 'quasar';
-import { reactive, ref } from 'vue';
-import { ApiError, api } from 'boot/axios';
+import { ref, toRaw } from 'vue';
 import { useAccountStore } from 'stores/account';
 
 const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
   useDialogPluginComponent();
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 
 const $q = useQuasar();
 const $account = useAccountStore();
 
 const inProgress = ref(false);
 
-const settings = reactive({
-  animationSpeed: $account.user.settings.game.animationSpeed,
-  opponentJoined: $account.user.settings.sounds.opponentJoined,
-  myTurn: $account.user.settings.sounds.myTurn,
-});
+const settings = ref(structuredClone(toRaw($account.user.settings)));
 
 const onSave = async () => {
   inProgress.value = true;
 
   try {
-    await api.put('/account/settings', {
-      animationSpeed: settings.animationSpeed,
-      opponentJoined: settings.opponentJoined,
-      myTurn: settings.myTurn,
-    });
-
-    $account.user.settings = {
-      game: {
-        animationSpeed: settings.animationSpeed,
-      },
-      sounds: {
-        opponentJoined: settings.opponentJoined,
-        myTurn: settings.myTurn,
-      },
-    };
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
+    await $account.updateSettings(settings.value);
   } finally {
     inProgress.value = false;
     onDialogOK();
