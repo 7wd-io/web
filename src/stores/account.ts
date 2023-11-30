@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import { jwtDecode } from 'jwt-decode';
-import { User, Session, Settings } from 'src/models/account';
+import { User, Session, Settings, Nickname } from 'src/models/account';
 import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
 import $router from 'src/router';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useRoomsStore } from 'stores/rooms';
+import { Profile } from 'src/models/profile';
 
 const sessionCookie = 'refresh_token';
 
@@ -108,6 +109,10 @@ export const useAccountStore = defineStore('account', {
       });
 
       this.user.settings = s;
+    },
+
+    async getProfile(user: Nickname) {
+      return await api.get<{ profile: Profile }>(`/account/${user}`);
     },
   },
 });

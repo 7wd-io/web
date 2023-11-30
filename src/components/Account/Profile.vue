@@ -122,9 +122,7 @@ const { dialogRef, onDialogHide } = useDialogPluginComponent();
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 
 const $q = useQuasar();
 const $account = useAccountStore();
@@ -137,15 +135,8 @@ onBeforeMount(async () => {
   loading.value = true;
 
   try {
-    const { data } = await api.get<{ profile: Profile }>(`/account/${name}`);
+    const { data } = await $account.getProfile(name);
     profile.value = data.profile;
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
   } finally {
     loading.value = false;
   }
