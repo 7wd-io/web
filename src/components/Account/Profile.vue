@@ -168,17 +168,8 @@ const onChangeTab = async (value: string) => {
   loading.value = true;
 
   try {
-    const { data } = await api.get<{ profile: GamesReport }>(
-      `account/${$account.user.nickname}/vs/${name}`
-    );
+    const { data } = await $account.getProfileVersus(name);
     profileVersus.value = data.profile;
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
   } finally {
     loading.value = false;
   }

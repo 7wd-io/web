@@ -6,7 +6,7 @@ import { Cookies } from 'quasar';
 import $router from 'src/router';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useRoomsStore } from 'stores/rooms';
-import { Profile } from 'src/models/profile';
+import { GamesReport, Profile } from 'src/models/profile';
 
 const sessionCookie = 'refresh_token';
 
@@ -113,6 +113,12 @@ export const useAccountStore = defineStore('account', {
 
     async getProfile(user: Nickname) {
       return await api.get<{ profile: Profile }>(`/account/${user}`);
+    },
+
+    async getProfileVersus(user: Nickname) {
+      return await api.get<{ profile: GamesReport }>(
+        `account/${this.user.nickname}/vs/${user}`
+      );
     },
   },
 });
