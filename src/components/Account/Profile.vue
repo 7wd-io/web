@@ -106,7 +106,6 @@
 <script setup lang="ts">
 import { useQuasar, useDialogPluginComponent } from 'quasar';
 import { Nickname } from 'src/models/account';
-import { ApiError, api } from 'boot/axios';
 import { computed, onBeforeMount, ref } from 'vue';
 import { GamesReport, Profile } from 'src/models/profile';
 import { useAccountStore } from 'stores/account';

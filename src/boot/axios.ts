@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers';
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { useAccountStore } from 'stores/account';
+import { Notify } from 'quasar';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -56,7 +57,7 @@ export default boot(({ app, redirect }) => {
 
   api.interceptors.response.use(
     (res) => res,
-    async (error: AxiosError) => {
+    async (error: ApiError) => {
       const status = error.response?.status;
 
       if (!status) {
@@ -76,6 +77,13 @@ export default boot(({ app, redirect }) => {
 
       if (status === 404) {
         return redirect({ name: 'error404' });
+      }
+
+      if (status === 500) {
+        Notify.create({
+          message: error.response?.data.err || 'Something went wrong',
+          type: 'negative',
+        });
       }
 
       return Promise.reject(error);

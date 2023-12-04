@@ -83,7 +83,6 @@ import PickDiscardedCardDialog from 'components/Game/Dialog/PickDiscardedCard.vu
 import PickReturnedCardsDialog from 'components/Game/Dialog/PickReturnedCards.vue';
 import ReplayPanel from 'components/Game/TheSidebar/TheLog/ReplayPanel.vue';
 import { LogRecord } from 'src/models/log';
-import { ApiError } from 'boot/axios';
 import { useQuasar } from 'quasar';
 import gsap from 'gsap';
 import { AnimationSpeed } from 'src/models/account';
@@ -445,24 +444,15 @@ watch(
 watch(
   () => $log.index,
   async (newValue, oldValue) => {
-    try {
-      await $game.goto(newValue);
-      // hack to avoid errors because wonders picker DOM don't exist in normally way
-      wonderPickInProgress.value = $game.state.phase === Phase.prepare;
+    await $game.goto(newValue);
+    // hack to avoid errors because wonders picker DOM don't exist in normally way
+    wonderPickInProgress.value = $game.state.phase === Phase.prepare;
 
-      const isSerial = newValue - oldValue === 1;
-      if (isSerial) {
-        handleMove($log.records[newValue - 1]);
-      } else {
-        $game.tick();
-      }
-    } catch (error) {
-      const err = error as ApiError;
-
-      $q.notify({
-        message: err.response?.data.err,
-        type: 'negative',
-      });
+    const isSerial = newValue - oldValue === 1;
+    if (isSerial) {
+      handleMove($log.records[newValue - 1]);
+    } else {
+      $game.tick();
     }
   }
 );
