@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
-import { Room } from 'src/models/game';
+import { Room, RoomOptions } from 'src/models/game';
 import { api } from 'boot/axios';
 import { useAccountStore } from 'stores/account';
+import { RoomId } from 'src/models/room';
 
 export const useRoomsStore = defineStore('rooms', {
   state: () => ({
@@ -37,11 +38,13 @@ export const useRoomsStore = defineStore('rooms', {
       const { data } = await api.get<{ items: Room[] }>('/room');
       this.rooms = data.items;
     },
+
     add(room: Room) {
       if (!this.rooms.includes(room)) {
         this.rooms.push(room);
       }
     },
+
     update(room: Room) {
       for (let i = 0; i < this.rooms.length; i += 1) {
         if (this.rooms[i].id === room.id) {
@@ -50,12 +53,37 @@ export const useRoomsStore = defineStore('rooms', {
         }
       }
     },
+
     remove(id: string) {
       const pos = this.rooms.findIndex((r) => r.id === id);
 
       if (pos !== -1) {
         this.rooms.splice(pos, 1);
       }
+    },
+
+    async create(o: RoomOptions) {
+      await api.post('/room', o);
+    },
+
+    async kick(id: RoomId) {
+      return await api.post(`/room/${id}/kick`);
+    },
+
+    async cancel(id: RoomId) {
+      return await api.delete(`/room/${id}`);
+    },
+
+    async join(id: RoomId) {
+      return await api.post(`/room/${id}/join`);
+    },
+
+    async leave(id: RoomId) {
+      return await api.post(`/room/${id}/leave`);
+    },
+
+    async start(id: RoomId) {
+      return await api.post(`/room/${id}/start`);
     },
   },
 });

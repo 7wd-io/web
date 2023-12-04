@@ -127,6 +127,7 @@ import { Room } from 'src/models/game';
 import { computed, ref } from 'vue';
 import { useAccountStore } from 'stores/account';
 import { useOnlineStore } from 'stores/online';
+import { useRoomsStore } from 'stores/rooms';
 import router from 'src/router';
 import { ApiError, api } from 'boot/axios';
 import { useQuasar } from 'quasar';
@@ -136,11 +137,11 @@ interface Props {
   data: Room;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const props = defineProps<Props>();
 const $q = useQuasar();
 const $account = useAccountStore();
 const $online = useOnlineStore();
+const $rooms = useRoomsStore();
 const inProgressCancel = ref(false);
 const hasRoom = computed(() => $account.hasRoom);
 const joinDenied = computed(() => {
@@ -178,72 +179,29 @@ const isHost = () => props.data.host === $account.user.nickname;
 const isGuest = () => props.data.guest === $account.user.nickname;
 
 const onKick = async () => {
-  try {
-    await api.post(`/room/${props.data.id}/kick`);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+  await $rooms.kick(props.data.id);
 };
 
 const onCancel = async () => {
   inProgressCancel.value = true;
 
   try {
-    await api.delete(`/room/${props.data.id}`);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
+    await $rooms.cancel(props.data.id);
   } finally {
     inProgressCancel.value = false;
   }
 };
 
 const onJoin = async () => {
-  try {
-    await api.post(`/room/${props.data.id}/join`);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+  await $rooms.join(props.data.id);
 };
 
 const onLeave = async () => {
-  try {
-    await api.post(`/room/${props.data.id}/leave`);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+  await $rooms.leave(props.data.id);
 };
 
 const onStart = async () => {
-  try {
-    await api.post(`/room/${props.data.id}/start`);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
-  }
+  await $rooms.start(props.data.id);
 };
 
 const onPlay = async () => {

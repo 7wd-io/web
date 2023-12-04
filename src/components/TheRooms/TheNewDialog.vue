@@ -163,9 +163,10 @@
 import { useDialogPluginComponent, useQuasar } from 'quasar';
 import { ref, watch, computed } from 'vue';
 import { useOnlineStore } from 'stores/online';
+import { useRoomsStore } from 'stores/rooms';
+import { useGameStore } from 'stores/game/game';
 import { RoomOptions } from 'src/models/game';
 import { Nickname } from 'src/models/account';
-import { ApiError, api } from 'boot/axios';
 
 const MIN_RATING = 1500;
 const MAX_RATING = 2000;
@@ -173,12 +174,12 @@ const MAX_RATING = 2000;
 const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
   useDialogPluginComponent();
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 
 const $q = useQuasar();
 const $online = useOnlineStore();
+const $rooms = useRoomsStore();
+const $game = useGameStore();
 
 const tab = ref('rating');
 
@@ -250,14 +251,7 @@ const onCreate = async () => {
   }
 
   try {
-    await api.post('/room', params);
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
+    await $rooms.create(params);
   } finally {
     inProgress.value = false;
     onDialogOK();
@@ -268,14 +262,7 @@ const onCreateWithBot = async () => {
   inProgress.value = true;
 
   try {
-    await api.post('/game-with-bot');
-  } catch (error) {
-    const err = error as ApiError;
-
-    $q.notify({
-      message: err.response?.data.err,
-      type: 'negative',
-    });
+    await $game.createWithBot();
   } finally {
     inProgress.value = false;
     onDialogOK();

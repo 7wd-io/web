@@ -97,12 +97,14 @@ export const useGameStore = defineStore('game', {
       this.finished = data.finished;
       $log.records = data.log;
     },
+
     async goto(index: number) {
       const { data } = await api.get<{ state: State }>(
         `/game/${this.id}/state/${index}`
       );
       this.state = data.state;
     },
+
     update(m: UpdateMessage) {
       const $log = useLogStore();
       const $playAgain = usePlayAgainStore();
@@ -118,8 +120,13 @@ export const useGameStore = defineStore('game', {
         $playAgain.showBadges = true;
       }
     },
+
     tick() {
       this.chan += 1;
+    },
+
+    async createWithBot() {
+      return await api.post('/game');
     },
   },
 });
