@@ -11,7 +11,7 @@
 
       <q-card-section>
         <div class="row q-gutter-md">
-          <swd-card
+          <Card
             v-for="c in cards"
             :key="c"
             :id="c"
@@ -31,6 +31,7 @@ import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
+import Card from 'components/Game/Card/Card.vue';
 
 const { onMouseDown } = useDraggble('#dialog-pick-discarded-card .swd-dialog');
 const $game = useGameStore();

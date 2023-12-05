@@ -12,7 +12,7 @@
       <EmptyStub v-if="!cards?.length" />
       <q-card-section v-else>
         <div class="row q-gutter-md">
-          <swd-card v-for="id in cards" :key="id" :id="id" />
+          <Card v-for="id in cards" :key="id" :id="id" />
         </div>
       </q-card-section>
     </q-card>
@@ -26,10 +26,9 @@ import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import Title from './Title.vue';
 import EmptyStub from './EmptyStub.vue';
+import Card from 'components/Game/Card/Card.vue';
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 const {
   dialogRef,
   onDialogHide,

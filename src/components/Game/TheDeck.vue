@@ -6,7 +6,7 @@
       :style="{ gridArea: `s-${index + 1}` }"
     >
       <div v-if="id !== -1" :class="BoardService.getClassnameCard(id)">
-        <swd-card
+        <Card
           v-if="id > 0"
           :id="id"
           @click="isMyTurn && isPlayable(id) && onClick(id)"
@@ -35,7 +35,7 @@
               />
             </template>
           </div>
-        </swd-card>
+        </Card>
 
         <Cover v-else :group="getCoverGroup(id)" :size="cardWidth" />
       </div>
@@ -54,6 +54,7 @@ import Cover from 'components/Game/Card/Cover.vue';
 import ChainBadge from 'components/Game/Badge/Chain.vue';
 import PriceBadge from 'components/Game/Badge/Price.vue';
 import BoardService from 'src/service/Board';
+import Card from 'components/Game/Card/Card.vue';
 
 const $q = useQuasar();
 const $game = useGameStore();

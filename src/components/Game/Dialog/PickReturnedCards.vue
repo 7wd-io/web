@@ -15,7 +15,7 @@
             <div v-for="c in cards" :key="c">
               <div class="column items-center q-gutter-md">
                 <div>
-                  <swd-card :id="c" class="item cursor-pointer" />
+                  <Card :id="c" class="item cursor-pointer" />
                 </div>
 
                 <div>
@@ -50,6 +50,7 @@ import { computed, reactive } from 'vue';
 import { CardId, Phase } from 'src/models/game';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
+import Card from 'components/Game/Card/Card.vue';
 
 type choice = 'pick' | 'give' | '';
 

@@ -100,14 +100,10 @@ const wonderPickInProgress = ref($game.state.phase === Phase.prepare);
 const { left, right } = $game;
 
 const createCard = (id: CardId) => {
-  const c = createApp(Card, {
+  return createApp(Card, {
     id,
     animated: true,
   });
-
-  c.component('swd-card', Card);
-
-  return c;
 };
 
 // slower -> faster

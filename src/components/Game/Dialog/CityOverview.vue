@@ -14,7 +14,7 @@
         <div class="row no-wrap q-gutter-xs-xs q-gutter-md-md q-gutter-lg-lg">
           <template v-for="gid in groups" :key="gid">
             <div v-if="city.cards.data[gid]" class="column q-gutter-y-xs">
-              <swd-card
+              <Card
                 v-for="cid in city.cards.data[gid]"
                 :key="cid"
                 :id="cid"
@@ -37,6 +37,7 @@ import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import EmptyStub from './EmptyStub.vue';
 import Title from './Title.vue';
+import Card from 'components/Game/Card/Card.vue';
 
 interface Props {
   name: Nickname;
@@ -45,9 +46,7 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 
 const groups = [
   CardGroupId.rawMaterials,
