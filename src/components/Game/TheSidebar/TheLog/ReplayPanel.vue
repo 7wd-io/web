@@ -3,7 +3,7 @@
     position="bottom"
     ref="dialogRef"
     @hide="onDialogHide"
-    :model-value="show"
+    :model-value="$log.replay"
     :persistent="true"
     :seamless="true"
     class="z-max"
@@ -53,15 +53,12 @@ import { computed, onBeforeUnmount } from 'vue';
 import { useDialogPluginComponent } from 'quasar';
 import { useLogStore } from 'stores/game/log';
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
 const { dialogRef, onDialogHide, onDialogOK } = useDialogPluginComponent();
 
 const $log = useLogStore();
 const index = computed(() => $log.index);
 const length = computed(() => $log.records.length);
-const show = computed(() => $log.replay);
 const prevDisabled = computed(() => $log.index === 0);
 const nextDisabled = computed(() => $log.index === length.value);
 
@@ -69,9 +66,9 @@ onBeforeUnmount(() => {
   $log.replayOff();
 });
 
-const onOff = (e) => {
+const onOff = () => {
   $log.replayOff();
-  onDialogOK(e);
+  onDialogOK();
 };
 
 const prev = () => {

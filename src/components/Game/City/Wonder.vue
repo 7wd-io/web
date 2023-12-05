@@ -35,7 +35,7 @@ import WonderCard from './WonderCard.vue';
 
 interface Props {
   wid: WonderId;
-  cid: CardId;
+  cid?: CardId;
   price?: number;
   pos: string;
   size: string;

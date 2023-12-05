@@ -5,20 +5,21 @@
         <TheBoard />
       </div>
 
-      <div v-if="!isOver" class="section-move-info">
-        <TheMoveInfo />
+      <div v-if="$playAgain.show" class="row justify-center q-mt-md">
+        <ThePlayAgain />
       </div>
 
-      <template v-if="isOver">
-        <div class="row justify-center q-mt-md">
-          <ThePlayAgain />
-        </div>
+      <template v-if="$game.isOver">
         <div class="row justify-center q-mt-md">
           <TheScoreCard />
         </div>
       </template>
 
       <template v-else>
+        <div class="section-move-info">
+          <TheMoveInfo />
+        </div>
+
         <div v-if="wonderPickInProgress" class="section-wonder-picker">
           <TheWondersPicker />
         </div>
@@ -68,6 +69,7 @@ import Card from 'components/Game/Card/Card.vue';
 import { useGameStore } from 'stores/game/game';
 import { useLogStore } from 'stores/game/log';
 import { useAccountStore } from 'stores/account';
+import { usePlayAgainStore } from 'stores/game/playAgain';
 import { watch, createApp, ref, computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
 import { MoveValidator } from 'src/models/move';
@@ -91,7 +93,8 @@ const $q = useQuasar();
 const $account = useAccountStore();
 const $game = useGameStore();
 const $log = useLogStore();
-const isOver = ref($game.isOver);
+const $playAgain = usePlayAgainStore();
+
 const wonderPickInProgress = ref($game.state.phase === Phase.prepare);
 
 const { left, right } = $game;
@@ -422,7 +425,7 @@ watch(
       wonderPickInProgress.value = false;
     }
 
-    isOver.value = $game.isOver;
+    // isOver.value = $game.isOver;
   }
 );
 

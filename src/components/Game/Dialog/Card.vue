@@ -103,9 +103,8 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { id } = defineProps<Props>();
 
-// runtime
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const emit = defineEmits([...useDialogPluginComponent.emits]);
+defineEmits([...useDialogPluginComponent.emits]);
+
 const {
   dialogRef,
   onDialogHide,
