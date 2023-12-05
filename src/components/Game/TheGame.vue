@@ -65,7 +65,7 @@ import TheDiscard from 'components/Game/TheDiscard.vue';
 import TheScoreCard from 'components/Game/TheScoreCard/TheScoreCard.vue';
 import ThePlayAgain from 'components/Game/ThePlayAgain/ThePlayAgain.vue';
 import City from 'components/Game/City/City.vue';
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 import { useGameStore } from 'stores/game/game';
 import { useLogStore } from 'stores/game/log';
 import { useAccountStore } from 'stores/account';

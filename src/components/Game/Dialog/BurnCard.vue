@@ -26,7 +26,7 @@ import { computed } from 'vue';
 import { CardId, Phase } from 'src/models/game';
 import Title from './Title.vue';
 import { useDraggble } from './useDraggble';
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 
 const { onMouseDown } = useDraggble('#dialog-burn-card .swd-dialog');
 const $game = useGameStore();

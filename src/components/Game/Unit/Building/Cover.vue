@@ -1,14 +1,11 @@
 <template>
-  <div
-    class="card-cover"
-    :class="co"
-  >
+  <div class="card-cover" :class="co">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { useCssVars } from 'components/Game/Card/useCssVars';
+import { useCssVars } from 'components/Game/Unit/Building/useCssVars';
 
 interface Props {
   group: 'age_1' | 'age_2' | 'age_3' | 'guild';
@@ -22,11 +19,7 @@ const co = {
   [`group-${group}`]: true,
 };
 
-const {
-  cardWidth,
-  cardHeight,
-  cardRadius,
-} = useCssVars(size);
+const { cardWidth, cardHeight, cardRadius } = useCssVars(size);
 </script>
 
 <style lang="scss" scoped>
@@ -38,16 +31,18 @@ const {
   width: var(--width);
   height: var(--height);
   border-radius: var(--radius);
-  background-image: url("/img/game/cards.jpeg");
+  background-image: url('/img/game/cards.jpeg');
   background-repeat: no-repeat;
   background-size: calc(var(--width) * var(--sprite-units-count));
 
   &.group-age_1 {
-    background-position: top calc(var(--height) * -6) left calc(var(--width) * -10);
+    background-position: top calc(var(--height) * -6) left
+      calc(var(--width) * -10);
   }
 
   &.group-age_2 {
-    background-position: top calc(var(--height) * -6) left calc(var(--width) * -11);
+    background-position: top calc(var(--height) * -6) left
+      calc(var(--width) * -11);
   }
 
   &.group-age_3 {
@@ -55,7 +50,8 @@ const {
   }
 
   &.group-guild {
-    background-position: top calc(var(--height) * -7) left calc(var(--width) * -1);
+    background-position: top calc(var(--height) * -7) left
+      calc(var(--width) * -1);
   }
 }
 </style>

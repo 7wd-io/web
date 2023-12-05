@@ -26,7 +26,7 @@ import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';
 import Title from './Title.vue';
 import EmptyStub from './EmptyStub.vue';
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 
 defineEmits([...useDialogPluginComponent.emits]);
 const {

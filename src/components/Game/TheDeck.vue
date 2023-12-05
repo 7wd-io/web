@@ -47,14 +47,14 @@
 import { useQuasar } from 'quasar';
 import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
-import { useCssVars } from 'components/Game/Card/useCssVars';
+import { useCssVars } from 'components/Game/Unit/Building/useCssVars';
 import { CardId } from 'src/models/game';
 import CardDialog from 'components/Game/Dialog/Card.vue';
-import Cover from 'components/Game/Card/Cover.vue';
+import Cover from 'components/Game/Unit/Building/Cover.vue';
 import ChainBadge from 'components/Game/Badge/Chain.vue';
 import PriceBadge from 'components/Game/Badge/Price.vue';
 import BoardService from 'src/service/Board';
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 
 const $q = useQuasar();
 const $game = useGameStore();

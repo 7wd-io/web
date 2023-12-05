@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 import Wonder from 'components/Game/Wonder/Wonder.vue';
 import { CardId, WonderId } from 'src/models/game';
 import Badge from 'components/Badge.vue';

@@ -37,7 +37,7 @@ import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import EmptyStub from './EmptyStub.vue';
 import Title from './Title.vue';
-import Card from 'components/Game/Card/Card.vue';
+import Card from 'components/Game/Unit/Building/BuildingUnit.vue';
 
 interface Props {
   name: Nickname;
