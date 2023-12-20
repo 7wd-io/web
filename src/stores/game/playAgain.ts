@@ -11,7 +11,7 @@ export const usePlayAgainStore = defineStore('game:playAgain', {
   }),
   actions: {
     async answer(gameId: GameId, answer: boolean) {
-      await api.post('/game/play-again', {
+      await api.post('/play-again', {
         gameId,
         answer,
       });
