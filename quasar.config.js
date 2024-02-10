@@ -65,11 +65,9 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         SWD_HOST: ctx.prod ? '7wd.io' : '7wd.io.local',
-        SWD_API_URL: ctx.prod
-          ? 'https://api.7wd.io'
-          : 'https://api.7wd.io.local',
+        SWD_API_URL: ctx.prod ? '0.0.0.0:8101' : 'https://api.7wd.io.local',
         SWD_CENTRIFUGO_URL: ctx.prod
-          ? 'wss://cent.7wd.io'
+          ? 'wss://0.0.0.0:8105'
           : 'ws://localhost:8105',
       },
       // rawDefine: {}
@@ -96,10 +94,10 @@ module.exports = configure(function (ctx) {
       https: {
         key: ctx.prod
           ? null
-          : fs.readFileSync('/Users/dstivrinsh/certificates/7wd.io.key'),
+          : fs.readFileSync('/Users/ridzhi/certificates/7wd.io.local.key'),
         cert: ctx.prod
           ? null
-          : fs.readFileSync('/Users/dstivrinsh/certificates/7wd.io.crt'),
+          : fs.readFileSync('/Users/ridzhi/certificates/7wd.io.local.crt'),
       },
     },
 
