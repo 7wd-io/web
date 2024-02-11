@@ -65,10 +65,10 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env: {
         SWD_HOST: ctx.prod ? '7wd.io' : '7wd.io.local',
-        SWD_API_URL: ctx.prod ? '0.0.0.0:8101' : 'https://api.7wd.io.local',
-        SWD_CENTRIFUGO_URL: ctx.prod
-          ? 'wss://0.0.0.0:8105'
-          : 'ws://localhost:8105',
+        SWD_API_URL: ctx.prod
+          ? 'https://7wd.io/api'
+          : 'https://api.7wd.io.local',
+        SWD_CENTRIFUGO_URL: ctx.prod ? 'wss://7wd.io' : 'ws://localhost:8105',
       },
       // rawDefine: {}
       // ignorePublicFolder: true,
