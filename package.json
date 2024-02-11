@@ -1,8 +1,8 @@
 {
   "name": "web",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "7 wonders duel online",
+  "productName": "7wd",
   "author": "Danila Stivrinsh <danilaridzhi@gmail.com>",
   "private": true,
   "scripts": {
