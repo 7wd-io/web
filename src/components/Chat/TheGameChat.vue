@@ -22,6 +22,7 @@
 
 <script setup lang="ts">
 import cent from 'src/centrifuge';
+import { Subscription } from 'centrifuge';
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
 import { useChatStore } from 'stores/chat/game';
 import { QScrollArea } from 'quasar';
@@ -72,6 +73,7 @@ onBeforeMount(() => {
 
 onBeforeUnmount(() => {
   sub.unsubscribe();
+  cent.removeSubscription(sub);
   window.clearInterval(presenceTimerId);
 });
 

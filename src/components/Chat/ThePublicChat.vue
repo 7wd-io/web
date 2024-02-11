@@ -62,6 +62,7 @@ onBeforeMount(async () => {
 
 onBeforeUnmount(() => {
   sub.unsubscribe();
+  cent.removeSubscription(sub);
 });
 
 const msg = ref('');

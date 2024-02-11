@@ -73,25 +73,26 @@ onBeforeMount(async () => {
       resourcesLoading.value = false;
     });
 
-    void $game.load(gameId).then(() => {
-      stateLoading.value = false;
-      title.value = `Game #${gameId}`;
+    await $game.load(gameId);
 
-      if (
-        $account.user.settings.sounds.myTurn &&
-        !$game.isOver &&
-        $game.isMyTurn
-      ) {
-        void sound();
-      }
-    });
+    stateLoading.value = false;
+    title.value = `Game #${gameId}`;
+
+    if (
+      $account.user.settings.sounds.myTurn &&
+      !$game.isOver &&
+      $game.isMyTurn
+    ) {
+      void sound();
+    }
   } catch (e) {
-    await router.push({ name: 'error404' });
+    await router.push({ name: '404' });
   }
 });
 
 onBeforeUnmount(() => {
   sub.unsubscribe();
+  cent.removeSubscription(sub);
 });
 </script>
 

@@ -77,8 +77,15 @@ onBeforeMount(async () => {
 
 onBeforeUnmount(() => {
   subOnline.unsubscribe();
+  cent.removeSubscription(subOnline);
+
   subRoomCreate.unsubscribe();
+  cent.removeSubscription(subRoomCreate);
+
   subRoomUpdate.unsubscribe();
+  cent.removeSubscription(subRoomUpdate);
+
   subRoomDelete.unsubscribe();
+  cent.removeSubscription(subRoomDelete);
 });
 </script>
