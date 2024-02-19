@@ -1,20 +1,10 @@
 <template>
-  <q-layout
-    view="hhh lpR fFf"
-    class="guest-layout full-height"
-    :class="co"
-  >
+  <q-layout view="hhh lpR fFf" class="guest-layout full-height" :class="co">
     <q-header class="header">
       <div class="row justify-center">
         <div class="col-8">
           <q-toolbar>
-            <q-btn
-              flat
-              round
-              class="q-mr-lg"
-              :to="{ name: 'welcome'}"
-              no-caps
-            >
+            <q-btn flat round class="q-mr-lg" :to="{ name: 'welcome' }" no-caps>
               <span class="text-h6 text-weight-bolder">7wd</span>
             </q-btn>
 
@@ -22,17 +12,12 @@
               flat
               color="white"
               label="Discord"
-              href="https://discord.gg/4wGgQYNWBy"
+              href="https://discord.gg/FNYke6MF57"
               target="_blank"
               class="q-ml-md"
             />
 
-            <q-btn
-              flat
-              color="white"
-              label="About"
-              :to="{ name: 'about' }"
-            />
+            <q-btn flat color="white" label="About" :to="{ name: 'about' }" />
 
             <q-space />
 
@@ -41,13 +26,13 @@
               class="q-mr-sm"
               outline
               color="white"
-              :to="{ name: 'register'}"
+              :to="{ name: 'register' }"
             />
             <q-btn
               label="Login"
               outline
               color="white"
-              :to="{ name: 'login'}"
+              :to="{ name: 'login' }"
             />
           </q-toolbar>
         </div>
@@ -70,17 +55,15 @@ const co = computed(() => ({
 }));
 </script>
 
-<style>
-
-</style>
+<style></style>
 
 <style lang="scss" scoped>
 .guest-layout {
   background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/cover no-repeat;
 
   &.welcome {
-    background:
-      linear-gradient(120deg, #5e60ce, #4ea8de) top left/100% 750px no-repeat,
+    background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/100% 750px
+        no-repeat,
       var(--swd-bg-color-main);
   }
 }
