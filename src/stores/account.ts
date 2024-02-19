@@ -4,16 +4,16 @@ import { User, Session, Settings, Nickname } from 'src/models/account';
 import { api } from 'boot/axios';
 import { Cookies } from 'quasar';
 import $router from 'src/router';
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useRoomsStore } from 'stores/rooms';
 import { GamesReport, Profile } from 'src/models/profile';
+import { v4 as uuidv4 } from 'uuid';
 
 const sessionCookie = 'refresh_token';
+const clientCookie = 'client';
 
 export const useAccountStore = defineStore('account', {
   state: () => ({
     user: {} as User,
-    fingerprint: '',
     token: (): string => '',
   }),
   getters: {
@@ -38,7 +38,7 @@ export const useAccountStore = defineStore('account', {
       const { data } = await api.post<Session>('/account/signin', {
         login,
         password,
-        fingerprint: this.fingerprint,
+        client: this.getClient(),
       });
 
       Cookies.set(sessionCookie, data.refreshToken, {
@@ -66,7 +66,7 @@ export const useAccountStore = defineStore('account', {
 
     async logout() {
       await api.post('/account/logout', {
-        fingerprint: this.fingerprint,
+        client: this.getClient(),
       });
 
       Cookies.remove(sessionCookie);
@@ -76,7 +76,7 @@ export const useAccountStore = defineStore('account', {
 
     async refreshSession() {
       const { data } = await api.post<Session>('/account/refresh', {
-        fingerprint: this.fingerprint,
+        client: this.getClient(),
         refresh_token: Cookies.get(sessionCookie),
       });
 
@@ -91,14 +91,18 @@ export const useAccountStore = defineStore('account', {
       this.parseToken(data.accessToken);
     },
 
-    async getFingerprint() {
-      const fpPromise = FingerprintJS.load();
-      const fp = await fpPromise;
-      const result = await fp.get();
+    getClient() {
+      if (!Cookies.has(clientCookie)) {
+        Cookies.set(clientCookie, uuidv4(), {
+          domain: process.env.SWD_HOST,
+          path: '/',
+          sameSite: 'None',
+          secure: true,
+          expires: 30,
+        });
+      }
 
-      this.$patch({
-        fingerprint: result.visitorId,
-      });
+      return Cookies.get(clientCookie);
     },
 
     async updateSettings(s: Settings) {

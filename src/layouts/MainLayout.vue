@@ -25,7 +25,7 @@
               <q-route-tab
                 name="discord"
                 label="Discord"
-                href="https://discord.gg/4wGgQYNWBy"
+                href="https://discord.gg/FNYke6MF57"
                 target="_blank"
               />
             </q-tabs>
