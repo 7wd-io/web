@@ -66,14 +66,6 @@ const routes: RouteRecordRaw[] = [
       },
     ],
   },
-  {
-    path: '/units',
-    name: 'units',
-    meta: {
-      public: true,
-    },
-    component: () => import('pages/UnitsPage.vue'),
-  },
   // Always leave this as last one,
   // but you can also remove it
   {

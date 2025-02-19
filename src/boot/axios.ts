@@ -64,17 +64,6 @@ export default boot(({ app, redirect }) => {
         return Promise.reject(error);
       }
 
-      // if (status == 401) {
-      //   try {
-      //     await account.refreshSession();
-      //
-      //     // return Promise
-      //     return true;
-      //   } catch (error) {
-      //     return redirect({ name: 'login' });
-      //   }
-      // }
-
       if (status === 404) {
         return redirect({ name: 'error404' });
       }

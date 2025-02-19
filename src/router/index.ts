@@ -29,6 +29,14 @@ router.beforeEach(async (to) => {
   const isPublic = to.meta.public || false;
 
   if (isPublic) {
+    try {
+      await account.refreshSession();
+
+      return { name: 'lobby' };
+    } catch (error) {
+      console.log('mute failed refresh session, public route');
+    }
+
     return true;
   }
 
