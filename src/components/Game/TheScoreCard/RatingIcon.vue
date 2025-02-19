@@ -15,7 +15,7 @@ const { size } = defineProps<Props>();
 .icon-rating {
   --size: v-bind(size);
   width: var(--size);
-  height: calc(var(--size) / .93);
-  background: url("./rating.png") no-repeat center/cover;
+  height: calc(var(--size) / 0.93);
+  background: url('./rating.png') no-repeat center/120%;
 }
 </style>

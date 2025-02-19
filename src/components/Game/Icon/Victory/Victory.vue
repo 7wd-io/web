@@ -16,6 +16,6 @@ const { size } = defineProps<Props>();
   --size: v-bind(size);
   width: var(--size);
   height: var(--size);
-  background: url("./icon.png") no-repeat center/cover;
+  background: url('./icon.png') no-repeat center/120%;
 }
 </style>
