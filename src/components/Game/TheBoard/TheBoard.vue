@@ -118,8 +118,8 @@ watch(
     display: flex;
     flex-direction: row;
     position: absolute;
-    top: calc(var(--height) * 0.03);
-    left: calc(var(--width) / 19 * 4.75);
+    top: calc(var(--height) * 0.034);
+    left: calc(var(--width) / 19 * 4.54);
 
     .board-token {
       margin-left: calc(var(--width) * 0.012);
