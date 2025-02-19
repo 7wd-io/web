@@ -21,7 +21,6 @@
         v-if="right.track.maxZone < 3"
         class="mtoken-l-5"
         :size="mtoken5Size"
-        side="left"
         value="5"
       />
     </transition>
@@ -34,7 +33,6 @@
         v-if="right.track.maxZone < 2"
         class="mtoken-l-2"
         :size="mtoken2Size"
-        side="left"
         value="2"
       />
     </transition>
@@ -134,38 +132,38 @@ watch(
   .pawn {
     position: absolute;
     transition: all 0.2s linear;
-    top: calc(var(--height) * 0.37);
+    top: calc(var(--height) * 0.41);
     left: 0;
   }
 
   @for $pos from 1 through 19 {
     .pos-#{$pos} {
-      transform: translateX(calc(var(--width) / 20.74 * #{$pos}));
+      transform: translateX(calc(var(--width) / 21.2 * #{$pos}));
     }
   }
 
   .mtoken-l-5 {
     position: absolute;
     bottom: calc(var(--height) * 0.085);
-    left: calc(var(--width) / 19 * 2);
+    left: calc(var(--width) / 19 * 1.77);
   }
 
   .mtoken-l-2 {
     position: absolute;
     bottom: calc(var(--height) * 0.085);
-    left: calc(var(--width) / 19 * 4.75);
+    left: calc(var(--width) / 19 * 4.5);
   }
 
   .mtoken-r-2 {
     position: absolute;
     bottom: calc(var(--height) * 0.085);
-    right: calc(var(--width) / 19 * 4.75);
+    right: calc(var(--width) / 19 * 5);
   }
 
   .mtoken-r-5 {
     position: absolute;
     bottom: calc(var(--height) * 0.081);
-    right: calc(var(--width) / 19 * 2);
+    right: calc(var(--width) / 19 * 2.2);
   }
 }
 </style>
