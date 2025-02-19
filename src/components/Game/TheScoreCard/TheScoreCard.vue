@@ -148,7 +148,7 @@
       <tr>
         <td>
           <div class="row justify-center">
-            <TokenIcon :size="lgIconSize" />
+            <Token id="00" :size="lgIconSize" />
           </div>
         </td>
         <td class="text-center">
@@ -221,12 +221,12 @@ import { useGameStore } from 'stores/game/game';
 import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import VictoryIcon from 'components/Game/Icon/Victory/Victory.vue';
+import Token from 'components/Game/Token.vue';
 import Text from 'components/Game/Text.vue';
 import { botNickname } from 'src/models/account';
 import Reason from './Reason.vue';
 import CardIcon from './CardIcon.vue';
 import WonderIcon from './WonderIcon.vue';
-import TokenIcon from './TokenIcon.vue';
 import CoinIcon from './CoinIcon.vue';
 import MilitaryIcon from './MilitaryIcon.vue';
 import RatingIcon from './RatingIcon.vue';

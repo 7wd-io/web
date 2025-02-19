@@ -38,6 +38,11 @@ const co = {
     background: none;
   }
 
+  // cover
+  &.id-00 {
+    background-position: top calc(var(--size) * -3) left calc(var(--size) * -3);
+  }
+
   &.id-1 {
     background-position: top 0 left 0;
   }
