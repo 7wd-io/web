@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="resource"
-    :class="co"
-  >
+  <div class="resource" :class="co">
     <slot />
   </div>
 </template>
@@ -33,8 +30,16 @@ const co = {
 
   @for $i from 1 through 5 {
     &.id-#{$i} {
-      background-image: url("./resource_#{$i}.png");
+      background-image: url('./resource_#{$i}.png');
     }
+  }
+
+  &.id-1,
+  &.id-2,
+  &.id-3 {
+    --scaled: calc(var(--size) * 1.17);
+    width: var(--scaled);
+    height: var(--scaled);
   }
 }
 </style>
