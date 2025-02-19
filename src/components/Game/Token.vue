@@ -28,7 +28,7 @@ const co = {
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
-  background-image: url('/img/game/tokens.jpeg');
+  background-image: url('/img/game/tokens.png');
   background-repeat: no-repeat;
   background-size: calc(var(--size) * var(--sprite-units-count));
 

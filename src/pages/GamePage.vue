@@ -65,7 +65,7 @@ onBeforeMount(async () => {
       'bg.jpg',
       'cards.jpeg',
       'wonders.jpeg',
-      'tokens.jpeg',
+      'tokens.png',
       'board.png',
       'messe.png',
       'statue_of_liberty.png',
