@@ -136,9 +136,17 @@ watch(
     left: 0;
   }
 
-  @for $pos from 1 through 19 {
+  @for $pos from 2 through 19 {
     .pos-#{$pos} {
-      transform: translateX(calc(var(--width) / 21.2 * #{$pos}));
+      //transform: translateX(calc(var(--progress-token-size) * 0.52 * #{$pos}));
+      transform: translateX(
+        calc(
+          (var(--width) * 0.035) +
+            var(--progress-token-size) *
+            0.5365 *
+            (#{$pos} - 1)
+        )
+      );
     }
   }
 
@@ -162,7 +170,7 @@ watch(
 
   .mtoken-r-5 {
     position: absolute;
-    bottom: calc(var(--height) * 0.081);
+    bottom: calc(var(--height) * 0.085);
     right: calc(var(--width) / 19 * 2.2);
   }
 }
