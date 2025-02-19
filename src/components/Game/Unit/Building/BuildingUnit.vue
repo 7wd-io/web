@@ -34,7 +34,7 @@ const co = {
   width: var(--width);
   height: var(--height);
   border-radius: var(--radius);
-  background-image: url('/img/game/cards.jpeg');
+  background-image: url('/img/game/cards.png');
   background-repeat: no-repeat;
   background-size: calc(var(--width) * var(--sprite-units-count));
 

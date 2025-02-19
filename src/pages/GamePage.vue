@@ -63,7 +63,7 @@ onBeforeMount(async () => {
   try {
     void loadResources([
       'bg.jpg',
-      'cards.jpeg',
+      'cards.png',
       'wonders.png',
       'tokens.png',
       'board.png',

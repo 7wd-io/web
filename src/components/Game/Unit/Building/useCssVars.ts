@@ -1,5 +1,4 @@
-// const ratio = 0.65;
-const ratio = 166 / 256;
+const ratio = 290 / 422;
 
 export function useCssVars(size = 'calc(var(--swd-game-unit) * 8)') {
   const cardWidth = size;
