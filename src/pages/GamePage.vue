@@ -67,8 +67,6 @@ onBeforeMount(async () => {
       'wonders.png',
       'tokens.png',
       'board.png',
-      'messe.png',
-      'statue_of_liberty.png',
     ]).then(() => {
       resourcesLoading.value = false;
     });

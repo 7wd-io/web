@@ -88,11 +88,12 @@ const co = {
   }
 
   &.id-13 {
-    background: url('/img/game/messe.png') center/cover no-repeat;
+    background-position: top calc(var(--height) * -2) left
+      calc(var(--width) * -3);
   }
 
   &.id-14 {
-    background: url('/img/game/statue_of_liberty.png') center/cover no-repeat;
+    background-position: top calc(var(--height) * -3) left 0;
   }
 }
 </style>
