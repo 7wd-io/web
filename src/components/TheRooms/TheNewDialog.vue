@@ -122,10 +122,6 @@
 
         <q-tab-panel name="bot" dark class="no-padding">
           <q-card-section>
-            <div class="text-subtitle2 text-bold text-warning">
-              Temporarily unavailable.
-            </div>
-
             <div class="text-subtitle2">
               Playing against a bot is the best way to get acquainted with the
               UI and functionality.
@@ -144,12 +140,12 @@
           <q-separator />
 
           <q-card-actions align="center" class="q-pa-lg">
-            <!--            <q-btn-->
-            <!--              :loading="inProgress"-->
-            <!--              color="primary"-->
-            <!--              label="Create"-->
-            <!--              @click="onCreateWithBot"-->
-            <!--            />-->
+            <q-btn
+              :loading="inProgress"
+              color="primary"
+              label="Create"
+              @click="onCreateWithBot"
+            />
             <q-btn
               outline
               color="primary"
