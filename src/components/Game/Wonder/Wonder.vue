@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="wonder"
-    :class="co"
-  >
+  <div class="wonder" :class="co">
     <slot />
   </div>
 </template>
@@ -27,13 +24,13 @@ const co = {
 .wonder {
   --sprite-units-count: 5;
   --size: v-bind(size);
-  --ratio: calc(368 / 239);
+  --ratio: calc(369 / 254);
   --width: var(--size);
   --height: calc(var(--width) / var(--ratio));
   width: var(--width);
   height: var(--height);
-  border-radius: calc(var(--width) * .05);
-  background-image: url("/img/game/wonders.jpeg");
+  border-radius: calc(var(--width) * 0.05);
+  background-image: url('/img/game/wonders.png');
   background-repeat: no-repeat;
   background-size: calc(var(--width) * var(--sprite-units-count));
 
@@ -42,7 +39,8 @@ const co = {
   }
 
   &.id-2 {
-    background-position: top calc(var(--height) * -2) left calc(var(--width) * -1);
+    background-position: top calc(var(--height) * -2) left
+      calc(var(--width) * -1);
   }
 
   &.id-3 {
@@ -58,7 +56,8 @@ const co = {
   }
 
   &.id-6 {
-    background-position: top calc(var(--height) * -1) left calc(var(--width) * -2);
+    background-position: top calc(var(--height) * -1) left
+      calc(var(--width) * -2);
   }
 
   &.id-7 {
@@ -66,7 +65,8 @@ const co = {
   }
 
   &.id-8 {
-    background-position: top calc(var(--height) * -1) left calc(var(--width) * -1);
+    background-position: top calc(var(--height) * -1) left
+      calc(var(--width) * -1);
   }
 
   &.id-9 {
@@ -74,11 +74,13 @@ const co = {
   }
 
   &.id-10 {
-    background-position: top calc(var(--height) * -1) left calc(var(--width) * -4);
+    background-position: top calc(var(--height) * -1) left
+      calc(var(--width) * -4);
   }
 
   &.id-11 {
-    background-position: top calc(var(--height) * -1) left calc(var(--width) * -3);
+    background-position: top calc(var(--height) * -1) left
+      calc(var(--width) * -3);
   }
 
   &.id-12 {
@@ -86,11 +88,11 @@ const co = {
   }
 
   &.id-13 {
-    background: url("/img/game/messe.png") center/cover no-repeat;
+    background: url('/img/game/messe.png') center/cover no-repeat;
   }
 
   &.id-14 {
-    background: url("/img/game/statue_of_liberty.png") center/cover no-repeat;
+    background: url('/img/game/statue_of_liberty.png') center/cover no-repeat;
   }
 }
 </style>
