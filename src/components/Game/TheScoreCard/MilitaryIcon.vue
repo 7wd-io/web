@@ -15,7 +15,7 @@ const { size } = defineProps<Props>();
 .icon-military {
   --size: v-bind(size);
   width: var(--size);
-  height: calc(var(--size) / .93);
-  background: url("./military.png") no-repeat center/95%;
+  height: calc(var(--size) / 0.95);
+  background: url('./military.png') no-repeat center/110%;
 }
 </style>
