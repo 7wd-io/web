@@ -9,28 +9,18 @@
       <q-list dense>
         <q-item clickable v-ripple>
           <q-item-section>
-            <q-item-label>
-              Hide in progress
-            </q-item-label>
+            <q-item-label> Hide in progress </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <q-toggle
-              v-model="hideInProgress"
-              color="primary"
-            />
+            <q-toggle v-model="hideInProgress" color="primary" />
           </q-item-section>
         </q-item>
         <q-item clickable v-ripple>
           <q-item-section>
-            <q-item-label>
-              Hide inaccessible
-            </q-item-label>
+            <q-item-label> Hide inaccessible </q-item-label>
           </q-item-section>
           <q-item-section side>
-            <q-toggle
-              v-model="hideInaccessible"
-              color="primary"
-            />
+            <q-toggle v-model="hideInaccessible" color="primary" />
           </q-item-section>
         </q-item>
       </q-list>

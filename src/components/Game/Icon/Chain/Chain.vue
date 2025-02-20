@@ -17,7 +17,7 @@ const { size } = defineProps<Props>();
   display: inline-block;
   width: var(--size);
   height: var(--size);
-  background: url("./chain.png") no-repeat center/cover;
-  filter: drop-shadow(0 0 calc(var(--size) * .1) rgba(0,0,0,60%));
+  background: url('./chain.png') no-repeat center/cover;
+  filter: drop-shadow(0 0 calc(var(--size) * 0.1) rgba(0, 0, 0, 60%));
 }
 </style>

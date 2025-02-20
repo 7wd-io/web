@@ -1,7 +1,5 @@
 <template>
-  <div class="icon-card">
-
-  </div>
+  <div class="icon-card"></div>
 </template>
 
 <script setup lang="ts">
@@ -17,9 +15,9 @@ const { size } = defineProps<Props>();
 .icon-card {
   --size: v-bind(size);
   height: var(--size);
-  width: calc(var(--size) * .75);
-  border-radius:  calc(var(--size) * .05);
-  border: calc(var(--size) * .03) solid black;
+  width: calc(var(--size) * 0.75);
+  border-radius: calc(var(--size) * 0.05);
+  border: calc(var(--size) * 0.03) solid black;
   background-color: #eee;
 }
 </style>

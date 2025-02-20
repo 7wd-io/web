@@ -5,10 +5,7 @@
         <slot name="title" />
       </q-item-label>
 
-      <template
-        v-for="k in order"
-        :key="k"
-      >
+      <template v-for="k in order" :key="k">
         <q-separator />
 
         <q-item>
@@ -17,10 +14,10 @@
           </q-item-section>
           <q-item-section side>
             <div class="text-weight-bolder">
-              {{ getRate(data[k], k === 'total' ? total : data['total'])}}%
+              {{ getRate(data[k], k === 'total' ? total : data['total']) }}%
             </div>
-            <div style="font-size: 12px; color: #999;">
-              {{ data[k]}}
+            <div style="font-size: 12px; color: #999">
+              {{ data[k] }}
             </div>
           </q-item-section>
         </q-item>
@@ -40,8 +37,15 @@ interface Props {
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { data, total } = defineProps<Props>();
 
-type key = keyof GameReport
-const order: key[] = ['total', 'points', 'science', 'military', 'resign', 'timeout'];
+type key = keyof GameReport;
+const order: key[] = [
+  'total',
+  'points',
+  'science',
+  'military',
+  'resign',
+  'timeout',
+];
 
 const getRate = (value: number, t: number) => {
   if (!value || !t) {

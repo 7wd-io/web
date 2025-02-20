@@ -15,7 +15,7 @@ const { size } = defineProps<Props>();
 .icon-wonder {
   --size: v-bind(size);
   width: var(--size);
-  height: calc(var(--size) * .809);
-  background: url("./wonder.png") no-repeat center/cover;
+  height: calc(var(--size) * 0.809);
+  background: url('./wonder.png') no-repeat center/cover;
 }
 </style>

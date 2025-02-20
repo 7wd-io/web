@@ -1,12 +1,8 @@
 <template>
   <div class="icon-discard">
     <div class="box">
-      <slot/>
-      <Card
-        v-for="i in 4"
-        :key="i"
-        :size="size"
-      />
+      <slot />
+      <Card v-for="i in 4" :key="i" :size="size" />
     </div>
   </div>
 </template>

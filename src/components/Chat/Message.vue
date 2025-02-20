@@ -1,12 +1,6 @@
 <template>
   <li class="chat-message">
-    <q-chip
-      color="accent"
-      text-color="black"
-      class="author"
-      square
-      dense
-    >
+    <q-chip color="accent" text-color="black" class="author" square dense>
       <Player :name="value.author" />
     </q-chip>
     <span class="chat-message-body">
@@ -49,7 +43,7 @@ runTimer();
   color: white;
 
   &:before {
-    content: "- "
+    content: '- ';
   }
 }
 .chat-message-ts {

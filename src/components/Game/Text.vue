@@ -27,7 +27,7 @@ const rate = sizes[size];
 <style scoped>
 .text {
   --rate: v-bind(rate);
-  line-height: .9;
+  line-height: 0.9;
   font-size: calc(var(--swd-game-unit) * var(--rate));
 }
 </style>

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="symbol"
-    :class="co"
-  >
+  <div class="symbol" :class="co">
     <slot />
   </div>
 </template>
@@ -28,7 +25,7 @@ const co = {
   --size: v-bind(size);
   width: var(--size);
   height: var(--size);
-  border: calc(var(--swd-game-unit) * .1) solid $primary;
+  border: calc(var(--swd-game-unit) * 0.1) solid $primary;
   border-radius: var(--swd-game-radius-sm);
   background-position: center;
   background-repeat: no-repeat;
@@ -36,7 +33,7 @@ const co = {
 
   @for $i from 1 through 6 {
     &.id-#{$i} {
-      background-image: url("./symbol_#{$i}.png");
+      background-image: url('./symbol_#{$i}.png');
     }
   }
 }

@@ -21,7 +21,7 @@ const { value, size } = defineProps<Props>();
 <style lang="scss" scoped>
 .counter {
   --size: v-bind(size);
-  font-size: calc(var(--size) * .8);
+  font-size: calc(var(--size) * 0.8);
   font-weight: bold;
   border-radius: 50%;
   color: white;

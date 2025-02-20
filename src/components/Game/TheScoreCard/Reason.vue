@@ -36,10 +36,9 @@ const map: Record<Victory, Record<string, string>> = {
 };
 
 const data = map[value];
-
 </script>
 
-<style  scoped>
+<style scoped>
 .the-victory {
   font-size: calc(var(--swd-game-unit) * 1.1);
   line-height: 1em;

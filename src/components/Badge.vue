@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="badge absolute"
-    :style="so"
-  >
+  <div class="badge absolute" :style="so">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-
-export type Pos = 'center'
+export type Pos =
+  | 'center'
   | 'top'
   | 'right'
   | 'bottom'

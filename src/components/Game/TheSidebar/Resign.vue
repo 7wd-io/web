@@ -1,21 +1,11 @@
 <template>
-  <q-list
-    bordered
-    separator
-  >
-    <q-item
-      clickable
-      v-ripple
-      class="swd-btn-primary"
-      @click="resign"
-    >
+  <q-list bordered separator>
+    <q-item clickable v-ripple class="swd-btn-primary" @click="resign">
       <q-item-section avatar>
         <q-icon name="outlined_flag" />
       </q-item-section>
 
-      <q-item-section>
-        RESIGN
-      </q-item-section>
+      <q-item-section> RESIGN </q-item-section>
     </q-item>
   </q-list>
 </template>

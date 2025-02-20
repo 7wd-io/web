@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
   value: number;
   size: string;
@@ -22,11 +21,11 @@ const { value, size } = defineProps<Props>();
   --size: v-bind(size);
   width: var(--size);
   height: var(--size);
-  font-size: calc(var(--size) * .65);
+  font-size: calc(var(--size) * 0.65);
   font-weight: bold;
   color: black;
   background-position: center;
   background-size: cover;
-  background-image: url("./coin.png");
+  background-image: url('./coin.png');
 }
 </style>

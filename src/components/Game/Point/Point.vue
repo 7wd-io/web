@@ -21,12 +21,12 @@ const { count, size } = defineProps<Props>();
   --size: v-bind(size);
   width: var(--size);
   height: calc(var(--size) / 1.0975);
-  font-size: calc(var(--size) * .4);
+  font-size: calc(var(--size) * 0.4);
   font-weight: bold;
   color: white;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("./points.png");
+  background-image: url('./points.png');
 }
 </style>

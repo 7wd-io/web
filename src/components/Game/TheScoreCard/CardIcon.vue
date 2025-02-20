@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="icon-card"
-    :class="co"
-  />
+  <div class="icon-card" :class="co" />
 </template>
 
 <script setup lang="ts">
 import { CardGroupId } from 'src/models/game';
 
 type Group =
-  CardGroupId.civilian
+  | CardGroupId.civilian
   | CardGroupId.scientific
   | CardGroupId.commercial
   | CardGroupId.guild;
@@ -32,22 +29,22 @@ const co = {
   --size: v-bind(size);
   width: var(--size);
   height: calc(var(--size) / 0.7);
-  border-radius: calc(var(--size) * .1);
+  border-radius: calc(var(--size) * 0.1);
 }
 
 .card-4 {
-  background-color: #008D48;
+  background-color: #008d48;
 }
 
 .card-5 {
-  background-color: #0074BC;
+  background-color: #0074bc;
 }
 
 .card-6 {
-  background-color: #FFCC0C;
+  background-color: #ffcc0c;
 }
 
 .card-7 {
-  background-color: #74548D;
+  background-color: #74548d;
 }
 </style>

@@ -4,7 +4,6 @@
       <div>
         {{ label }}
       </div>
-
     </q-card-section>
     <q-card-section horizontal>
       <div class="text-weight-bolder text-h5">
@@ -22,7 +21,6 @@ interface Props {
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 const { label, body } = defineProps<Props>();
-
 </script>
 
 <style lang="scss" scoped>
