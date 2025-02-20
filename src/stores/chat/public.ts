@@ -1,29 +1,33 @@
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 import { Message } from 'components/Chat/models';
 import { HistoryResult } from 'centrifuge/build/types';
 
-export const useChatStore = defineStore('chat:public', {
-  state: () => ({
-    messages: [] as Message[],
-  }),
-  actions: {
-    addMessage(msg: Message) {
-      this.messages = [...this.messages, msg];
-    },
-    setHistory(history: HistoryResult) {
-      const messages = [] as Message[];
+export const useChatStore = defineStore('chat:public', () => {
+  const messages = ref<Message[]>([]);
 
-      history.publications.forEach((item) => {
-        // messages.push([item.info?.user as Nickname, item.data as string]);
-        const { body, ts } = item.data as Message;
-        messages.push({
-          author: item.info?.user || '',
-          body,
-          ts,
-        });
+  async function addMessage(msg: Message) {
+    messages.value.push(msg);
+  }
+
+  async function setHistory(history: HistoryResult) {
+    const value = [] as Message[];
+
+    history.publications.forEach((item) => {
+      const { body, ts } = item.data as Message;
+      value.push({
+        author: item.info?.user || '',
+        body,
+        ts,
       });
+    });
 
-      this.messages = messages;
-    },
-  },
+    messages.value = value;
+  }
+
+  return {
+    messages,
+    addMessage,
+    setHistory,
+  };
 });
