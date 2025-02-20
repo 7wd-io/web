@@ -8,7 +8,6 @@ interface Props {
   value: '2' | '5';
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { size, value } = defineProps<Props>();
 const co = {
   [`value-${value}`]: true,

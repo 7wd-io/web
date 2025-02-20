@@ -9,7 +9,6 @@ interface Props {
   value: Victory;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { value } = defineProps<Props>();
 
 const map: Record<Victory, Record<string, string>> = {

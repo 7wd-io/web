@@ -100,7 +100,6 @@ interface Props {
   id: CardId;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { id } = defineProps<Props>();
 
 defineEmits([...useDialogPluginComponent.emits]);

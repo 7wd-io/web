@@ -43,7 +43,6 @@ interface Props {
   size: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { card, left, right, size } = defineProps<Props>();
 const { show, pos, x, y } = use(left, right, card);
 </script>

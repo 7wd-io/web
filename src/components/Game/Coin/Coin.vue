@@ -13,7 +13,6 @@ interface Props {
   fontRatio?: number;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure,@typescript-eslint/no-unsafe-assignment
 const { count, size, fontRatio = 0.8 } = defineProps<Props>();
 </script>
 

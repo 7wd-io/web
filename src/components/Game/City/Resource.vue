@@ -23,7 +23,6 @@ interface Props {
   price: number;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { id, count, price } = defineProps<Props>();
 
 const resourceSize = 'calc(var(--swd-game-unit) * 3.5)';

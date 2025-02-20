@@ -11,7 +11,6 @@ interface Props {
   name: Nickname;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
 const $game = useGameStore();

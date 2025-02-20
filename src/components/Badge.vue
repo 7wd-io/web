@@ -31,7 +31,6 @@ interface Style {
   transform: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { pos, x = '0%', y = '0%' } = defineProps<Props>();
 
 const styles: Record<Pos, Style> = {

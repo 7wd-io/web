@@ -41,7 +41,6 @@ interface Props {
   size: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { wid, cid, price, pos, size } = defineProps<Props>();
 
 const { wonderCardSize, wonderPriceBadgeSize } = useWonderCssVars();

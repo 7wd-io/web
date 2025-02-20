@@ -12,7 +12,6 @@ interface Props {
   size: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure,@typescript-eslint/no-unsafe-assignment
 const { value, size } = defineProps<Props>();
 </script>
 

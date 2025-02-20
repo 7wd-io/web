@@ -16,7 +16,6 @@ interface Props {
   size: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { id, size } = defineProps<Props>();
 
 const group = (function getGroup(cid: CardId) {

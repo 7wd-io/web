@@ -25,7 +25,6 @@ interface Props {
   pos: 'top' | 'bottom';
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { name, group, pos } = defineProps<Props>();
 
 let offset = '400%';

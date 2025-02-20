@@ -22,7 +22,6 @@ interface Props {
   value: Message;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { value } = defineProps<Props>();
 
 const when = ref(timeAgo.format(Date.now() - (Date.now() - value.ts)));

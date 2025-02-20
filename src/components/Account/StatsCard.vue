@@ -34,7 +34,6 @@ interface Props {
   total: number;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { data, total } = defineProps<Props>();
 
 type key = keyof GameReport;

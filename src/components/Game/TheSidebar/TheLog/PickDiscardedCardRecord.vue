@@ -17,7 +17,6 @@ import Record from './Record.vue';
 import { useCssVars } from './useCssVars';
 import { useRecord } from './useRecord';
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { actor, n, width, card } = defineProps({
   ...useRecord(),
   card: {
@@ -26,6 +25,5 @@ const { actor, n, width, card } = defineProps({
   },
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 const { nameSize, cardSize } = useCssVars(width);
 </script>

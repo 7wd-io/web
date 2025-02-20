@@ -15,7 +15,6 @@ interface Props {
   value: '-' | 'Yes' | 'No';
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { name, value } = defineProps<Props>();
 
 const co = computed(() => ({

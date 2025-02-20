@@ -19,7 +19,6 @@ interface Props {
   size?: Size;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { size = 'md' } = defineProps<Props>();
 const rate = sizes[size];
 </script>

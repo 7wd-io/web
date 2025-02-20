@@ -14,7 +14,6 @@ interface Props {
   size: string;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { value, pos, size } = defineProps<Props>();
 
 let x = '110%';

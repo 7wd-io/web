@@ -19,7 +19,6 @@ interface Props {
   body: string | number;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { label, body } = defineProps<Props>();
 </script>
 

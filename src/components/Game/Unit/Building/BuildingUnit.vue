@@ -14,7 +14,6 @@ interface Props {
   dense?: boolean;
 }
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { id, size, dense = false } = defineProps<Props>();
 
 const { cardWidth, cardHeight, cardHeightDense, cardRadius } = useCssVars(size);
