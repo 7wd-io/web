@@ -20,11 +20,10 @@ import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed, ref, watch } from 'vue';
 import { WonderId } from 'src/models/game';
-import { useQuasar } from 'quasar';
 import BoardService from 'src/service/Board';
 
-const $q = useQuasar();
 const $game = useGameStore();
+// @typescript-eslint/no-non-null-assertion
 const $move = useMoveStore();
 const { wonderWidth, wonderHeight } = useWonderCssVars(
   'calc(var(--swd-game-unit) * 20)'

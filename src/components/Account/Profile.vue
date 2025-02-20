@@ -104,7 +104,7 @@
 </template>
 
 <script setup lang="ts">
-import { useQuasar, useDialogPluginComponent } from 'quasar';
+import { useDialogPluginComponent } from 'quasar';
 import { Nickname } from 'src/models/account';
 import { computed, onBeforeMount, ref } from 'vue';
 import { GamesReport, Profile } from 'src/models/profile';
@@ -118,12 +118,10 @@ interface Props {
 
 const { dialogRef, onDialogHide } = useDialogPluginComponent();
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const { name } = defineProps<Props>();
 
 defineEmits([...useDialogPluginComponent.emits]);
 
-const $q = useQuasar();
 const $account = useAccountStore();
 
 const loading = ref(false);

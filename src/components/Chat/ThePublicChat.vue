@@ -38,6 +38,7 @@ onBeforeMount(async () => {
 
   sub.on('publication', (ctx) => {
     const m: MessageModel = ctx.data;
+    //  eslint-disable-next-line  @typescript-eslint/no-non-null-assertion
     m.author = ctx.info!.user;
 
     $chat.addMessage(m);

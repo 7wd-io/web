@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDialogPluginComponent, useQuasar } from 'quasar';
+import { useDialogPluginComponent } from 'quasar';
 import { ref, toRaw } from 'vue';
 import { useAccountStore } from 'stores/account';
 
@@ -92,7 +92,6 @@ const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
 
 defineEmits([...useDialogPluginComponent.emits]);
 
-const $q = useQuasar();
 const $account = useAccountStore();
 
 const inProgress = ref(false);

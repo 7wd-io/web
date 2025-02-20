@@ -85,11 +85,9 @@ import PickDiscardedCardDialog from 'components/Game/Dialog/PickDiscardedCard.vu
 import PickReturnedCardsDialog from 'components/Game/Dialog/PickReturnedCards.vue';
 import ReplayPanel from 'components/Game/TheSidebar/TheLog/ReplayPanel.vue';
 import { LogRecord } from 'src/models/log';
-import { useQuasar } from 'quasar';
 import gsap from 'gsap';
 import { AnimationSpeed } from 'src/models/account';
 
-const $q = useQuasar();
 const $account = useAccountStore();
 const $game = useGameStore();
 const $log = useLogStore();

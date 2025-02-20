@@ -129,7 +129,6 @@ import { useAccountStore } from 'stores/account';
 import { useOnlineStore } from 'stores/online';
 import { useRoomsStore } from 'stores/rooms';
 import router from 'src/router';
-import { useQuasar } from 'quasar';
 import Badge from 'components/Badge.vue';
 
 interface Props {
@@ -137,7 +136,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const $q = useQuasar();
 const $account = useAccountStore();
 const $online = useOnlineStore();
 const $rooms = useRoomsStore();

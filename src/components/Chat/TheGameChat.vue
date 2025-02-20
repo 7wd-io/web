@@ -22,7 +22,6 @@
 
 <script setup lang="ts">
 import cent from 'src/centrifuge';
-import { Subscription } from 'centrifuge';
 import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
 import { useChatStore } from 'stores/chat/game';
 import { QScrollArea } from 'quasar';
@@ -45,6 +44,7 @@ onBeforeMount(() => {
 
   sub.on('publication', (ctx) => {
     const m: MessageModel = ctx.data;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     m.author = ctx.info!.user;
 
     $chat.addMessage(m);
