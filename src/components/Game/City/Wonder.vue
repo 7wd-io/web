@@ -26,11 +26,11 @@
 </template>
 
 <script setup lang="ts">
-import WonderComp from 'components/Game/Wonder/Wonder.vue';
+import WonderComp from 'components/Game/Unit/Wonder/Wonder.vue';
 import Badge from 'components/Badge.vue';
 import { CardId, WonderId } from 'src/models/game';
 import PriceHint from 'components/Game/PriceHint/PriceHint.vue';
-import useWonderCssVars from 'components/Game/Wonder/useCssVars';
+import useWonderCssVars from 'components/Game/Unit/Wonder/useCssVars';
 import WonderCard from './WonderCard.vue';
 
 interface Props {

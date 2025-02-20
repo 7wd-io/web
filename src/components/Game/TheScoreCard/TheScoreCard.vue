@@ -221,7 +221,7 @@ import { useGameStore } from 'stores/game/game';
 import { CardGroupId } from 'src/models/game';
 import { Nickname } from 'src/models/account';
 import VictoryIcon from 'components/Game/Icon/Victory/Victory.vue';
-import Token from 'components/Game/Token.vue';
+import Token from 'components/Game/Unit/Token/Token.vue';
 import Text from 'components/Game/Text.vue';
 import { botNickname } from 'src/models/account';
 import Reason from './Reason.vue';

@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import useWonderCssVars from 'components/Game/Wonder/useCssVars';
-import Wonder from 'components/Game/Wonder/Wonder.vue';
+import useWonderCssVars from 'components/Game/Unit/Wonder/useCssVars';
+import Wonder from 'components/Game/Unit/Wonder/Wonder.vue';
 import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed, ref, watch } from 'vue';

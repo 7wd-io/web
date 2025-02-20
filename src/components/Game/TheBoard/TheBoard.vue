@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import ProgressToken from 'components/Game/Token.vue';
+import ProgressToken from 'components/Game/Unit/Token/Token.vue';
 import { useGameStore } from 'stores/game/game';
 import { computed, ref, watch } from 'vue';
 import BoardService from 'src/service/Board';

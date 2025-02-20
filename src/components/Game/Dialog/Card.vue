@@ -91,7 +91,7 @@ import { useMoveStore } from 'stores/game/move';
 import { useAccountStore } from 'stores/account';
 import { useDraggble } from 'components/Game/Dialog/useDraggble';
 import { computed } from 'vue';
-import Wonder from 'components/Game/Wonder/Wonder.vue';
+import Wonder from 'components/Game/Unit/Wonder/Wonder.vue';
 import CardComp from 'components/Game/Unit/Building/BuildingUnit.vue';
 import Button from 'components/Game/Button.vue';
 import PriceHint from 'components/Game/PriceHint/PriceHint.vue';

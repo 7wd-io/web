@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Token from 'components/Game/Token.vue';
+import Token from 'components/Game/Unit/Token/Token.vue';
 import { Nickname } from 'src/models/account';
 import { useGameStore } from 'stores/game/game';
 import { computed } from 'vue';

@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import Token from 'components/Game/Token.vue';
+import Token from 'components/Game/Unit/Token/Token.vue';
 import { useGameStore } from 'stores/game/game';
 import { useMoveStore } from 'stores/game/move';
 import { computed } from 'vue';
