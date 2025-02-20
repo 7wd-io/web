@@ -166,7 +166,7 @@
       <tr>
         <td>
           <div class="row justify-center">
-            <CoinIcon :size="lgIconSize" />
+            <Coin :size="lgIconSize" />
           </div>
         </td>
         <td class="text-center">
@@ -227,7 +227,7 @@ import { botNickname } from 'src/models/account';
 import Reason from './Reason.vue';
 import CardIcon from './CardIcon.vue';
 import WonderIcon from './WonderIcon.vue';
-import CoinIcon from './CoinIcon.vue';
+import Coin from 'components/Game/Coin/Coin.vue';
 import MilitaryIcon from './MilitaryIcon.vue';
 import RatingIcon from './RatingIcon.vue';
 import PlayAgainBadge from './PlayAgainBadge.vue';

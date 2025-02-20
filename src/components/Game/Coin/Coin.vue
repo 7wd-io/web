@@ -1,14 +1,14 @@
 <template>
   <div class="coin relative-position">
     <div class="absolute-center">
-      {{ count }}
+      {{ count || '' }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  count: number;
+  count?: number;
   size: string;
   fontRatio?: number;
 }
@@ -29,6 +29,6 @@ const { count, size, fontRatio = 0.8 } = defineProps<Props>();
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-image: url("./coin.png");
+  background-image: url('./coin.png');
 }
 </style>
