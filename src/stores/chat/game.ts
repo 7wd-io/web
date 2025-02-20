@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { Rating } from 'src/models/game';
 import { Nickname } from 'src/models/account';
@@ -8,60 +9,65 @@ import { botNickname } from 'src/models/account';
 import { Message } from 'components/Chat/models';
 import { HistoryResult, PresenceResult } from 'centrifuge/build/types';
 
-export const useChatStore = defineStore('chat:game', {
-  state: () => ({
-    messages: [] as Message[],
-    players: [] as Nickname[],
-  }),
-  getters: {
-    descPlayers(state): [Nickname, Rating][] {
-      const $online = useOnlineStore();
+export const useChatStore = defineStore('chat:game', () => {
+  const messages = ref<Message[]>([]);
+  const players = ref<Nickname[]>([]);
 
-      const m: Record<Nickname, Rating> = {};
+  const descPlayers = computed<[Nickname, Rating][]>(() => {
+    const $online = useOnlineStore();
+    const m: Record<Nickname, Rating> = {};
 
-      state.players.forEach((player) => {
-        m[player] = $online.players[player];
+    players.value.forEach((player) => {
+      m[player] = $online.players[player];
+    });
+
+    return _toPairs(m).sort((a, b) => b[1] - a[1]);
+  });
+
+  const countPlayers = computed(() => players.value.length);
+
+  async function addMessage(msg: Message) {
+    messages.value.push(msg);
+  }
+
+  async function setHistory(history: HistoryResult) {
+    const value = [] as Message[];
+
+    history.publications.forEach((item) => {
+      const { body, ts } = item.data as Message;
+      value.push({
+        author: item.info?.user || '',
+        body,
+        ts,
       });
+    });
 
-      return _toPairs(m).sort((a, b) => b[1] - a[1]);
-    },
-    countPlayers(state) {
-      return state.players.length;
-    },
-  },
-  actions: {
-    addMessage(msg: Message) {
-      this.messages = [...this.messages, msg];
-    },
-    setHistory(history: HistoryResult) {
-      const messages = [] as Message[];
+    messages.value = value;
+  }
 
-      history.publications.forEach((item) => {
-        // messages.push([item.info?.user as Nickname, item.data as string]);
-        const { body, ts } = item.data as Message;
-        messages.push({
-          author: item.info?.user || '',
-          body,
-          ts,
-        });
-      });
+  async function setPlayers(presence: PresenceResult) {
+    const $game = useGameStore();
 
-      this.messages = messages;
-    },
-    setPlayers(presence: PresenceResult) {
-      const $game = useGameStore();
+    const value: Nickname[] = [];
 
-      const players: Nickname[] = [];
+    if ($game.right === botNickname) {
+      value.push(botNickname);
+    }
 
-      if ($game.right === botNickname) {
-        players.push(botNickname);
-      }
+    Object.values(presence.clients).forEach((item) => {
+      value.push(item.user as Nickname);
+    });
 
-      Object.values(presence.clients).forEach((item) => {
-        players.push(item.user as Nickname);
-      });
+    players.value = Array.from(new Set(value));
+  }
 
-      this.players = Array.from(new Set(players));
-    },
-  },
+  return {
+    messages,
+    players,
+    descPlayers,
+    countPlayers,
+    addMessage,
+    setHistory,
+    setPlayers,
+  };
 });
