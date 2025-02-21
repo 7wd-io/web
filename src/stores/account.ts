@@ -1,3 +1,4 @@
+import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { jwtDecode } from 'jwt-decode';
 import { User, Session, Settings, Nickname } from 'src/models/account';
@@ -11,118 +12,116 @@ import { v4 as uuidv4 } from 'uuid';
 const sessionCookie = 'refresh_token';
 const clientCookie = 'client';
 
-export const useAccountStore = defineStore('account', {
-  state: () => ({
-    user: {} as User,
-    token: (): string => '',
-  }),
-  getters: {
-    isLoggedIn: (state) => state.token() !== '',
-    hasRoom(state) {
-      const $rooms = useRoomsStore();
+export const useAccountStore = defineStore('account', () => {
+  const user = ref({} as User);
+  const token = ref((): string => '');
 
-      return $rooms.rooms.some(
-        (room) =>
-          state.user.nickname === room.host ||
-          state.user.nickname === room.guest
-      );
-    },
-  },
-  actions: {
-    parseToken(token: string) {
-      this.user = jwtDecode<User>(token);
-      this.token = () => token;
-    },
+  const isLoggedIn = computed(() => token.value() !== '');
+  const hasRoom = computed(() => {
+    const $rooms = useRoomsStore();
 
-    async signin(login: string, password: string) {
-      const { data } = await api.post<Session>('/account/signin', {
-        login,
-        password,
-        client: this.getClient(),
-      });
+    return $rooms.rooms.some(
+      (room) =>
+        user.value.nickname === room.host || user.value.nickname === room.guest
+    );
+  });
 
-      Cookies.set(sessionCookie, data.refreshToken, {
+  function parseToken(token_: string) {
+    user.value = jwtDecode<User>(token_);
+    token.value = () => token_;
+  }
+
+  function getClient() {
+    if (!Cookies.has(clientCookie)) {
+      Cookies.set(clientCookie, uuidv4(), {
         domain: process.env.SWD_HOST,
         path: '/',
         sameSite: 'None',
         secure: true,
         expires: 30,
       });
+    }
 
-      this.parseToken(data.accessToken);
+    return Cookies.get(clientCookie);
+  }
 
-      await $router.push({ name: 'lobby' });
-    },
+  async function signin(login: string, password: string) {
+    const { data } = await api.post<Session>('/account/signin', {
+      login,
+      password,
+      client: getClient(),
+    });
 
-    async signup(email: string, password: string, nickname: string) {
-      await api.post('/account/signup', {
-        email,
-        password,
-        nickname,
-      });
+    Cookies.set(sessionCookie, data.refreshToken, {
+      domain: process.env.SWD_HOST,
+      path: '/',
+      sameSite: 'None',
+      secure: true,
+      expires: 30,
+    });
 
-      await this.signin(email, password);
-    },
+    parseToken(data.accessToken);
 
-    async logout() {
-      await api.post('/account/logout', {
-        client: this.getClient(),
-      });
+    await $router.push({ name: 'lobby' });
+  }
 
-      Cookies.remove(sessionCookie);
+  async function logout() {
+    await api.post('/account/logout', {
+      client: getClient(),
+    });
 
-      window.open('/', '_self');
-    },
+    Cookies.remove(sessionCookie);
 
-    async refreshSession() {
-      const { data } = await api.post<Session>('/account/refresh', {
-        client: this.getClient(),
-        refresh_token: Cookies.get(sessionCookie),
-      });
+    window.open('/', '_self');
+  }
 
-      Cookies.set(sessionCookie, data.refreshToken, {
-        domain: process.env.SWD_HOST,
-        path: '/',
-        sameSite: 'None',
-        secure: true,
-        expires: 30,
-      });
+  async function refreshSession() {
+    const { data } = await api.post<Session>('/account/refresh', {
+      client: getClient(),
+      refresh_token: Cookies.get(sessionCookie),
+    });
 
-      this.parseToken(data.accessToken);
-    },
+    Cookies.set(sessionCookie, data.refreshToken, {
+      domain: process.env.SWD_HOST,
+      path: '/',
+      sameSite: 'None',
+      secure: true,
+      expires: 30,
+    });
 
-    getClient() {
-      if (!Cookies.has(clientCookie)) {
-        Cookies.set(clientCookie, uuidv4(), {
-          domain: process.env.SWD_HOST,
-          path: '/',
-          sameSite: 'None',
-          secure: true,
-          expires: 30,
-        });
-      }
+    parseToken(data.accessToken);
+  }
 
-      return Cookies.get(clientCookie);
-    },
+  async function updateSettings(s: Settings) {
+    await api.put('/account/settings', {
+      animationSpeed: s.game.animationSpeed,
+      opponentJoined: s.sounds.opponentJoined,
+      myTurn: s.sounds.myTurn,
+    });
 
-    async updateSettings(s: Settings) {
-      await api.put('/account/settings', {
-        animationSpeed: s.game.animationSpeed,
-        opponentJoined: s.sounds.opponentJoined,
-        myTurn: s.sounds.myTurn,
-      });
+    user.value.settings = s;
+  }
 
-      this.user.settings = s;
-    },
+  async function getProfile(n: Nickname) {
+    return await api.get<{ profile: Profile }>(`/account/${n}`);
+  }
 
-    async getProfile(user: Nickname) {
-      return await api.get<{ profile: Profile }>(`/account/${user}`);
-    },
+  async function getProfileVersus(vs: Nickname) {
+    return await api.get<{ profile: GamesReport }>(
+      `account/${user.value.nickname}/vs/${vs}`
+    );
+  }
 
-    async getProfileVersus(user: Nickname) {
-      return await api.get<{ profile: GamesReport }>(
-        `account/${this.user.nickname}/vs/${user}`
-      );
-    },
-  },
+  return {
+    user,
+    token,
+    isLoggedIn,
+    hasRoom,
+    signin,
+    logout,
+    refreshSession,
+    updateSettings,
+    getProfile,
+    getProfileVersus,
+  };
 });
