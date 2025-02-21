@@ -1,31 +1,40 @@
 import { defineStore } from 'pinia';
 import { Log } from 'src/models/log';
+import { ref, computed } from 'vue';
 
-export const useLogStore = defineStore('game:log', {
-  state: () => ({
-    records: [] as Log,
-    replay: false as boolean,
-    index: -2 as number,
-  }),
-  getters: {
-    last(state) {
-      return state.records[state.records.length - 1];
-    },
-  },
-  actions: {
-    replayOn(index: number) {
-      this.replay = true;
-      this.index = index;
-    },
-    replayOff() {
-      this.replay = false;
-      this.index = this.records.length;
-    },
-    next() {
-      this.index += 1;
-    },
-    prev() {
-      this.index -= 1;
-    },
-  },
+export const useLogStore = defineStore('game:log', () => {
+  const records = ref<Log>([]);
+  const replay = ref(false);
+  const index = ref(-2);
+
+  const last = computed(() => records.value[records.value.length - 1]);
+
+  function replayOn(index_: number) {
+    replay.value = true;
+    index.value = index_;
+  }
+
+  function replayOff() {
+    replay.value = false;
+    index.value = records.value.length;
+  }
+
+  function next() {
+    index.value += 1;
+  }
+
+  function prev() {
+    index.value -= 1;
+  }
+
+  return {
+    records,
+    replay,
+    index,
+    last,
+    replayOn,
+    replayOff,
+    next,
+    prev,
+  };
 });
