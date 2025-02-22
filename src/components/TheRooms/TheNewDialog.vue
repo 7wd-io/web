@@ -37,7 +37,7 @@
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle v-model="flagPromoWonders" />
+                <q-toggle v-model="settings.promoWonders" />
               </q-item-section>
             </q-item>
 
@@ -54,7 +54,7 @@
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle v-model="flagFast" />
+                <q-toggle v-model="settings.fast" />
               </q-item-section>
             </q-item>
 
@@ -75,20 +75,23 @@
               </q-item-section>
 
               <q-item-section avatar>
-                <q-toggle v-model="flagMinRating" />
+                <q-toggle v-model="settings.minRating.enabled" />
               </q-item-section>
             </q-item>
 
             <q-item>
               <q-item-section avatar>
-                <div v-show="flagMinRating" class="text-bold text-primary">
-                  {{ minRating }}
+                <div
+                  v-show="settings.minRating.enabled"
+                  class="text-bold text-primary"
+                >
+                  {{ settings.minRating.value }}
                 </div>
               </q-item-section>
               <q-item-section>
                 <q-slider
-                  v-model="minRating"
-                  :disable="!flagMinRating"
+                  v-model="settings.minRating.value"
+                  :disable="!settings.minRating.enabled"
                   markers
                   snap
                   :min="MIN_RATING"
@@ -106,7 +109,7 @@
 
               <q-item-section>
                 <q-item-label class="text-weight-bold"> Private </q-item-label>
-                <q-item-label caption> Who can join to game </q-item-label>
+                <q-item-label caption> Play with friends </q-item-label>
               </q-item-section>
 
               <q-item-section avatar>
@@ -212,13 +215,8 @@ const $rooms = useRoomsStore();
 const $game = useGameStore();
 
 const tab = ref('rating');
-
-const flagPromoWonders = ref(false);
-const flagFast = ref(false);
-const flagMinRating = ref(false);
+const settings = ref($rooms.$state.settings);
 const flagPrivate = ref(false);
-
-const minRating = ref(MIN_RATING);
 const privateNickname = ref('');
 
 const promoWonders = [
@@ -232,17 +230,20 @@ const promoWonders = [
   ],
 ];
 
-watch(flagMinRating, (newValue) => {
-  if (newValue) {
-    flagPrivate.value = false;
-    privateNickname.value = '';
-  }
-});
+watch(
+  settings,
+  (newValue) => {
+    if (newValue.minRating.enabled) {
+      flagPrivate.value = false;
+      privateNickname.value = '';
+    }
+  },
+  { deep: true }
+);
 
 watch(flagPrivate, (newValue) => {
   if (newValue) {
-    flagMinRating.value = false;
-    minRating.value = MIN_RATING;
+    settings.value.minRating.enabled = false;
   }
 });
 
@@ -270,12 +271,12 @@ const searchPlayer = (val: Nickname, update: (f: () => void) => void) => {
 const onCreate = async () => {
   inProgress.value = true;
   const params: RoomOptions = {
-    promoWonders: flagPromoWonders.value,
-    fast: flagFast.value,
+    promoWonders: settings.value.promoWonders,
+    fast: settings.value.fast,
   };
 
-  if (flagMinRating.value) {
-    params.minRating = minRating.value;
+  if (settings.value.minRating.enabled) {
+    params.minRating = settings.value.minRating.value;
   }
 
   if (flagPrivate.value) {

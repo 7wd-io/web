@@ -4,9 +4,18 @@ import { Room, RoomOptions } from 'src/models/game';
 import { api } from 'boot/axios';
 import { useAccountStore } from 'stores/account';
 import { RoomId } from 'src/models/room';
+import { useLocalStorage } from '@vueuse/core';
 
 export const useRoomsStore = defineStore('rooms', () => {
   const rooms = ref([] as Room[]);
+  const settings = useLocalStorage('settings', {
+    promoWonders: false,
+    fast: false,
+    minRating: {
+      enabled: false,
+      value: 1500,
+    },
+  });
 
   const ordered = computed(() => {
     const $account = useAccountStore();
@@ -86,6 +95,7 @@ export const useRoomsStore = defineStore('rooms', () => {
 
   return {
     rooms,
+    settings,
     ordered,
     load,
     add,
