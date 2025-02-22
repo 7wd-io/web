@@ -13,13 +13,43 @@
           <q-list>
             <q-item v-ripple tag="label">
               <q-item-section avatar>
+                <q-icon name="cake" />
+              </q-item-section>
+
+              <q-item-section>
+                <q-item-label class="text-weight-bold">
+                  Promo wonders
+                </q-item-label>
+                <q-item-label caption>
+                  <q-btn
+                    v-for="[label, link] in promoWonders"
+                    :key="label"
+                    dense
+                    color="primary"
+                    size="xs"
+                    :href="link"
+                    target="_blank"
+                    rounded
+                    flat
+                    >{{ label }}</q-btn
+                  >
+                </q-item-label>
+              </q-item-section>
+
+              <q-item-section avatar>
+                <q-toggle v-model="flagPromoWonders" />
+              </q-item-section>
+            </q-item>
+
+            <q-item v-ripple tag="label">
+              <q-item-section avatar>
                 <q-icon name="bolt" />
               </q-item-section>
 
               <q-item-section>
                 <q-item-label class="text-weight-bold"> Fast </q-item-label>
                 <q-item-label caption>
-                  3 min on clock, +5 sec per move
+                  7 min on clock, +5 sec per move
                 </q-item-label>
               </q-item-section>
 
@@ -183,12 +213,24 @@ const $game = useGameStore();
 
 const tab = ref('rating');
 
+const flagPromoWonders = ref(false);
 const flagFast = ref(false);
 const flagMinRating = ref(false);
 const flagPrivate = ref(false);
 
 const minRating = ref(MIN_RATING);
 const privateNickname = ref('');
+
+const promoWonders = [
+  [
+    'Messe',
+    'https://boardgamegeek.com/boardgame/186069/7-wonders-duel-the-messe-essen-promo-card',
+  ],
+  [
+    'The Statue of Liberty',
+    'https://boardgamegeek.com/boardgame/196339/7-wonders-duel-statue-of-liberty-promo-card',
+  ],
+];
 
 watch(flagMinRating, (newValue) => {
   if (newValue) {
@@ -228,6 +270,7 @@ const searchPlayer = (val: Nickname, update: (f: () => void) => void) => {
 const onCreate = async () => {
   inProgress.value = true;
   const params: RoomOptions = {
+    promoWonders: flagPromoWonders.value,
     fast: flagFast.value,
   };
 

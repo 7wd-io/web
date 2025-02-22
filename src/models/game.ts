@@ -91,6 +91,7 @@ export type ResourceMap = Record<ResourceId, number>;
 export type ChainMap = Record<Age, CardId>;
 
 export interface RoomOptions {
+  promoWonders: boolean;
   fast: boolean;
   minRating?: number;
   enemy?: string;

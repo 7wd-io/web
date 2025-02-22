@@ -16,6 +16,7 @@
     "@quasar/cli": "^2.4.1",
     "@quasar/extras": "^1.16.12",
     "@types/lodash-es": "^4.17.10",
+    "@vueuse/core": "^12.7.0",
     "axios": "^1.2.1",
     "centrifuge": "^5.0.1",
     "gsap": "^3.12.2",

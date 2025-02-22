@@ -36,6 +36,16 @@
         </div>
         <div class="col-grow text-right q-pr-md">
           <q-icon
+            v-show="data.options.promoWonders"
+            name="cake"
+            size="xxs"
+            class="text-primary"
+          >
+            <q-tooltip class="bg-dark text-white">
+              With promo wonders
+            </q-tooltip>
+          </q-icon>
+          <q-icon
             v-show="data.options.fast"
             name="bolt"
             size="xxs"
