@@ -44,15 +44,16 @@ const approved = ref(false);
 const $route = useRoute();
 const gameId: GameId = +$route.params.id;
 
+let timerId: number;
+
 const runTimer = () => {
-  window.setTimeout(function clock() {
+  timerId = window.setTimeout(function clock() {
     countdown.value -= 1;
     if (countdown.value <= 0) {
-      $playAgain.show = false;
-      $playAgain.showBadges = false;
+      $playAgain.disable();
     }
 
-    window.setTimeout(clock, 1000);
+    timerId = window.setTimeout(clock, 1000);
   }, 1000);
 };
 
@@ -88,5 +89,7 @@ onBeforeMount(() => {
 onBeforeUnmount(() => {
   subUpdate.unsubscribe();
   subApprove.unsubscribe();
+  $playAgain.disable();
+  clearTimeout(timerId);
 });
 </script>

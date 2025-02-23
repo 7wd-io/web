@@ -16,10 +16,16 @@ export const usePlayAgainStore = defineStore('game:playAgain', () => {
     });
   }
 
+  function disable() {
+    show.value = false;
+    showBadges.value = false;
+  }
+
   return {
     answers,
     show,
     showBadges,
     answer,
+    disable,
   };
 });

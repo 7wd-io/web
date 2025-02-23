@@ -148,7 +148,7 @@
       <tr>
         <td>
           <div class="row justify-center">
-            <Token id="00" :size="lgIconSize" />
+            <Token :id="1000" :size="lgIconSize" />
           </div>
         </td>
         <td class="text-center">

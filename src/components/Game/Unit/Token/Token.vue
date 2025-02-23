@@ -39,7 +39,7 @@ const co = {
   }
 
   // cover
-  &.id-00 {
+  &.id-1000 {
     background-position: top calc(var(--size) * -3) left calc(var(--size) * -3);
   }
 
