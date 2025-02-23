@@ -11,7 +11,7 @@
         v-model="msg"
         dense
         outlined
-        placeholder="To send press <Enter>"
+        placeholder="press <Enter> to send"
         @keyup.enter="submit"
         color="white"
         dark
@@ -79,6 +79,10 @@ onBeforeUnmount(() => {
 
 const msg = ref('');
 const submit = async () => {
+  if (msg.value === '') {
+    return;
+  }
+
   const m: MessageModel = {
     body: msg.value,
     ts: Date.now(),
