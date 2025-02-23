@@ -7,18 +7,19 @@
   >
     <q-card class="swd-dialog" @mousedown="onMouseDown">
       <q-card-section>
-        <Title> City cards </Title>
+        <Title> City overview </Title>
       </q-card-section>
       <EmptyStub v-if="!hasCards" />
       <q-card-section v-else>
-        <div class="row no-wrap q-gutter-xs-xs q-gutter-md-md q-gutter-lg-lg">
+        <div class="row no-wrap q-col-gutter-xs">
           <template v-for="gid in groups" :key="gid">
-            <div v-if="city.cards.data[gid]" class="column q-gutter-y-xs">
+            <div v-if="city.cards.data[gid]" class="column">
               <Card
                 v-for="cid in city.cards.data[gid]"
                 :key="cid"
                 :id="cid"
                 :dense="true"
+                class="q-mb-xs"
               />
             </div>
           </template>
