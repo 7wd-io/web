@@ -89,7 +89,7 @@ watch(
   () => {
     scroll.value?.setScrollPercentage('vertical', 100);
   },
-  { flush: 'post' }
+  { flush: 'post', deep: true }
 );
 </script>
 
