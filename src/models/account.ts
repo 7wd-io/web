@@ -27,6 +27,7 @@ export interface User {
   nickname: Nickname;
   rating: number;
   settings: Settings;
+  exp: number;
 }
 
 export const botNickname = 'bot';

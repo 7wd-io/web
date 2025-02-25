@@ -32,25 +32,20 @@ export type ApiError = AxiosError<{ err: string }>;
 
 export default boot(({ app, redirect }) => {
   const account = useAccountStore();
-  // for use inside Vue files (Options API) through this.$axios and this.$api
 
-  api.interceptors.request.use((config) => {
+  api.interceptors.request.use(async (config) => {
     if (config.baseURL && config.url) {
       const path = new URL(config.baseURL + config.url).pathname;
 
       if (publicEndpoints.indexOf(path) === -1) {
+        // use sensible interval gap to avoid expiration during request call
+        if (account.exp - 3 < Math.floor(Date.now() / 1000)) {
+          await account.refreshSession();
+        }
+
         (config.headers as Headers).Authorization = `Bearer ${account.token()}`;
       }
     }
-
-    // @TODO решить проблему открытого окна приложения
-    // токен протух, на страницу мы никуда не переходили, boot не срабатывал
-    // рефрешеа аккаунта не было, будет выполнен запрос с протухшим токеном и статус 401
-    //
-    // Решение:
-    // можно при получении токена писать время когда он был получен
-    // и перед любым запросом чекать время, если протухло делать рефреш перед основным запросом
-    // Также добавить проверку в интерсептор ответа на получение 401 и пробовать делать рефрешь
 
     return config;
   });

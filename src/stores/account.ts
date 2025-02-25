@@ -8,6 +8,7 @@ import $router from 'src/router';
 import { useRoomsStore } from 'stores/rooms';
 import { GamesReport, Profile } from 'src/models/profile';
 import { v4 as uuidv4 } from 'uuid';
+import { useLocalStorage } from '@vueuse/core';
 
 const sessionCookie = 'refresh_token';
 const clientCookie = 'client';
@@ -15,6 +16,7 @@ const clientCookie = 'client';
 export const useAccountStore = defineStore('account', () => {
   const user = ref({} as User);
   const token = ref((): string => '');
+  const exp = useLocalStorage('exp', 0);
 
   const isLoggedIn = computed(() => token.value() !== '');
   const hasRoom = computed(() => {
@@ -29,6 +31,7 @@ export const useAccountStore = defineStore('account', () => {
   function parseToken(token_: string) {
     user.value = jwtDecode<User>(token_);
     token.value = () => token_;
+    exp.value = user.value.exp;
   }
 
   function getClient() {
@@ -115,6 +118,7 @@ export const useAccountStore = defineStore('account', () => {
   return {
     user,
     token,
+    exp,
     isLoggedIn,
     hasRoom,
     signin,
