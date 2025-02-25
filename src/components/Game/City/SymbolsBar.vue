@@ -30,7 +30,7 @@ interface Props {
 
 const { name } = defineProps<Props>();
 
-const symbolSize = 'calc(var(--swd-game-unit) * 3.5)';
+const symbolSize = 'calc(var(--swd-game-unit) * 3)';
 const badgeSize = `calc(${symbolSize} * .3)`;
 
 const $game = useGameStore();

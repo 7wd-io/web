@@ -98,7 +98,7 @@ const showOverview = (e: PointerEvent) => {
   padding-top: var(--swd-game-gap-xxl);
 
   .bar {
-    margin-bottom: var(--swd-game-gap-lg);
+    margin-bottom: var(--swd-game-gap-sm);
     &:last-child {
       margin-bottom: 0;
     }
