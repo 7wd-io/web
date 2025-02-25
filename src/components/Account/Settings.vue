@@ -71,12 +71,19 @@
 
       <q-card-actions align="center" class="q-pa-lg">
         <q-btn
+          push
           :loading="inProgress"
           color="primary"
           label="Save"
           @click="onSave"
         />
-        <q-btn outline color="primary" label="Cancel" @click="onDialogCancel" />
+        <q-btn
+          push
+          outline
+          color="primary"
+          label="Cancel"
+          @click="onDialogCancel"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>

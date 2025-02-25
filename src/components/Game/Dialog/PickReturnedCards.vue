@@ -20,6 +20,7 @@
 
                 <div>
                   <q-btn-toggle
+                    push
                     :model-value="model[c]"
                     @update:model-value="onUpdate($event, c)"
                     size="calc(var(--swd-game-unit) * .8)"

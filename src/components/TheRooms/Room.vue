@@ -82,6 +82,7 @@
         </div>
         <div>
           <q-btn
+            push
             v-if="data.gameId && (isHost() || isGuest())"
             class="swd-btn-primary"
             size="sm"
@@ -89,6 +90,7 @@
             @click="onPlay"
           />
           <q-btn
+            push
             v-else-if="data.gameId"
             class="swd-btn-primary"
             color="primary"
@@ -98,6 +100,7 @@
             @click="onSpectate"
           />
           <q-btn
+            push
             v-else-if="isHost()"
             :disable="!data.guest"
             outline
@@ -108,6 +111,7 @@
             @click="onStart"
           />
           <q-btn
+            push
             v-else-if="isGuest()"
             :loading="inProgressCancel"
             class="swd-btn-primary"
@@ -118,6 +122,7 @@
             @click="onLeave"
           />
           <q-btn
+            push
             v-else
             :disable="joinDenied || hasRoom"
             class="swd-btn-primary"

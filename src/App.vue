@@ -65,6 +65,7 @@ ul {
 }
 
 .swd-cover-dark {
+  color: white;
   background-color: var(--swd-color-cover-dark);
 }
 

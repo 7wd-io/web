@@ -18,22 +18,6 @@
             />
 
             <q-btn flat color="white" label="About" :to="{ name: 'about' }" />
-
-            <q-space />
-
-            <q-btn
-              label="Register"
-              class="q-mr-sm"
-              outline
-              color="white"
-              :to="{ name: 'register' }"
-            />
-            <q-btn
-              label="Login"
-              outline
-              color="white"
-              :to="{ name: 'login' }"
-            />
           </q-toolbar>
         </div>
       </div>
@@ -59,14 +43,22 @@ const co = computed(() => ({
 
 <style lang="scss" scoped>
 .guest-layout {
-  background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/cover no-repeat;
-
-  &.welcome {
-    background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/100% 750px
-        no-repeat,
-      var(--swd-bg-color-main);
-  }
+  background: linear-gradient(
+      150deg,
+      rgba(13, 46, 62, 0.75) 0,
+      rgba(126, 126, 126, 0.5) 50%,
+      rgba(88, 66, 24, 0.75) 100%
+    ),
+    url('/img/game/bg.jpg') center/cover no-repeat fixed;
 }
+//  background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/cover no-repeat;
+//
+//  &.welcome {
+//    background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/100% 750px
+//        no-repeat,
+//      var(--swd-bg-color-main);
+//  }
+//}
 
 .header {
   background-color: transparent;

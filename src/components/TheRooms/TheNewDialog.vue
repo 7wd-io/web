@@ -139,12 +139,14 @@
 
           <q-card-actions align="center" class="q-pa-lg">
             <q-btn
+              push
               :loading="inProgress"
               color="primary"
               label="Create"
               @click="onCreate"
             />
             <q-btn
+              push
               outline
               color="primary"
               label="Cancel"
@@ -174,12 +176,14 @@
 
           <q-card-actions align="center" class="q-pa-lg">
             <q-btn
+              push
               :loading="inProgress"
               color="primary"
               label="Create"
               @click="onCreateWithBot"
             />
             <q-btn
+              push
               outline
               color="primary"
               label="Cancel"

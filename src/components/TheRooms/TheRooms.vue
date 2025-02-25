@@ -3,6 +3,7 @@
     <div class="text-h6 text-weight-bolder">Rooms</div>
     <div>
       <q-btn
+        push
         :disabled="hasRoom"
         class="swd-btn-primary"
         label="New"

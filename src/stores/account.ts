@@ -68,6 +68,16 @@ export const useAccountStore = defineStore('account', () => {
     await $router.push({ name: 'lobby' });
   }
 
+  async function signup(email: string, password: string, nickname: string) {
+    await api.post('/account/signup', {
+      email,
+      password,
+      nickname,
+    });
+
+    await signin(email, password);
+  }
+
   async function logout() {
     await api.post('/account/logout', {
       client: getClient(),
@@ -122,6 +132,7 @@ export const useAccountStore = defineStore('account', () => {
     isLoggedIn,
     hasRoom,
     signin,
+    signup,
     logout,
     refreshSession,
     updateSettings,
