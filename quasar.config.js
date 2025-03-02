@@ -94,10 +94,10 @@ module.exports = configure(function (ctx) {
       https: {
         key: ctx.prod
           ? null
-          : fs.readFileSync('/Users/ridzhi/certificates/7wd.io.local.key'),
+          : fs.readFileSync('/Users/dstivrinsh/certificates/7wd.io.key'),
         cert: ctx.prod
           ? null
-          : fs.readFileSync('/Users/ridzhi/certificates/7wd.io.local.crt'),
+          : fs.readFileSync('/Users/dstivrinsh/certificates/7wd.io.crt'),
       },
     },
 

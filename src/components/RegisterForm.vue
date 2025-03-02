@@ -58,6 +58,7 @@
             type="submit"
             color="primary"
             :loading="inProgress"
+            @click="onSubmit"
             push
           />
         </div>
