@@ -48,6 +48,7 @@
           />
         </template>
       </q-input>
+      <q-btn type="submit" class="hidden" />
     </q-form>
     <div class="form-footer">
       <div class="row justify-center">
@@ -55,7 +56,6 @@
           <q-btn
             style="width: 150px"
             label="Register"
-            type="submit"
             color="primary"
             :loading="inProgress"
             @click="onSubmit"

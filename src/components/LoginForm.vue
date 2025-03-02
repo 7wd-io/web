@@ -36,6 +36,7 @@
           />
         </template>
       </q-input>
+      <q-btn type="submit" class="hidden"/>
     </q-form>
 
     <div class="form-footer">
@@ -44,7 +45,6 @@
           <q-btn
             style="width: 150px"
             label="Login"
-            type="submit"
             color="primary"
             :loading="inProgress"
             @click="onSubmit"
