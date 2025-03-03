@@ -5,7 +5,7 @@
   >
     <h5 class="text-weight-bold text-center text-uppercase">Login</h5>
 
-    <q-form novalidate @submit.stop="onSubmit" class="q-gutter-lg">
+    <q-form novalidate @submit.stop="onSubmit" class="q-gutter-lg" ref="form-login">
       <q-input
         label="Nickname or Email *"
         v-model="login"
@@ -60,12 +60,13 @@
 
 <script setup lang="ts">
 import { useAccountStore } from 'stores/account';
-import { useQuasar } from 'quasar';
-import { ref } from 'vue';
+import { QForm, useQuasar } from 'quasar';
+import { ref, useTemplateRef } from 'vue';
 import { ApiError } from 'boot/axios';
 
 const $q = useQuasar();
 const $account = useAccountStore();
+const form = useTemplateRef<QForm>('form-login');
 
 const inProgress = ref(false);
 const login = ref('');
@@ -81,6 +82,10 @@ const rules = {
 };
 
 const onSubmit = async () => {
+  if (!await form.value!.validate()) {
+    return;
+  }
+
   inProgress.value = true;
 
   try {

@@ -5,7 +5,7 @@
   >
     <h5 class="text-weight-bold text-center text-uppercase">Register</h5>
 
-    <q-form novalidate @submit="onSubmit" class="q-gutter-lg" ref="form-login">
+    <q-form novalidate @submit="onSubmit" class="q-gutter-lg" ref="form-register">
       <q-input
         type="text"
         label="Nickname *"
@@ -85,7 +85,7 @@ import { QForm, useQuasar } from 'quasar';
 
 const $q = useQuasar();
 const $account = useAccountStore();
-const form = useTemplateRef<QForm>('form-login');
+const form = useTemplateRef<QForm>('form-register');
 
 const inProgress = ref(false);
 const nickname = ref('');
