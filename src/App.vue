@@ -50,7 +50,14 @@ body,
 }
 
 body {
-  background: var(--swd-bg-color-main);
+  color: white;
+  background: linear-gradient(
+      150deg,
+      rgba(13, 46, 62, 0.75) 0,
+      rgba(126, 126, 126, 0.5) 50%,
+      rgba(88, 66, 24, 0.75) 100%
+  ),
+  url('/img/game/bg.jpg') center/cover no-repeat fixed;
 }
 
 ul {

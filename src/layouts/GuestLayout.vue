@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hhh lpR fFf" class="guest-layout full-height" :class="co">
+  <q-layout view="hhh lpR fFf" class="full-height" :class="co">
     <q-header class="header">
       <div class="row justify-center">
         <div class="col-8">
@@ -40,16 +40,6 @@ const co = computed(() => ({
 <style></style>
 
 <style lang="scss" scoped>
-.guest-layout {
-  background: linear-gradient(
-      150deg,
-      rgba(13, 46, 62, 0.75) 0,
-      rgba(126, 126, 126, 0.5) 50%,
-      rgba(88, 66, 24, 0.75) 100%
-    ),
-    url('/img/game/bg.jpg') center/cover no-repeat fixed;
-}
-
 .header {
   background-color: transparent;
 }

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpr fFf" class="main-layout full-height">
+  <q-layout view="hHh lpr fFf" class="full-height">
     <q-header class="header bg-dark" bordered>
       <div class="row justify-center">
         <div class="col-8">
@@ -120,16 +120,3 @@ const accountMenu: Action[] = [
   },
 ];
 </script>
-
-<style lang="scss" scoped>
-.main-layout {
-  color: white;
-  background: linear-gradient(
-      150deg,
-      rgba(13, 46, 62, 0.75) 0,
-      rgba(126, 126, 126, 0.5) 50%,
-      rgba(88, 66, 24, 0.75) 100%
-    ),
-    url('/img/game/bg.jpg') center/cover no-repeat fixed;
-}
-</style>
