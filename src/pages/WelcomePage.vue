@@ -1,11 +1,14 @@
 <template>
   <q-page>
-    <div class="hero">
-      <h3 class="text-center text-white text-bold q-pt-lg q-pb-lg">
-        7wd is a platform to play <br />
-        <span style="white-space: nowrap">7 wonders duel</span> online
-      </h3>
+    <div class="row justify-center">
+      <div class="col col-auto">
+        <h3 class="text-center text-white text-bold q-pt-lg q-pb-lg">
+          7wd is a platform to play <br />
+          <span style="white-space: nowrap">7 wonders duel</span> online
+        </h3>
+      </div>
     </div>
+
     <div class="row justify-center items-center q-gutter-lg">
       <div class="col col-auto">
         <LoginForm />
@@ -24,5 +27,3 @@
 import LoginForm from 'components/LoginForm.vue';
 import RegisterForm from 'components/RegisterForm.vue';
 </script>
-
-<style scoped lang="scss"></style>
