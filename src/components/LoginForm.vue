@@ -1,32 +1,34 @@
 <template>
   <div
     class="rounded-borders relative-position swd-cover-dark q-pa-lg"
-    style="width: 300px; height: 450px"
+    style="width: 300px; height: 480px"
   >
     <h5 class="text-weight-bold text-center text-uppercase">Login</h5>
 
-    <q-form novalidate @submit.stop="onSubmit">
+    <q-form novalidate @submit.stop="onSubmit" class="q-gutter-lg">
       <q-input
         label="Nickname or Email *"
         v-model="login"
         type="text"
         color="primary"
+        label-color="black"
         bg-color="white"
-        lazy-rules="ondemand"
+        lazy-rules
         :rules="rules.login"
-        :clearable="true"
-        outlined
+        clearable
+        filled
       />
       <q-input
         label="Password *"
         v-model="password"
         color="primary"
+        label-color="black"
         bg-color="white"
         :type="showPassword ? 'text' : 'password'"
         :rules="rules.password"
-        lazy-rules="ondemand"
-        :clearable="true"
-        outlined
+        lazy-rules
+        clearable
+        filled
       >
         <template #append>
           <q-icon
@@ -71,10 +73,10 @@ const password = ref('');
 const showPassword = ref(false);
 const rules = {
   login: [
-    (val: string) => (val && val.length > 0) || 'Nickname or Email is required',
+    (val: string) => (val && val.length > 0) || 'Nickname or Email required',
   ],
   password: [
-    (val: string) => (val && val.length > 0) || 'Password is required',
+    (val: string) => (val && val.length > 0) || 'Password required',
   ],
 };
 

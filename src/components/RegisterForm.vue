@@ -1,32 +1,38 @@
 <template>
   <div
     class="rounded-borders q-pa-lg swd-cover-dark relative-position"
-    style="width: 300px; height: 450px"
+    style="width: 300px; height: 480px"
   >
     <h5 class="text-weight-bold text-center text-uppercase">Register</h5>
 
-    <q-form novalidate @submit="onSubmit">
+    <q-form novalidate @submit="onSubmit" class="q-gutter-lg">
       <q-input
         type="text"
         label="Nickname *"
-        color="primary"
-        bg-color="white"
         v-model="nickname"
-        lazy-rules="ondemand"
+        color="primary"
+        label-color="black"
+        bg-color="white"
+        lazy-rules
         :rules="rules.nickname"
-        :clearable="true"
-        outlined
-      />
+        clearable
+        filled
+      >
+        <template #hint>
+          <span class="hint">3-15 alphanumeric characters, starts with letter</span>
+        </template>
+      </q-input>
 
       <q-input
         label="Email *"
         color="primary"
+        label-color="black"
         bg-color="white"
         v-model="email"
-        lazy-rules="ondemand"
+        lazy-rules
         :rules="rules.email"
-        :clearable="true"
-        outlined
+        clearable
+        filled
       />
 
       <q-input
@@ -34,11 +40,12 @@
         :type="showPassword ? 'text' : 'password'"
         v-model="password"
         color="primary"
+        label-color="black"
         bg-color="white"
-        :rules="rules.email"
-        lazy-rules="ondemand"
-        :clearable="true"
-        outlined
+        :rules="rules.password"
+        lazy-rules
+        clearable
+        filled
       >
         <template #append>
           <q-icon
@@ -46,6 +53,9 @@
             :name="showPassword ? 'visibility_off' : 'visibility'"
             @click="showPassword = !showPassword"
           />
+        </template>
+        <template #hint>
+          <span class="hint">6-32 characters</span>
         </template>
       </q-input>
       <q-btn type="submit" class="hidden" />
@@ -83,12 +93,13 @@ const password = ref('');
 const showPassword = ref(false);
 const rules = {
   nickname: [
-    (val: string) => (val && val.length > 0) || 'Nickname is required',
+    (val: string) => (val && val.length >= 3 && val.length <= 15) || 'Invalid nickname',
   ],
-  email: [(val: string) => (val && val.length > 0) || 'Email is required'],
+  email: [(val: string) => (val && val.length > 0) || 'Email required'],
   password: [
-    (val: string) => (val && val.length > 0) || 'Password is required',
+    (val: string) => (val && val.length >= 6 && val.length <= 32) || 'Invalid password',
   ],
+
 };
 
 const onSubmit = async () => {
@@ -115,5 +126,8 @@ const onSubmit = async () => {
   width: 300px;
   left: 0px;
   bottom: 25px;
+}
+.hint {
+  color: rgba(255, 255, 255, 0.7);
 }
 </style>
