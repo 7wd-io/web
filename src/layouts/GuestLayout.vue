@@ -16,8 +16,6 @@
               target="_blank"
               class="q-ml-md"
             />
-
-            <q-btn flat color="white" label="About" :to="{ name: 'about' }" />
           </q-toolbar>
         </div>
       </div>
@@ -51,14 +49,6 @@ const co = computed(() => ({
     ),
     url('/img/game/bg.jpg') center/cover no-repeat fixed;
 }
-//  background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/cover no-repeat;
-//
-//  &.welcome {
-//    background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/100% 750px
-//        no-repeat,
-//      var(--swd-bg-color-main);
-//  }
-//}
 
 .header {
   background-color: transparent;

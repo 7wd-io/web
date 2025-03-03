@@ -40,14 +40,6 @@ const routes: RouteRecordRaw[] = [
         },
         component: () => import('pages/WelcomePage.vue'),
       },
-      {
-        path: '/about',
-        name: 'about',
-        meta: {
-          public: true,
-        },
-        component: () => import('pages/AboutPage.vue'),
-      },
     ],
   },
   // Always leave this as last one,
