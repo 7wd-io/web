@@ -5,7 +5,7 @@
   >
     <h5 class="text-weight-bold text-center text-uppercase">Register</h5>
 
-    <q-form novalidate @submit="onSubmit" class="q-gutter-lg">
+    <q-form novalidate @submit="onSubmit" class="q-gutter-lg" ref="form-login">
       <q-input
         type="text"
         label="Nickname *"
@@ -78,13 +78,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, useTemplateRef } from 'vue';
 import { useAccountStore } from 'stores/account';
 import { ApiError } from 'boot/axios';
-import { useQuasar } from 'quasar';
+import { QForm, useQuasar } from 'quasar';
 
 const $q = useQuasar();
 const $account = useAccountStore();
+const form = useTemplateRef<QForm>('form-login');
 
 const inProgress = ref(false);
 const nickname = ref('');
@@ -103,6 +104,10 @@ const rules = {
 };
 
 const onSubmit = async () => {
+  if (!await form.value!.validate()) {
+    return;
+  }
+
   inProgress.value = true;
 
   try {
