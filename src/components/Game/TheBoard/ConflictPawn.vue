@@ -13,7 +13,6 @@ const { size } = defineProps<Props>();
 <style scoped>
 .conflict-pawn {
   --size: v-bind(size);
-  //--ratio: .358;
   --ratio: 0.485;
   width: var(--size);
   height: calc(var(--size) / var(--ratio));

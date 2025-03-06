@@ -16,10 +16,10 @@ const api = axios.create({
 });
 
 const publicEndpoints = [
-  '/ping',
-  '/account/signup',
-  '/account/signin',
-  '/account/refresh',
+  '/api/ping',
+  '/api/account/signup',
+  '/api/account/signin',
+  '/api/account/refresh',
 ];
 
 interface Headers {

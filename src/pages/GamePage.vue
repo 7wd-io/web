@@ -112,7 +112,7 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 .preload {
-  background: linear-gradient(120deg, #5e60ce, #4ea8de) top left/cover no-repeat !important;
+  background: url('/img/game/bg.jpg') center/cover no-repeat !important;
 }
 
 .page-game {

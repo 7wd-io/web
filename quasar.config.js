@@ -51,7 +51,7 @@ module.exports = configure(function (ctx) {
     build: {
       target: {
         browser: ['es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1'],
-        node: 'node16',
+        node: 'node22',
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -67,8 +67,10 @@ module.exports = configure(function (ctx) {
         SWD_HOST: ctx.prod ? '7wd.io' : '7wd.io.local',
         SWD_API_URL: ctx.prod
           ? 'https://7wd.io/api'
-          : 'https://api.7wd.io.local',
-        SWD_CENTRIFUGO_URL: ctx.prod ? 'wss://7wd.io' : 'ws://localhost:8105',
+          : 'http://localhost:10000',
+        SWD_CENTRIFUGO_URL: ctx.prod
+          ? 'wss://7wd.io/cent'
+          : 'ws://localhost:8105',
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

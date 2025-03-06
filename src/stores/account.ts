@@ -37,9 +37,7 @@ export const useAccountStore = defineStore('account', () => {
   function getClient() {
     if (!Cookies.has(clientCookie)) {
       Cookies.set(clientCookie, uuidv4(), {
-        domain: process.env.SWD_HOST,
-        path: '/',
-        sameSite: 'None',
+        httpOnly: true,
         secure: true,
         expires: 30,
       });
