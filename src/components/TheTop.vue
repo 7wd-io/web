@@ -1,7 +1,7 @@
 <template>
   <q-card class="swd-cover-dark">
     <q-card-section>
-      <div class="text-weight-bolder text-h6">Top 7</div>
+      <div class="text-weight-bolder text-h6">Leaderboards</div>
     </q-card-section>
 
     <q-card-section class="no-padding">
