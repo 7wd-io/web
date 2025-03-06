@@ -37,7 +37,6 @@ export const useAccountStore = defineStore('account', () => {
   function getClient() {
     if (!Cookies.has(clientCookie)) {
       Cookies.set(clientCookie, uuidv4(), {
-        httpOnly: true,
         secure: true,
         expires: 30,
       });
