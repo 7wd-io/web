@@ -141,6 +141,7 @@
             <q-btn
               push
               :loading="inProgress"
+              :disable="inProgress"
               color="primary"
               label="Create"
               @click="onCreate"
@@ -178,6 +179,7 @@
             <q-btn
               push
               :loading="inProgress"
+              :disable="inProgress"
               color="primary"
               label="Create"
               @click="onCreateWithBot"
