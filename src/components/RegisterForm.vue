@@ -68,6 +68,7 @@
             label="Register"
             color="primary"
             :loading="inProgress"
+            :disable="inProgress"
             @click="onSubmit"
             push
           />
