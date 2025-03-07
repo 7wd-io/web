@@ -1,7 +1,7 @@
 <template>
   <div class="coin relative-position">
     <div class="absolute-center">
-      {{ count || '' }}
+      {{ typeof count !== "undefined" ? count : '' }}
     </div>
   </div>
 </template>
